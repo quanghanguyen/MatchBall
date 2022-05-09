@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Match Ball</string>
+    <string name="sign_up"><u>Sign-up</u></string>
+    <string name="type_your_password">Type Your Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="not_registered_yet">Not Registered Yet?</string>
+    <string name="type_your_email">Type your Email</string>
+    <string name="sign_in">Sign In</string>
+    <string name="set_your_password">Set your Password</string>
+    <string name="confirm_your_password">Confirm your Password</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="or_sign_up_with">Or Sign-up with</string>
+    <string name="by_click">By clicking Sign-up, you agree to our</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+
+    <string name="pass_not_match">Password is not matching!</string>
+    <string name="empty_fields">Empty Fields Are Not Allowed!</string>
+    <string name="sign_up_fail">Sign-Up Fail</string>
+    <string name="sign_in_fail">Sign-In Fail</string>
+    <string name="sign_up_success">Sign-Up Success</string>
+    <string name="sign_in_success">Sign-In Success</string>
 </resources>
