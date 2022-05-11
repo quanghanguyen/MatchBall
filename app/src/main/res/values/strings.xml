@@ -6,6 +6,7 @@
     <string name="not_registered_yet">Not Registered Yet?</string>
     <string name="type_your_email">Type your Email</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_in_underline"><u>Sign In</u></string>
     <string name="set_your_password">Set your Password</string>
     <string name="confirm_your_password">Confirm your Password</string>
     <string name="btn_sign_up">Sign Up</string>
@@ -19,4 +20,17 @@
     <string name="sign_in_fail">Sign-In Fail</string>
     <string name="sign_up_success">Sign-Up Success</string>
     <string name="sign_in_success">Sign-In Success</string>
+    <string name="it_s_easier_to_sign_up_now">It\'s easier to Sign Up now</string>
+    <string name="i_ll_use_email_or_phone">I\'ll use email or phone</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="already_have_account">Already have account?</string>
+
+
+    <string name="facebook_app_id">1234</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">56789</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="pass_cannot_empty">Password cannot empty</string>
+
+
 </resources>
