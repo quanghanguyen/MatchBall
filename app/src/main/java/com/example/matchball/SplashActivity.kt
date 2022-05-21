@@ -18,14 +18,15 @@ class SplashActivity : AppCompatActivity() {
         val user = firebaseAuth.currentUser
 
         Handler().postDelayed({
-            if (user == null) {
+            if (user != null) {
                 val signUpIntent = Intent(this, MainActivity::class.java)
                 startActivity(signUpIntent)
+                finish()
             } else {
                 val mainUpIntent = Intent(this, IntroActivity::class.java)
                 startActivity(mainUpIntent)
+                finish()
             }
         }, 3000)
-
     }
 }

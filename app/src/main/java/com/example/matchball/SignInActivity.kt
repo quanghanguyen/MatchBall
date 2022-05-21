@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import com.example.matchball.databinding.ActivitySignInBinding
+import com.example.matchball.model.*
 import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
@@ -59,6 +60,7 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(this, R.string.sign_in_success, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 } else {
                     Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
                 }
@@ -103,25 +105,25 @@ class SignInActivity : AppCompatActivity() {
             return "Password cannot empty"
         }
 
-        if (passwordText.length < 8)
+        if (passwordText.validateLengthPassword())
 
         {
             return "Minimum 8 Character Password"
         }
 
-        if (!passwordText.matches(".*[A-Z].*".toRegex()))
+        if (!passwordText.validateUpperCasePassword())
 
         {
             return "Must contain 1 Upper-case Character"
         }
 
-        if (!passwordText.matches(".*[a-z].*".toRegex()))
+        if (!passwordText.validateLowerCasePassword())
 
         {
             return "Must contain 1 Lower-case Character"
         }
 
-        if (!passwordText.matches(".*[@#\$%^&+=].*".toRegex()))
+        if (!passwordText.validateSpecialPassword())
 
         {
             return "Must contain 1 Special Character"

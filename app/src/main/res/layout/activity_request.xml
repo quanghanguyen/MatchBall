@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RequestActivity"
+    android:padding="15dp">
+
+    <TextView
+        android:id="@+id/tvMatchRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/your_match_request"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvMatchRequest"
+        android:layout_marginTop="40dp"
+        android:text="@string/time"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvPickTime"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvTime"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_edittext"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btnSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTime"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@id/tvPickTime"
+        android:text="@string/select"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tvPitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPickTime"
+        android:layout_marginTop="10dp"
+        android:text="@string/pitch"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvPickPitch"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvPitch"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_edittext"
+        android:textSize="15sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPitch"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/tvPickPitch"
+        android:text="@string/select"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tvPeople"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPickPitch"
+        android:layout_marginTop="10dp"
+        android:text="@string/amount_of_people"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <Spinner
+        android:id="@+id/spnPeople"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvPeople"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_edittext"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tvNote"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spnPeople"
+        android:layout_marginTop="10dp"
+        android:text="@string/note"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/edtNote"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/tvNote"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/bg_edittext"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:text="@string/send"
+        android:textColor="@color/white" />
+
+
+
+</RelativeLayout>

@@ -3,16 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/bg_edittext.xml" value="0.1935185185185185" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/boder.xml" value="0.9178571428571428" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/border.xml" value="0.2203125" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/button_stroke.xml" value="0.2203125" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17592592592592593" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/underline.xml" value="0.2203125" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_intro.xml" value="0.22" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_intro.xml" value="0.18" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_main.xml" value="0.18" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_request.xml" value="0.14" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_info.xml" value="0.2" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_user.xml" value="0.18" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16" />
       </map>
     </option>
   </component>

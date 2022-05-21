@@ -31,6 +31,24 @@
     <string name="facebook_client_token">56789</string>
     <string name="invalid_email">Invalid Email</string>
     <string name="pass_cannot_empty">Password cannot empty</string>
+    <string name="list">List</string>
+    <string name="person">User</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="team_name">Team Name</string>
+    <string name="bio">Bio</string>
+    <string name="sign_out">Sign out</string>
+    <string name="email">Email</string>
+    <string name="save">Save</string>
+    <string name="enter_bio">Enter Bio</string>
+    <string name="blank">Blank</string>
+    <string name="your_match_request">Your Match Request</string>
+    <string name="time">Time:</string>
+    <string name="pitch">Pitch</string>
+    <string name="amount_of_people">Amount of people</string>
+    <string name="send">Send</string>
+    <string name="select">Select</string>
+    <string name="note">Note</string>
 
 
 </resources>

@@ -93,7 +93,6 @@
             android:id="@+id/tvAlreadyHaveAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:text="@string/already_have_account"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp" />
@@ -102,7 +101,6 @@
             android:id="@+id/tvSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="5dp"
             android:layout_toEndOf="@+id/tvAlreadyHaveAccount"
             android:text="@string/sign_in_underline"
