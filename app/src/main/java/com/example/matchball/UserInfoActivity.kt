@@ -115,6 +115,8 @@ class UserInfoActivity : AppCompatActivity() {
         storageReference.putFile(imgUri).addOnSuccessListener {
             Toast.makeText(this, "Save Profile Success", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
+//            val teamName = userInfoBinding.edtTeamName.text.toString()
+//            intent.putExtra("teamName", teamName)
             startActivity(intent)
             finish()
         }.addOnFailureListener{

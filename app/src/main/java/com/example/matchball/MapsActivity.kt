@@ -1,7 +1,16 @@
 package com.example.matchball
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.*
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,11 +19,24 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.matchball.databinding.ActivityMapsBinding
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.Marker
+import java.io.IOException
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+open class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
+    GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    internal lateinit var mLastLocation: Location
+    internal var mCurrLocationMarker: Marker? = null
+    internal var mGoogleApiClient: GoogleApiClient? = null
+    lateinit var mLocationRequest: LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +48,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        searchButtonClick()
+        doneButtonClick()
+
     }
 
     /**
@@ -38,11 +64,138 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+//        // Add a marker in Sydney and move the camera
+//        val sydney = LatLng(-34.0, 151.0)
+//        val hue = LatLng(16.461109, 107.570183)
+//        mMap.addMarker(MarkerOptions().position(hue).title("Marker in Hue"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(hue))
+        mMap = googleMap
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                buildGoogleApiClient()
+                mMap.isMyLocationEnabled = true
+            }
+        } else {
+            buildGoogleApiClient()
+            mMap.isMyLocationEnabled = true
+        }
     }
-}
+
+    private fun buildGoogleApiClient() {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(LocationServices.API).build()
+        mGoogleApiClient!!.connect()
+    }
+
+    override fun onConnected(p0: Bundle?) {
+
+        mLocationRequest = LocationRequest()
+        mLocationRequest.interval = 1000
+        mLocationRequest.fastestInterval = 1000
+        mLocationRequest.priority = PRIORITY_BALANCED_POWER_ACCURACY
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ){
+            LocationServices.getFusedLocationProviderClient(this)
+        }
+    }
+
+    override fun onConnectionSuspended(i: Int) {
+
+    }
+
+    override fun onLocationChanged(location: Location) {
+
+        mLastLocation = location
+        if (mCurrLocationMarker != null) {
+            mCurrLocationMarker!!.remove()
+        }
+        //Place current location marker
+        val latLng = LatLng(location.latitude, location.longitude)
+        val markerOptions = MarkerOptions()
+        markerOptions.position(latLng)
+        markerOptions.title("Current Position")
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        mCurrLocationMarker = mMap.addMarker(markerOptions)
+
+        //move map camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
+
+        //stop location updates
+        if (mGoogleApiClient != null) {
+            LocationServices.getFusedLocationProviderClient(this)
+        }
+
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+
+    }
+
+    private fun searchButtonClick() {
+        binding.btnSearch.setOnClickListener {
+            val location = binding.edtSearch.text.toString()
+            var addressList: List<Address>? = null
+
+            if (location == "") {
+                Toast.makeText(applicationContext,"Please Provide Location",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                val geoCoder = Geocoder(this)
+                try {
+                    addressList = geoCoder.getFromLocationName(location, 5)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                val address = addressList!![0]
+                val latLng = LatLng(address.latitude, address.longitude)
+                mMap.addMarker(MarkerOptions().position(latLng).title(location))
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+
+//                Toast.makeText(applicationContext, address.latitude.toString() + " " + address.longitude, Toast.LENGTH_LONG).show()
+
+            }
+        }
+
+        }
+
+    private fun doneButtonClick() {
+        binding.btnDone.setOnClickListener {
+
+            val location = binding.edtSearch.text.toString()
+            var addressList: List<Address>? = null
+            val geoCoder = Geocoder(this)
+            try {
+                addressList = geoCoder.getFromLocationName(location, 1)
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            val address = addressList!![0]
+
+            if (location.isEmpty() || address.latitude.toString().isBlank() || address.longitude.toString().isBlank()) {
+                Toast.makeText(applicationContext, "Location is Invalid", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this, RequestActivity::class.java)
+                intent.putExtra("location", location)
+                intent.putExtra("latitude", address.latitude.toString())
+                intent.putExtra("longitude", address.longitude.toString())
+                startActivity(intent)
+            }
+        }
+    }
+
+    }
+
+//    fun searchLocation(view: View) {
+////        val locationSearch: EditText = findViewById<EditText>(R.id.editText)
+////        lateinit var location: String

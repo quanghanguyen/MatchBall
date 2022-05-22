@@ -28,64 +28,87 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/tvPickTime"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvTime"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_edittext"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
-    <Button
-        android:id="@+id/btnSelect"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llTimePick"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@+id/tvTime"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@id/tvPickTime"
-        android:text="@string/select"
-        android:textColor="@color/white" />
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvPickTime"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:background="@drawable/bg_edittext"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@string/select"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/llPitchPick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tvPitch"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tvPickPitch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:background="@drawable/bg_edittext"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/btnLocationSelect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:layout_marginStart="15dp"
+            android:text="@string/select"
+            android:textColor="@color/white" />
+
+
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/tvPitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPickTime"
+        android:layout_below="@+id/llTimePick"
         android:layout_marginTop="10dp"
         android:text="@string/pitch"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/tvPickPitch"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvPitch"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_edittext"
-        android:textSize="15sp" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPitch"
-        android:layout_marginStart="15dp"
-        android:layout_toEndOf="@+id/tvPickPitch"
-        android:text="@string/select"
-        android:textColor="@color/white" />
-
-    <TextView
         android:id="@+id/tvPeople"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPickPitch"
+        android:layout_below="@+id/llPitchPick"
         android:layout_marginTop="10dp"
         android:text="@string/amount_of_people"
         android:textColor="@color/black"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/spnPeople"

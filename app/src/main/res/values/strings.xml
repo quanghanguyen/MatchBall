@@ -35,7 +35,7 @@
     <string name="person">User</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="team_name">Team Name</string>
+    <string name="team_name">Team Name:</string>
     <string name="bio">Bio</string>
     <string name="sign_out">Sign out</string>
     <string name="email">Email</string>
@@ -49,6 +49,15 @@
     <string name="send">Send</string>
     <string name="select">Select</string>
     <string name="note">Note</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="search_location">Search Location</string>
+    <string name="search">Search</string>
+    <string name="done">Done</string>
+    <string name="amount">Amount:</string>
+    <string name="join_match">Join Match</string>
+    <string name="join">Join</string>
+    <string name="team_name_join"><u>Team Name Join</u></string>
+    <string name="title_activity_join_maps">JoinMapsActivity</string>
 
 
 </resources>

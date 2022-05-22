@@ -9,10 +9,10 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.fragment.ListFragment
 import com.example.matchball.fragment.UserFragment
 
-// Edit lại FrondEnd - LinearLayout
-// Pick from Google Map
-// Add item to recyclerview
-// Notification to other Devices
+// Lấy Team Name + People
+// Join Map
+// Notification Join
+// Lên ý tưởng về phân quyền User
 
 class MainActivity : AppCompatActivity() {
 
