@@ -1,7 +1,10 @@
 package com.example.matchball
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil.setContentView
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,11 +13,23 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.matchball.databinding.ActivityJoinMapsBinding
+import com.example.matchball.model.MatchRequest
 
 class JoinMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityJoinMapsBinding
+
+//    companion object
+//    {
+//        private const val KEY_MAP_DATA = "request_map_data"
+//        fun startMapDetails(context: Context, data : MatchRequest)
+//        {
+//            context.startActivity(Intent(context, JoinMapsActivity::class.java).apply {
+//                putExtra(KEY_MAP_DATA, data)
+//            })
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +53,25 @@ class JoinMapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
+
+//        intent?.let { bundle ->
+//            val requestData = bundle.getParcelableExtra<MatchRequest>(KEY_MAP_DATA)
+//            val pitchLatitude = requestData?.pitchLatitude!!.toDouble()
+//            val pitchLongitude = requestData.pitchLongitude!!.toDouble()
+//            val pitchName = requestData.pitch.toString()
+//        }
+
         mMap = googleMap
 
+        val pitchName = intent.getStringExtra("pitchName")
+        val pitchLatitude = intent.getDoubleExtra("pitchLatitude", 0.1)
+        val pitchLongitude = intent.getDoubleExtra("pitchLongitude", 0.1)
+
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(pitchLatitude, pitchLongitude)
+        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in $pitchName"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
     }
 }

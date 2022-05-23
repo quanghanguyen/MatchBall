@@ -10,9 +10,9 @@ import com.example.matchball.fragment.ListFragment
 import com.example.matchball.fragment.UserFragment
 
 // Lấy Team Name + People
-// Join Map
 // Notification Join
 // Lên ý tưởng về phân quyền User
+// Setting Activity
 
 class MainActivity : AppCompatActivity() {
 
