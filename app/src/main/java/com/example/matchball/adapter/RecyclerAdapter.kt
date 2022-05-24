@@ -27,7 +27,7 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>) : Recyc
         : RecyclerView.ViewHolder(requestItemsBinding.root){
         fun bind(requestData : MatchRequest){
             with(requestItemsBinding){
-//                tvTeamName.text = ...
+                tvTeamName.text = requestData.teamName
                 tvTime.text = requestData.time
                 tvPitch.text = requestData.pitch
                 tvAmount.text = requestData.people

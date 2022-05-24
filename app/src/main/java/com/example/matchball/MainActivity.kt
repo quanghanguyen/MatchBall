@@ -9,9 +9,10 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.fragment.ListFragment
 import com.example.matchball.fragment.UserFragment
 
-// Lấy Team Name + People
-// Notification Join
+// coi Intern Malaysia
+// Lấy Team People
 // Lên ý tưởng về phân quyền User
+// Xây dựng Database
 // Setting Activity
 
 class MainActivity : AppCompatActivity() {

@@ -58,6 +58,9 @@
     <string name="join">Join</string>
     <string name="team_name_join"><u>Team Name Join</u></string>
     <string name="title_activity_join_maps">JoinMapsActivity</string>
+    <string name="your_request">Your Request</string>
+    <string name="setting">Setting</string>
+    <string name="request_list">Request List</string>
 
 
 </resources>

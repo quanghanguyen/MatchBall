@@ -9,6 +9,7 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.core.view.isEmpty
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -29,6 +30,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     private lateinit var requestBinding: ActivityRequestBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var databaseReference : DatabaseReference
+    private lateinit var reference : DatabaseReference
     private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
 
     //Notification
@@ -64,9 +66,9 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         timePick()
         pitchPick()
-        peopleSelect()
         locationReceive()
         sendRequest()
+        peopleSelect()
 
         //Notification
         FirebaseMessaging.getInstance().subscribeToTopic("/topics/Enter_topic")
@@ -74,50 +76,68 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     }
 
     private fun sendRequest() {
-        requestBinding.btnSend.setOnClickListener {
-            val uid = auth.currentUser?.uid
 
-            val teamNameReceived = intent.getStringExtra("teamName")
-            val locationReceived = intent.getStringExtra("location")
-            val latitudeReceived = intent.getStringExtra("latitude")
-            val longitudeReceived = intent.getStringExtra("longitude")
-            val matchTime = requestBinding.tvPickTime.text.toString()
-            val matchPeople = requestBinding.spnPeople.toString()
-            val matchNote = requestBinding.edtNote.text.toString()
+        val uid = auth.currentUser!!.uid
 
-            val matchRequest = MatchRequest(matchTime, locationReceived, latitudeReceived, longitudeReceived,
-                matchPeople, matchNote)
+        reference = FirebaseDatabase.getInstance().getReference("Users")
+        reference.child(uid).get().addOnSuccessListener {
+            val teamNameReceived =  it.child("teamName").value.toString()
 
-            if (uid != null) {
-                databaseReference.child(uid).setValue(matchRequest).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        uploadRequest()
-                    } else {
-                        Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show()
+            requestBinding.btnSend.setOnClickListener {
+
+                if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
+                    || requestBinding.spnPeople.isEmpty()) {
+                    Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
+                } else {
+
+                    val locationReceived = intent.getStringExtra("location")
+                    val latitudeReceived = intent.getStringExtra("latitude")
+                    val longitudeReceived = intent.getStringExtra("longitude")
+
+                    val matchTime = requestBinding.tvPickTime.text.toString()
+                    val matchPeople = requestBinding.spnPeople.toString()
+                    val matchNote = requestBinding.edtNote.text.toString()
+
+                    val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
+                        matchPeople, matchNote)
+
+                    if (uid != null) {
+                        databaseReference.child(uid).push().setValue(matchRequest).addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                Toast.makeText(this, "Send Request Success", Toast.LENGTH_SHORT).show()
+                                intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+
+                    if (!TextUtils.isEmpty(requestBinding.tvPickPitch.text)) {
+                        val topic = "/topics/Enter_topic"
+
+                        val notification = JSONObject()
+                        val notifcationBody = JSONObject()
+
+                        try {
+                            notifcationBody.put("title", "Match Request Notification")
+                            notifcationBody.put("message", requestBinding.tvPickPitch.text)
+                            notification.put("to", topic)
+                            notification.put("data", notifcationBody)
+                            Log.e("TAG", "try")
+                        } catch (e: JSONException) {
+                            Log.e("TAG", "onCreate: " + e.message)
+                        }
+
+                        sendNotification(notification)
                     }
                 }
-            }
-
-            if (!TextUtils.isEmpty(requestBinding.tvPickPitch.text)) {
-                val topic = "/topics/Enter_topic"
-
-                val notification = JSONObject()
-                val notifcationBody = JSONObject()
-
-                try {
-                    notifcationBody.put("title", "Match Request Notification")
-                    notifcationBody.put("message", requestBinding.tvPickPitch.text)
-                    notification.put("to", topic)
-                    notification.put("data", notifcationBody)
-                    Log.e("TAG", "try")
-                } catch (e: JSONException) {
-                    Log.e("TAG", "onCreate: " + e.message)
-                }
-
-                sendNotification(notification)
-            }
 
             }
+
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to Load TeamName", Toast.LENGTH_SHORT).show()
+        }
 
         }
 
@@ -143,11 +163,6 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestQueue.add(jsonObjectRequest)
     }
 
-    private fun uploadRequest() {
-        Toast.makeText(this, "Send Request Success", Toast.LENGTH_SHORT).show()
-        intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun locationReceive() {
         val locationReceived = intent.getStringExtra("location")
@@ -170,6 +185,9 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestBinding.spnPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val peopleSelected : String = parent?.getItemAtPosition(position).toString()
+
+
+
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
 

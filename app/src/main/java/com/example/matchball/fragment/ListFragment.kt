@@ -14,6 +14,7 @@ import com.example.matchball.R
 import com.example.matchball.adapter.RecyclerAdapter
 import com.example.matchball.databinding.FragmentListBinding
 import com.example.matchball.model.MatchRequest
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
@@ -23,16 +24,22 @@ class ListFragment : Fragment() {
     private lateinit var recyclerAdapter: RecyclerAdapter
     private lateinit var recyclerView : RecyclerView
     private lateinit var firebaseReference: DatabaseReference
+    private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var matchRequestArrayList : ArrayList<MatchRequest>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
     }
 
     private fun getMatchRequestData() {
-        firebaseReference = FirebaseDatabase.getInstance().getReference("MatchRequest")
+
+        val uid = firebaseAuth.currentUser!!.uid
+
+        firebaseReference = FirebaseDatabase.getInstance().getReference("MatchRequest").child(uid)
         firebaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {

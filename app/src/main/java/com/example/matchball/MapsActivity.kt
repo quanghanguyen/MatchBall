@@ -171,29 +171,32 @@ open class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListe
     private fun doneButtonClick() {
         binding.btnDone.setOnClickListener {
 
-            val location = binding.edtSearch.text.toString()
-            var addressList: List<Address>? = null
-            val geoCoder = Geocoder(this)
-            try {
-                addressList = geoCoder.getFromLocationName(location, 1)
-
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            val address = addressList!![0]
-
-            if (location.isEmpty() || address.latitude.toString().isBlank() || address.longitude.toString().isBlank()) {
-                Toast.makeText(applicationContext, "Location is Invalid", Toast.LENGTH_SHORT).show()
+            if (binding.edtSearch.text.isEmpty()) {
+                Toast.makeText(this, "Please Select Location", Toast.LENGTH_SHORT).show()
             } else {
-                val intent = Intent(this, RequestActivity::class.java)
-                intent.putExtra("location", location)
-                intent.putExtra("latitude", address.latitude.toString())
-                intent.putExtra("longitude", address.longitude.toString())
-                startActivity(intent)
+                val location = binding.edtSearch.text.toString()
+                var addressList: List<Address>? = null
+                val geoCoder = Geocoder(this)
+                try {
+                    addressList = geoCoder.getFromLocationName(location, 1)
+
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                val address = addressList!![0]
+
+                if (location.isEmpty() || address.latitude.toString().isBlank() || address.longitude.toString().isBlank()) {
+                    Toast.makeText(applicationContext, "Location is Invalid", Toast.LENGTH_SHORT).show()
+                } else {
+                    val intent = Intent(this, RequestActivity::class.java)
+                    intent.putExtra("location", location)
+                    intent.putExtra("latitude", address.latitude.toString())
+                    intent.putExtra("longitude", address.longitude.toString())
+                    startActivity(intent)
+                }
             }
         }
     }
-
     }
 
 //    fun searchLocation(view: View) {
