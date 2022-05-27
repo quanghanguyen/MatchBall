@@ -58,12 +58,14 @@ class UserInfoActivity : AppCompatActivity() {
         val nameIntent = intent.getStringExtra("name")
         val bioIntent = intent.getStringExtra("bio")
         val emailIntent = intent.getStringExtra("email")
+        val phoneIntent = intent.getStringExtra("phone")
 
         intent?.let {
             with(userInfoBinding) {
                 edtTeamName.setText(nameIntent)
                 edtBio.setText(bioIntent)
                 edtEmail.setText(emailIntent)
+                edtPhone.setText(phoneIntent)
             }
         }
     }
@@ -74,7 +76,8 @@ class UserInfoActivity : AppCompatActivity() {
             val teamName = userInfoBinding.edtTeamName.text.toString()
             val teamBio = userInfoBinding.edtBio.text.toString()
             val teamEmail = userInfoBinding.edtEmail.text.toString()
-            val user = User(teamName, teamBio, teamEmail)
+            val teamPhone = userInfoBinding.edtPhone.text.toString()
+            val user = User(teamName, teamBio, teamEmail, teamPhone)
 
             if (uid != null) {
                 databaseReference.child(uid).setValue(user).addOnCompleteListener {

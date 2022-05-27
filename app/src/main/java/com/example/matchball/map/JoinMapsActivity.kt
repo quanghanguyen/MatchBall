@@ -1,10 +1,8 @@
-package com.example.matchball
+package com.example.matchball.map
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil.setContentView
+import com.example.matchball.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -13,7 +11,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.matchball.databinding.ActivityJoinMapsBinding
-import com.example.matchball.model.MatchRequest
 
 class JoinMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 

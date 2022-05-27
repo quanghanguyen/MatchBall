@@ -39,7 +39,7 @@ class ListFragment : Fragment() {
 
         val uid = firebaseAuth.currentUser!!.uid
 
-        firebaseReference = FirebaseDatabase.getInstance().getReference("MatchRequest").child(uid)
+        firebaseReference = FirebaseDatabase.getInstance().getReference("MatchRequest")
         firebaseReference.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -50,8 +50,6 @@ class ListFragment : Fragment() {
 
                     //recyclerView.adapter = RecyclerAdapter(matchRequestArrayList)
                     listFragmentBinding.rcvMatchRequest.adapter = recyclerAdapter
-
-
                 }
             }
 

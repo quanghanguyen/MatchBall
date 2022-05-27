@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import com.android.volley.RequestQueue
@@ -12,6 +11,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.matchball.databinding.ActivityJoinBinding
+import com.example.matchball.map.JoinMapsActivity
 import com.example.matchball.model.MatchRequest
 import com.google.firebase.messaging.FirebaseMessaging
 import org.json.JSONException
@@ -59,7 +59,8 @@ class JoinActivity : AppCompatActivity() {
 //            val pitchName = requests?.pitch.toString()
 
             with(joinBinding){
-                tvJMTime.text = requests!!.time
+                tvJMTeamName.text = requests!!.teamName
+                tvJMTime.text = requests.time
                 tvJMPitch.text = requests.pitch
                 tvJMNote.text = requests.note
             }

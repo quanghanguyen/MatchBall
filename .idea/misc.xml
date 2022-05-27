@@ -10,6 +10,7 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_baseline_near_me_24.xml" value="0.2203125" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17592592592592593" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/underline.xml" value="0.2203125" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_edit_maps.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_intro.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_join.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_join_maps.xml" value="0.20416666666666666" />
@@ -19,7 +20,9 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_info.xml" value="0.2" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_info.xml" value="0.25" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_your_request.xml" value="0.20416666666666666" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_your_request_details.xml" value="0.2" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_user.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/match_request_items.xml" value="0.2" />

@@ -61,6 +61,12 @@
     <string name="your_request">Your Request</string>
     <string name="setting">Setting</string>
     <string name="request_list">Request List</string>
+    <string name="your_request_match">Your Request Match</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_edit_maps">EditMapsActivity</string>
+    <string name="edit_your_request">Edit Your Request</string>
+    <string name="phone">Phone</string>
 
 
 </resources>

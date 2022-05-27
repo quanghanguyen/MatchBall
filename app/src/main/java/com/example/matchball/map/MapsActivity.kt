@@ -1,4 +1,4 @@
-package com.example.matchball
+package com.example.matchball.map
 
 import android.Manifest
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.location.*
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.example.matchball.R
+import com.example.matchball.RequestActivity
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -72,6 +72,9 @@ open class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListe
 //        mMap.addMarker(MarkerOptions().position(hue).title("Marker in Hue"))
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(hue))
         mMap = googleMap
+        mMap.setOnMapLongClickListener {
+            mMap.addMarker(MarkerOptions().position(it))
+        }
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -158,6 +161,7 @@ open class MapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListe
                 }
                 val address = addressList!![0]
                 val latLng = LatLng(address.latitude, address.longitude)
+
                 mMap.addMarker(MarkerOptions().position(latLng).title(location))
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
 

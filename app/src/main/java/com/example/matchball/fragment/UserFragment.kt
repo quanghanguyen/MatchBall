@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.matchball.IntroActivity
-import com.example.matchball.R
-import com.example.matchball.SignUpActivity
-import com.example.matchball.UserInfoActivity
+import com.example.matchball.*
 import com.example.matchball.databinding.FragmentUserBinding
 import com.example.matchball.model.User
 import com.google.firebase.auth.FirebaseAuth
@@ -26,14 +23,19 @@ class UserFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database : DatabaseReference
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().getReference("Users")
 
+    }
 
+    private fun yourRequestClick() {
+        userFragmentBinding.cvYourRequest.setOnClickListener {
+            val intent = Intent(requireContext(), YourRequestActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,6 +43,7 @@ class UserFragment : Fragment() {
 
         readUserData()
         goUserInfoActivity()
+        yourRequestClick()
         signOut()
 
     }
@@ -53,10 +56,12 @@ class UserFragment : Fragment() {
                 val teamName = it.child("teamName").value
                 val teamBio = it.child("teamBio").value
                 val email = it.child("email").value
+                val phone = it.child("phone").value
 
                 userFragmentBinding.tvIntroName.text = teamName.toString()
                 userFragmentBinding.tvIntroEmail.text = email.toString()
                 userFragmentBinding.tvBio.text = teamBio.toString()
+                userFragmentBinding.tvPhone.text = phone.toString()
 
             } else {
                 Toast.makeText(context, "User does not exist", Toast.LENGTH_SHORT).show()
@@ -93,9 +98,12 @@ class UserFragment : Fragment() {
             val teamName = userFragmentBinding.tvIntroName.text.toString()
             val teamEmail = userFragmentBinding.tvIntroEmail.text.toString()
             val teamBio = userFragmentBinding.tvBio.text.toString()
+            val teamPhone = userFragmentBinding.tvPhone.text.toString()
+
             intent.putExtra("name", teamName)
             intent.putExtra("email", teamEmail)
             intent.putExtra("bio", teamBio)
+            intent.putExtra("phone", teamPhone)
             startActivity(intent)
         }
     }

@@ -9,11 +9,21 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.fragment.ListFragment
 import com.example.matchball.fragment.UserFragment
 
+// Click on Map
+// Sửa lại UI - dùng style
+// Load hết cái RecyclerView
+// Check lại Time + Null trong Request List
+// Sửa lại Notifications
+// Thêm Refresh
+// MVVM
+// Object
+
+
+// Setting Activity
 // coi Intern Malaysia
-// Lấy Team People
 // Lên ý tưởng về phân quyền User
 // Xây dựng Database
-// Setting Activity
+
 
 class MainActivity : AppCompatActivity() {
 

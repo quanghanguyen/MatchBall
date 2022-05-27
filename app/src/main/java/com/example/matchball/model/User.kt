@@ -8,6 +8,8 @@ data class User (
     @SerializedName("teamBio")
     var teamBio : String,
     @SerializedName("email")
-    var email : String
+    var email : String,
+    @SerializedName("phone")
+    var phone : String
         )
 
