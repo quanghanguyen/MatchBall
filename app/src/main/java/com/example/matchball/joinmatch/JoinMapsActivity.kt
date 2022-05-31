@@ -1,4 +1,4 @@
-package com.example.matchball.map
+package com.example.matchball.joinmatch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

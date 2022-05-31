@@ -1,4 +1,4 @@
-package com.example.matchball
+package com.example.matchball.usersetting
 
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -8,30 +8,22 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.matchball.model.User
 import com.example.matchball.databinding.ActivityUserInfoBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.firebaseconnection.DatabaseConnection
+import com.example.matchball.firebaseconnection.StorageConnection
+import com.example.matchball.home.MainActivity
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import java.io.File
-import java.net.URI
 
 class UserInfoActivity : AppCompatActivity() {
 
     private lateinit var userInfoBinding: ActivityUserInfoBinding
-    private lateinit var auth : FirebaseAuth
-    private lateinit var databaseReference : DatabaseReference
-    private lateinit var storageReference : StorageReference
     private lateinit var imgUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userInfoBinding = ActivityUserInfoBinding.inflate(layoutInflater)
         setContentView(userInfoBinding.root)
-
-
-        auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         getData()
         loadAvatar()
@@ -41,7 +33,7 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun loadAvatar() {
-        val uid = auth.currentUser!!.uid
+        val uid = AuthConnection.auth.currentUser!!.uid
         val firebaseStorage = FirebaseStorage.getInstance().getReference("Users").child(uid)
         val localFile = File.createTempFile("tempImage", "jpg")
         firebaseStorage.getFile(localFile).addOnSuccessListener {
@@ -71,7 +63,7 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun btnSaveClick() {
-        val uid = auth.currentUser?.uid
+        val uid = AuthConnection.auth.currentUser?.uid
         userInfoBinding.btnSave.setOnClickListener {
             val teamName = userInfoBinding.edtTeamName.text.toString()
             val teamBio = userInfoBinding.edtBio.text.toString()
@@ -80,7 +72,7 @@ class UserInfoActivity : AppCompatActivity() {
             val user = User(teamName, teamBio, teamEmail, teamPhone)
 
             if (uid != null) {
-                databaseReference.child(uid).setValue(user).addOnCompleteListener {
+                DatabaseConnection.databaseReference.getReference("Users").child(uid).setValue(user).addOnCompleteListener {
                     if (it.isSuccessful) {
                         uploadProfile()
                     } else {
@@ -96,7 +88,6 @@ class UserInfoActivity : AppCompatActivity() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-
             startActivityForResult(intent, 100)
 
         }
@@ -112,14 +103,9 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun uploadProfile() {
-//        imgUri = Uri.parse("android.resource://$packageName/${R.drawable.ic_launcher_background}")
-//        imgUri = Uri.parse("android.resource://$packageName")
-        storageReference = FirebaseStorage.getInstance().getReference("Users/" + auth.currentUser?.uid)
-        storageReference.putFile(imgUri).addOnSuccessListener {
+        StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid).putFile(imgUri).addOnSuccessListener {
             Toast.makeText(this, "Save Profile Success", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
-//            val teamName = userInfoBinding.edtTeamName.text.toString()
-//            intent.putExtra("teamName", teamName)
             startActivity(intent)
             finish()
         }.addOnFailureListener{

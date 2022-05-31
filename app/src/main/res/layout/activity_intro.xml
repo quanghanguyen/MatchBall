@@ -5,15 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IntroActivity"
-    android:background="@drawable/intro">
+    tools:context=".signin.IntroActivity"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/intro"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/tvIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="410dp"
+        android:layout_marginTop="400dp"
         android:text="@string/it_s_easier_to_sign_up_now"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />

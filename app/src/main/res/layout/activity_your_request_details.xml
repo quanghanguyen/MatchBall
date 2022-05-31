@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".YourRequestDetailsActivity"
+    tools:context=".yourmatchrequest.YourRequestDetailsActivity"
     android:padding="16dp">
 
     <RelativeLayout
@@ -102,15 +102,12 @@
                 android:textSize="14sp" />
 
             <Button
-                android:visibility="visible"
                 android:id="@+id/btnPitchSelect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                style="@style/ButtonStyle"
                 android:layout_gravity="center"
+                android:layout_marginStart="20dp"
                 android:text="@string/select"
-                android:textColor="@color/white"
-                />
+                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -142,12 +139,9 @@
             <Button
                 android:visibility="visible"
                 android:id="@+id/btnTimeSelect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/ButtonStyle"
                 android:layout_marginStart="20dp"
-                android:layout_gravity="center"
                 android:text="@string/select"
-                android:textColor="@color/white"
                 />
 
         </LinearLayout>
@@ -246,9 +240,7 @@
 
             <Button
                 android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                style="@style/ButtonStyle"
                 android:text="@string/delete"
                 />
 

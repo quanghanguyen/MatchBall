@@ -1,4 +1,4 @@
-package com.example.matchball.map
+package com.example.matchball.createrequest
 
 import android.Manifest
 import android.content.Intent
@@ -13,8 +13,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.matchball.R
-import com.example.matchball.RequestActivity
-import com.example.matchball.YourRequestDetailsActivity
+import com.example.matchball.yourmatchrequest.YourRequestDetailsActivity
 import com.example.matchball.databinding.ActivityEditMapsBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -31,7 +30,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import java.io.IOException
 
-class EditMapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
+class ShowRequestMapActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private lateinit var mMap: GoogleMap

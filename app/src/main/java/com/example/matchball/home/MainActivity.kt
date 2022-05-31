@@ -1,28 +1,33 @@
-package com.example.matchball
+package com.example.matchball.home
 
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.matchball.R
+import com.example.matchball.createrequest.RequestActivity
 import com.example.matchball.databinding.ActivityMainBinding
-import com.example.matchball.fragment.ListFragment
-import com.example.matchball.fragment.UserFragment
+import com.example.matchball.dashboard.ListFragment
+import com.example.matchball.usersetting.UserFragment
 
+// Tổ chức lại cấu trúc project
+// Click mở thẳng trên GG Maps
+// Chủ sân
+// Check lại cái lưu ảnh
 // Click on Map
-// Sửa lại UI - dùng style
-// Load hết cái RecyclerView
 // Check lại Time + Null trong Request List
-// Sửa lại Notifications
-// Thêm Refresh
 // MVVM
 // Object
+// Học lại MVVM
 
+//------------
 
 // Setting Activity
-// coi Intern Malaysia
 // Lên ý tưởng về phân quyền User
 // Xây dựng Database
+// Notification
+// Search
 
 
 class MainActivity : AppCompatActivity() {

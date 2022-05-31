@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
-    tools:context=".map.EditMapsActivity"
+    tools:context=".createrequest.ShowRequestMapActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment">
 
     <RelativeLayout
@@ -22,23 +22,18 @@
 
         <Button
             android:id="@+id/btnSearch"
+            style="@style/ButtonStyle"
             android:text="@string/search"
             android:layout_below="@+id/edtSearch"
             android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_search_24"
-            android:textColor="@color/white"
             android:layout_marginStart="4dp"/>
 
         <Button
             android:id="@+id/btnDone"
+            style="@style/ButtonStyle"
             android:layout_below="@+id/btnSearch"
             android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/done"
-            android:textColor="@color/white"
             android:layout_marginStart="4dp"/>
 
 

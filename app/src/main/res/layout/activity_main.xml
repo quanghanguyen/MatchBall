@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".home.MainActivity">
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
@@ -40,12 +40,5 @@
         android:layout_width="match_parent"
         android:layout_height="550dp"
         />
-
-
-<!--    <fragment-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:name="com.example.matchball.fragment.ListFragment"-->
-<!--        navG-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

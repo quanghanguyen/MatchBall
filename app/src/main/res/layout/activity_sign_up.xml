@@ -5,15 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    android:background="@drawable/sign_up_new">
+    tools:context=".signup.SignUpActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/sign_up_new" />
 
     <RelativeLayout
         android:id="@+id/rlSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="280dp">
+        android:layout_marginTop="270dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvEmailSignUp"
@@ -85,12 +90,12 @@
             app:boxCornerRadiusTopEnd="20dp"
             app:boxCornerRadiusTopStart="20dp"
             app:boxStrokeColor="@color/yellow"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
             app:helperText=""
             app:helperTextTextColor="@android:color/holo_red_light"
             app:hintTextColor="@color/yellow"
-            app:passwordToggleEnabled="true"
-            app:counterEnabled="true"
-            app:counterMaxLength="16">
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passConfirmET"
@@ -99,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/confirm_your_password"
                 android:inputType="textPassword"
-                android:maxLength="16"/>
+                android:maxLength="16" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>

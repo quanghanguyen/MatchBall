@@ -44,7 +44,7 @@
     <string name="blank">Blank</string>
     <string name="your_match_request">Your Match Request</string>
     <string name="time">Time:</string>
-    <string name="pitch">Pitch</string>
+    <string name="pitch">Pitch:</string>
     <string name="amount_of_people">Amount of people</string>
     <string name="send">Send</string>
     <string name="select">Select</string>
@@ -66,7 +66,7 @@
     <string name="delete">Delete</string>
     <string name="title_activity_edit_maps">EditMapsActivity</string>
     <string name="edit_your_request">Edit Your Request</string>
-    <string name="phone">Phone</string>
+    <string name="phone">Phone:</string>
 
 
 </resources>

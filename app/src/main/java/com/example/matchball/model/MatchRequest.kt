@@ -19,5 +19,7 @@ data class MatchRequest (
     @SerializedName("people")
     val people : String = "",
     @SerializedName("note")
-    val note : String = ""
+    val note : String = "",
+    @SerializedName("phone")
+    val phone : String = "",
         ) : Parcelable

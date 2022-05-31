@@ -27,10 +27,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatchBall">
         <activity
-            android:name=".YourRequestDetailsActivity"
+            android:name=".yourmatchrequest.YourRequestDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".YourRequestActivity"
+            android:name=".yourmatchrequest.YourRequestActivity"
             android:exported="false" />
 
         <service
@@ -50,11 +50,11 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".map.JoinMapsActivity"
+            android:name=".joinmatch.JoinMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_join_maps" />
 
-        <activity android:name=".map.EditMapsActivity"
+        <activity android:name=".createrequest.ShowRequestMapActivity"
             android:exported="false"
             android:label="@string/title_activity_edit_maps"/>
 
@@ -70,17 +70,17 @@
         </service>
 
         <activity
-            android:name=".JoinActivity"
+            android:name=".joinmatch.JoinActivity"
             android:exported="false" />
         <activity
-            android:name=".map.MapsActivity"
+            android:name=".createrequest.RequestMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".RequestActivity"
+            android:name=".createrequest.RequestActivity"
             android:exported="false" />
         <activity
-            android:name=".UserInfoActivity"
+            android:name=".usersetting.UserInfoActivity"
             android:exported="false" />
 
         <meta-data
@@ -91,19 +91,19 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".IntroActivity"
+            android:name=".signin.IntroActivity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".signin.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".signup.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".home.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".home.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

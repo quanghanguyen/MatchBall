@@ -1,7 +1,6 @@
-package com.example.matchball.adapter
+package com.example.matchball.dashboard
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
@@ -31,6 +30,7 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>) : Recyc
                 tvTime.text = requestData.time
                 tvPitch.text = requestData.pitch
                 tvAmount.text = requestData.people
+                tvPhone.text = requestData.phone
 
                 requestItemsBinding.rlRequestItems.setOnClickListener {
                     listerner.onItemClick(requestData)

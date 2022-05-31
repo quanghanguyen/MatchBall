@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserInfoActivity">
+    tools:context=".usersetting.UserInfoActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/civAvatar"
@@ -101,8 +101,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:text="@string/save"
-        />
+        android:text="@string/save" />
 
 
 </RelativeLayout>

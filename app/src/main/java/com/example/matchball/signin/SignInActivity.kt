@@ -1,25 +1,26 @@
-package com.example.matchball
+package com.example.matchball.signin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
+import com.example.matchball.R
 import com.example.matchball.databinding.ActivitySignInBinding
+import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.home.MainActivity
 import com.example.matchball.model.*
-import com.google.firebase.auth.FirebaseAuth
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var signInBinding: ActivitySignInBinding
-    private lateinit var fireBaseAuth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signInBinding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(signInBinding.root)
-
-        fireBaseAuth = FirebaseAuth.getInstance()
 
         signInBinding.tvSignup.setOnClickListener {
             goSignUp()
@@ -41,30 +42,34 @@ class SignInActivity : AppCompatActivity() {
         if (validEmail && validPass) {
             signInSuccess()
         } else {
-            signInFail()
+            Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
         }
 
 
-    }
-
-    private fun signInFail() {
-        Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
     }
 
     private fun signInSuccess() {
         val email : String = signInBinding.emailEt.text.toString()
         val password : String = signInBinding.passET.text.toString()
 
-            fireBaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(this, R.string.sign_in_success, Toast.LENGTH_SHORT).show()
+        val signInViewModel : SignInViewModel by viewModels()
+        signInViewModel.signInResult.observe(this, Observer {result ->
+            when (result) {
+                is SignInViewModel.SignInResult.SignInOk -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
-                } else {
-                    Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
+                }
+
+                is SignInViewModel.SignInResult.SignInError -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
+        })
+
+        signInViewModel.handleSignIn(email, password)
+
     }
 
     private fun emailFocusListener() {

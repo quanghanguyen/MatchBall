@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragment.UserFragment"
+    tools:context=".usersetting.UserFragment"
     android:padding="15dp">
 
     <androidx.cardview.widget.CardView
@@ -83,10 +83,7 @@
         android:id="@+id/cvYourRequest"
         android:layout_below="@+id/cvUserInfo"
         android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/light_grey">
+        style="@style/CardViewStyle">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -108,10 +105,7 @@
         android:id="@+id/cvSetting"
         android:layout_below="@+id/cvYourRequest"
         android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/light_grey">
+        style="@style/CardViewStyle">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -134,13 +128,10 @@
 
     <Button
         android:id="@+id/btnSignOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sign_out"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
+        style="@style/ButtonStyle"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/sign_out"
         />
 
 </RelativeLayout>

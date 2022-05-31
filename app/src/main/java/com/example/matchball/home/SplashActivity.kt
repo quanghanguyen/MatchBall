@@ -1,9 +1,11 @@
-package com.example.matchball
+package com.example.matchball.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.matchball.R
+import com.example.matchball.signin.IntroActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {

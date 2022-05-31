@@ -1,4 +1,4 @@
-package com.example.matchball
+package com.example.matchball.yourmatchrequest
 
 import android.R
 import android.content.Context
@@ -9,8 +9,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.matchball.databinding.ActivityYourRequestDetailsBinding
-import com.example.matchball.map.EditMapsActivity
-import com.example.matchball.map.JoinMapsActivity
+import com.example.matchball.createrequest.ShowRequestMapActivity
+import com.example.matchball.joinmatch.JoinMapsActivity
 import com.example.matchball.model.MatchRequest
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -64,7 +64,7 @@ class YourRequestDetailsActivity : AppCompatActivity() {
 
     private fun selectMap() {
         requestDetailsBinding.btnPitchSelect.setOnClickListener {
-            val intent = Intent(this, EditMapsActivity::class.java)
+            val intent = Intent(this, ShowRequestMapActivity::class.java)
             val locationReceived = intent.getStringExtra("location")
             intent.let {
                 requestDetailsBinding.tvPitch.text = locationReceived

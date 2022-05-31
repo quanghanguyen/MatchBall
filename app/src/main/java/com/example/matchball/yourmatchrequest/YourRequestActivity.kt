@@ -1,10 +1,10 @@
-package com.example.matchball
+package com.example.matchball.yourmatchrequest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.matchball.adapter.RecyclerAdapter
+import com.example.matchball.dashboard.RecyclerAdapter
 import com.example.matchball.databinding.ActivityYourRequestBinding
 import com.example.matchball.model.MatchRequest
 import com.google.firebase.auth.FirebaseAuth
@@ -33,7 +33,10 @@ class YourRequestActivity : AppCompatActivity() {
     private fun itemsClick() {
         recyclerAdapter.setOnItemClickListerner(object : RecyclerAdapter.OnItemClickListerner{
             override fun onItemClick(requestData: MatchRequest) {
-                YourRequestDetailsActivity.startRequestDetails(this@YourRequestActivity, requestData)
+                YourRequestDetailsActivity.startRequestDetails(
+                    this@YourRequestActivity,
+                    requestData
+                )
             }
 
         })
