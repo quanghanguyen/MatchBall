@@ -9,7 +9,7 @@ data class MatchRequest (
     @SerializedName("teamName")
     val teamName : String? = "",
     @SerializedName("time")
-    val time : String = "",
+    val time : String? = "",
     @SerializedName("pitch")
     val pitch : String? = "",
     @SerializedName("pitchLatitude")
@@ -17,9 +17,9 @@ data class MatchRequest (
     @SerializedName("pitchLongitude")
     val pitchLongitude : String? = "",
     @SerializedName("people")
-    val people : String = "",
+    val people : String? = "",
     @SerializedName("note")
-    val note : String = "",
+    val note : String? = "",
     @SerializedName("phone")
-    val phone : String = "",
+    val phone : String? = "",
         ) : Parcelable

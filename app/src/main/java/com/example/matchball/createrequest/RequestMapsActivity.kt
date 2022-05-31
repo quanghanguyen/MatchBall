@@ -202,6 +202,3 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
     }
     }
 
-//    fun searchLocation(view: View) {
-////        val locationSearch: EditText = findViewById<EditText>(R.id.editText)
-////        lateinit var location: String

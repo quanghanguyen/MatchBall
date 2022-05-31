@@ -6,6 +6,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.example.matchball.model.User
 import com.example.matchball.databinding.ActivityUserInfoBinding
 import com.example.matchball.firebaseconnection.AuthConnection
@@ -19,6 +21,7 @@ class UserInfoActivity : AppCompatActivity() {
 
     private lateinit var userInfoBinding: ActivityUserInfoBinding
     private lateinit var imgUri : Uri
+    private val userInfoViewModel : UserInfoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +36,17 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun loadAvatar() {
-        val uid = AuthConnection.auth.currentUser!!.uid
-        val firebaseStorage = FirebaseStorage.getInstance().getReference("Users").child(uid)
-        val localFile = File.createTempFile("tempImage", "jpg")
-        firebaseStorage.getFile(localFile).addOnSuccessListener {
-
-            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-            userInfoBinding.civAvatar.setImageBitmap(bitmap)
-
-        }.addOnFailureListener {
-            Toast.makeText(this, "Load Avatar Failed", Toast.LENGTH_SHORT).show()
-        }
+        userInfoViewModel.loadUserAvatar.observe(this, Observer { result ->
+            when (result) {
+                is UserInfoViewModel.LoadUserAvatar.LoadOk -> {
+                    userInfoBinding.civAvatar.setImageBitmap(result.avatar)
+                }
+                is UserInfoViewModel.LoadUserAvatar.LoadFail -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+        userInfoViewModel.handleLoadUserData()
     }
 
     private fun getData() {
@@ -63,23 +66,26 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun btnSaveClick() {
-        val uid = AuthConnection.auth.currentUser?.uid
         userInfoBinding.btnSave.setOnClickListener {
             val teamName = userInfoBinding.edtTeamName.text.toString()
             val teamBio = userInfoBinding.edtBio.text.toString()
             val teamEmail = userInfoBinding.edtEmail.text.toString()
             val teamPhone = userInfoBinding.edtPhone.text.toString()
-            val user = User(teamName, teamBio, teamEmail, teamPhone)
 
-            if (uid != null) {
-                DatabaseConnection.databaseReference.getReference("Users").child(uid).setValue(user).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        uploadProfile()
-                    } else {
-                        Toast.makeText(this, "Failed to update Profile", Toast.LENGTH_SHORT).show()
+            userInfoViewModel.saveUserData.observe(this, Observer { result ->
+                when (result) {
+                    is UserInfoViewModel.SaveUserData.SaveOk -> {
+                        Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    is UserInfoViewModel.SaveUserData.SaveFail -> {
+                        Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-            }
+            })
+            userInfoViewModel.handleSaveUserData(teamName, teamBio, teamEmail, teamPhone)
         }
     }
 
@@ -99,17 +105,6 @@ class UserInfoActivity : AppCompatActivity() {
         if (requestCode == 100 && resultCode == RESULT_OK) {
             imgUri = data?.data!!
             userInfoBinding.civAvatar.setImageURI(imgUri)
-        }
-    }
-
-    private fun uploadProfile() {
-        StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid).putFile(imgUri).addOnSuccessListener {
-            Toast.makeText(this, "Save Profile Success", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }.addOnFailureListener{
-            Toast.makeText(this, "Failed to Save Profile", Toast.LENGTH_SHORT).show()
         }
     }
 }

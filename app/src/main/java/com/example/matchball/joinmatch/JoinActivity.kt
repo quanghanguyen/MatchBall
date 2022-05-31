@@ -2,6 +2,7 @@ package com.example.matchball.joinmatch
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +17,7 @@ class JoinActivity : AppCompatActivity() {
     companion object
     {
         private const val KEY_DATA = "request_data"
-        fun startDetails(context: Context, data : MatchRequest)
+        fun startDetails(context: Context, data : MatchRequest?)
         {
             context.startActivity(Intent(context, JoinActivity::class.java).apply {
                 putExtra(KEY_DATA, data)
@@ -65,11 +66,17 @@ class JoinActivity : AppCompatActivity() {
                 val pitchLongitude = requests?.pitchLongitude?.toDouble()
                 val pitchName = requests?.pitch.toString()
 
-                val intent = Intent(this, JoinMapsActivity::class.java)
-                intent.putExtra("pitchLatitude", pitchLatitude)
-                intent.putExtra("pitchLongitude", pitchLongitude)
-                intent.putExtra("pitchName", pitchName)
-                startActivity(intent)
+//                val intent = Intent(this, JoinMapsActivity::class.java)
+//                intent.putExtra("pitchLatitude", pitchLatitude)
+//                intent.putExtra("pitchLongitude", pitchLongitude)
+//                intent.putExtra("pitchName", pitchName)
+//                startActivity(intent)
+
+                val gmmIntentUri = Uri.parse("geo:$pitchLatitude, $pitchLongitude")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
+
             }
         }
     }

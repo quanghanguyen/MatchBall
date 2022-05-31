@@ -1,6 +1,7 @@
 package com.example.matchball.createrequest
 
 import android.app.DatePickerDialog
+import android.app.DownloadManager
 import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,17 +9,16 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.core.view.isEmpty
 import com.example.matchball.home.MainActivity
 import com.example.matchball.databinding.ActivityRequestBinding
-import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.firebaseconnection.DatabaseConnection
-import com.example.matchball.model.MatchRequest
 import java.util.*
 
 class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private lateinit var requestBinding: ActivityRequestBinding
+    private val requestViewModel : RequestViewModel by viewModels()
     private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
 
     var day = 0
@@ -47,48 +47,90 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     private fun sendRequest() {
 
-        val uid = AuthConnection.auth.currentUser!!.uid
+        val locationReceived = intent.getStringExtra("location")
+        val latitudeReceived = intent.getStringExtra("latitude")
+        val longitudeReceived = intent.getStringExtra("longitude")
 
-        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
-            val teamNameReceived =  it.child("teamName").value.toString()
-            val teamPhoneReceived = it.child("phone").value.toString()
+        val matchTime = requestBinding.tvPickTime.text.toString()
+        val matchPeople = requestBinding.spnPeople.selectedItem.toString()
+        val matchNote = requestBinding.edtNote.text.toString()
 
-            requestBinding.btnSend.setOnClickListener {
+        requestViewModel.getNameAndPhone.observe(this, androidx.lifecycle.Observer { result ->
+            when (result) {
+                is RequestViewModel.GetNameAndPhoneResult.ResultOk -> {
 
-                if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
-                    || requestBinding.spnPeople.isEmpty()) {
-                    Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
+                    val teamNameReceived = result.teamName
+                    val teamPhoneReceived = result.teamPhone
+
+                    requestBinding.btnSend.setOnClickListener {
+                        if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
+                            || requestBinding.spnPeople.isEmpty()) {
+                        Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
                 } else {
-
-                    val locationReceived = intent.getStringExtra("location")
-                    val latitudeReceived = intent.getStringExtra("latitude")
-                    val longitudeReceived = intent.getStringExtra("longitude")
-
-                    val matchTime = requestBinding.tvPickTime.text.toString()
-                    val matchPeople = requestBinding.spnPeople.selectedItem.toString()
-                    val matchNote = requestBinding.edtNote.text.toString()
-
-                    val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
-                        matchPeople, matchNote, teamPhoneReceived)
-
-                    if (uid != null) {
-                        DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                Toast.makeText(this, "Send Request Success", Toast.LENGTH_SHORT).show()
-                                intent = Intent(this, MainActivity::class.java)
-                                startActivity(intent)
-                            } else {
-                                Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show()
-                            }
+                            requestViewModel.sendRequest.observe(this, androidx.lifecycle.Observer { sendResult ->
+                                when (sendResult) {
+                                    is RequestViewModel.SendRequestResult.SendResultOk -> {
+                                        Toast.makeText(this, sendResult.successMessage, Toast.LENGTH_SHORT).show()
+                                        intent = Intent(this, MainActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                    is RequestViewModel.SendRequestResult.SendResultError -> {
+                                        Toast.makeText(this, sendResult.errorMessage, Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                            })
+                            requestViewModel.handleSendRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived, matchPeople, matchNote, teamPhoneReceived)
                         }
                     }
                 }
-
+                is RequestViewModel.GetNameAndPhoneResult.ResultError -> {
+                    Toast.makeText(this, result.errorMessage, Toast.LENGTH_SHORT).show()
+                }
             }
+        })
 
-        }.addOnFailureListener {
-            Toast.makeText(this, "Failed to Load TeamName", Toast.LENGTH_SHORT).show()
-        }
+        requestViewModel.handleNameAndPhone()
+
+//        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
+//            val teamNameReceived =  it.child("teamName").value.toString()
+//            val teamPhoneReceived = it.child("phone").value.toString()
+//
+//            requestBinding.btnSend.setOnClickListener {
+//
+//                if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
+//                    || requestBinding.spnPeople.isEmpty()) {
+//                    Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
+//                } else {
+//
+//                    val locationReceived = intent.getStringExtra("location")
+//                    val latitudeReceived = intent.getStringExtra("latitude")
+//                    val longitudeReceived = intent.getStringExtra("longitude")
+//
+//                    val matchTime = requestBinding.tvPickTime.text.toString()
+//                    val matchPeople = requestBinding.spnPeople.selectedItem.toString()
+//                    val matchNote = requestBinding.edtNote.text.toString()
+//
+//                    val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
+//                        matchPeople, matchNote, teamPhoneReceived)
+//
+//                    if (uid != null) {
+//                        DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
+//                            if (it.isSuccessful) {
+//                                Toast.makeText(this, "Send Request Success", Toast.LENGTH_SHORT).show()
+//                                intent = Intent(this, MainActivity::class.java)
+//                                startActivity(intent)
+//                            } else {
+//                                Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show()
+//                            }
+//                        }
+//                    }
+//                }
+//
+//            }
+//
+//        }.addOnFailureListener {
+//            Toast.makeText(this, "Failed to Load TeamName", Toast.LENGTH_SHORT).show()
+//        }
 
         }
 

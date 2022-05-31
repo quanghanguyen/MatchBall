@@ -8,18 +8,16 @@ import androidx.fragment.app.Fragment
 import com.example.matchball.R
 import com.example.matchball.createrequest.RequestActivity
 import com.example.matchball.databinding.ActivityMainBinding
-import com.example.matchball.dashboard.ListFragment
+import com.example.matchball.dashboard.MatchListFragment
 import com.example.matchball.usersetting.UserFragment
 
-// Tổ chức lại cấu trúc project
-// Click mở thẳng trên GG Maps
+// Check Intent trên Google Maps
 // Chủ sân
 // Check lại cái lưu ảnh
 // Click on Map
 // Check lại Time + Null trong Request List
 // MVVM
 // Object
-// Học lại MVVM
 
 //------------
 
@@ -47,14 +45,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         //List fragment is first
-        loadFragment(ListFragment.newInstance())
+        loadFragment(MatchListFragment.newInstance())
 
         mainBinding.bottomNavigationView.setOnItemSelectedListener { item ->
             val fragment : Fragment
             when (item.itemId) {
 
                 R.id.home -> {
-                    fragment = ListFragment()
+                    fragment = MatchListFragment()
                     loadFragment(fragment)
                     true
                 }

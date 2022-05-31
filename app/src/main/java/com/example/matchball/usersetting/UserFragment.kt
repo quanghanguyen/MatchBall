@@ -22,7 +22,7 @@ import java.io.File
 class UserFragment : Fragment() {
 
     private lateinit var userFragmentBinding : FragmentUserBinding
-    val userFragmentViewModel : UserFragmentViewModel by viewModels()
+    private val userFragmentViewModel : UserFragmentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,16 +60,6 @@ class UserFragment : Fragment() {
     }
 
     private fun readUserImage() {
-//        val localFile = File.createTempFile("tempImage", "jpg")
-//        StorageConnection.storageReference.getReference("Users").child(uid).getFile(localFile).addOnSuccessListener {
-//
-//            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-//            userFragmentBinding.civIntroAvatar.setImageBitmap(bitmap)
-//
-//        }.addOnFailureListener {
-//            Toast.makeText(context, "Load Avatar Failed", Toast.LENGTH_SHORT).show()
-//        }
-
         userFragmentViewModel.readUserImage.observe(this, Observer { result ->
 
             when (result) {

@@ -1,31 +1,44 @@
 package com.example.matchball.dashboard
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
 import com.example.matchball.model.MatchRequest
 
-class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>) : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
-
-//    fun getListRequest(requestData : ArrayList<MatchRequest>) {
-//        this.requestList = requestData
-//    }
-
-    private lateinit var mListerner : OnItemClickListerner
+class RecyclerAdapter(val requestList:ArrayList<MatchRequest>):
+    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+    private lateinit var listerner: OnItemClickListerner
 
     interface OnItemClickListerner {
         fun onItemClick(requestData: MatchRequest)
     }
 
-    fun setOnItemClickListerner(listerner : OnItemClickListerner) {
-        mListerner = listerner
+    fun addNewData(list: ArrayList<MatchRequest>) {
+        requestList.addAll(list)
+        notifyDataSetChanged()
     }
 
-    class MyViewHolder(private val requestItemsBinding: MatchRequestItemsBinding, private val listerner: OnItemClickListerner)
-        : RecyclerView.ViewHolder(requestItemsBinding.root){
-        fun bind(requestData : MatchRequest){
-            with(requestItemsBinding){
+    fun addMoreData(list: ArrayList<MatchRequest>) {
+        requestList.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    fun remove(matchRequest: MatchRequest) {
+
+    }
+
+    fun setOnItemClickListerner(listerner: OnItemClickListerner) {
+        this.listerner = listerner
+    }
+
+    class MyViewHolder(
+        private val requestItemsBinding: MatchRequestItemsBinding,
+        private val listerner: OnItemClickListerner
+    ) : RecyclerView.ViewHolder(requestItemsBinding.root) {
+        fun bind(requestData: MatchRequest) {
+            with(requestItemsBinding) {
                 tvTeamName.text = requestData.teamName
                 tvTime.text = requestData.time
                 tvPitch.text = requestData.pitch
@@ -38,14 +51,12 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>) : Recyc
 
             }
         }
-
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val matchRequestItems = MatchRequestItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val viewHolder : MyViewHolder = MyViewHolder(matchRequestItems, mListerner)
+        val matchRequestItems =
+            MatchRequestItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val viewHolder: MyViewHolder = MyViewHolder(matchRequestItems, listerner)
         return viewHolder
     }
 
@@ -56,5 +67,4 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>) : Recyc
     override fun getItemCount(): Int {
         return requestList.size
     }
-
 }

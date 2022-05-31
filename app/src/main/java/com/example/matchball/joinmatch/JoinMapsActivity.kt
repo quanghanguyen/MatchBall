@@ -17,17 +17,6 @@ class JoinMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityJoinMapsBinding
 
-//    companion object
-//    {
-//        private const val KEY_MAP_DATA = "request_map_data"
-//        fun startMapDetails(context: Context, data : MatchRequest)
-//        {
-//            context.startActivity(Intent(context, JoinMapsActivity::class.java).apply {
-//                putExtra(KEY_MAP_DATA, data)
-//            })
-//        }
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

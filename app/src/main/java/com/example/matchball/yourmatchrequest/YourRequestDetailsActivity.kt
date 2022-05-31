@@ -26,7 +26,7 @@ class YourRequestDetailsActivity : AppCompatActivity() {
     companion object
     {
         private const val KEY_DATA = "request_details_data"
-        fun startRequestDetails(context: Context, data : MatchRequest)
+        fun startRequestDetails(context: Context, data : MatchRequest?)
         {
             context.startActivity(Intent(context, YourRequestDetailsActivity::class.java).apply {
                 putExtra(KEY_DATA, data)

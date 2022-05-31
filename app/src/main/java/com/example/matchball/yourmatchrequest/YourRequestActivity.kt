@@ -46,7 +46,6 @@ class YourRequestActivity : AppCompatActivity() {
         yourRequestBinding.rcvYourRequest.apply {
             layoutManager = LinearLayoutManager(context)
             matchRequestList = arrayListOf<MatchRequest>()
-            recyclerAdapter = RecyclerAdapter(matchRequestList)
 
             getData()
 
