@@ -1,7 +1,6 @@
 package com.example.matchball.createrequest
 
 import android.app.DatePickerDialog
-import android.app.DownloadManager
 import android.app.TimePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +18,9 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     private lateinit var requestBinding: ActivityRequestBinding
     private val requestViewModel : RequestViewModel by viewModels()
-    private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
 
+
+    private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
     var day = 0
     var month: Int = 0
     var year: Int = 0
@@ -37,25 +37,30 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestBinding = ActivityRequestBinding.inflate(layoutInflater)
         setContentView(requestBinding.root)
 
-        timePick()
-        pitchPick()
-        locationReceive()
-        sendRequest()
-        peopleSelect()
+        initEvents()
+        initObserve()
+    }
 
+    private fun initObserve() {
+        TODO("Not yet implemented")
+    }
+
+    private fun initEvents() {
+        timeSelect()
+        pitchSelect()
+        peopleSelect()
+        sendRequest()
     }
 
     private fun sendRequest() {
-
         val locationReceived = intent.getStringExtra("location")
         val latitudeReceived = intent.getStringExtra("latitude")
         val longitudeReceived = intent.getStringExtra("longitude")
-
         val matchTime = requestBinding.tvPickTime.text.toString()
         val matchPeople = requestBinding.spnPeople.selectedItem.toString()
         val matchNote = requestBinding.edtNote.text.toString()
 
-        requestViewModel.getNameAndPhone.observe(this, androidx.lifecycle.Observer { result ->
+        requestViewModel.getNameAndPhone.observe(this, { result ->
             when (result) {
                 is RequestViewModel.GetNameAndPhoneResult.ResultOk -> {
 
@@ -134,48 +139,39 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         }
 
-    private fun locationReceive() {
+    private fun locationReceived() {
         val locationReceived = intent.getStringExtra("location")
-        intent.let {
-            with(requestBinding) {
-                tvPickPitch.setText("$locationReceived")
-            }
+        with(requestBinding) {
+            tvPickPitch.text = ("$locationReceived")
         }
     }
 
-    private fun pitchPick() {
+    private fun pitchSelect() {
         requestBinding.btnLocationSelect.setOnClickListener {
             intent = Intent(this, RequestMapsActivity::class.java)
             startActivity(intent)
         }
+        locationReceived()
     }
 
     private fun peopleSelect() {
         requestBinding.spnPeople.adapter = ArrayAdapter<Int>(this, android.R.layout.simple_list_item_1, peopleOptions)
         requestBinding.spnPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val peopleSelected : String = parent?.getItemAtPosition(position).toString()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
         }
     }
 
-    private fun timePick() {
+    private fun timeSelect() {
         requestBinding.btnSelect.setOnClickListener {
-//            getDateTimeCalendar()
-//
-//            DatePickerDialog(this, this, year, month, day).show()
-
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DAY_OF_MONTH)
             month = calendar.get(Calendar.MONTH)
             year = calendar.get(Calendar.YEAR)
-            val datePickerDialog =
-                DatePickerDialog(this, this, year, month,day)
+            val datePickerDialog = DatePickerDialog(this, this, year, month,day)
             datePickerDialog.show()
-
         }
     }
 

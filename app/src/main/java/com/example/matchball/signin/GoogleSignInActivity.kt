@@ -17,38 +17,57 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 
-class IntroActivity : AppCompatActivity() {
+class GoogleSignInActivity : AppCompatActivity() {
 
-    private lateinit var introBinding: ActivityIntroBinding
+    private lateinit var googleSignInBinding: ActivityIntroBinding
     private lateinit var googleSignInClient : GoogleSignInClient
-    val googleSignInViewModel : IntroViewModel by viewModels()
+    private val googleSignInViewModel : GoogleSignInViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        introBinding = ActivityIntroBinding.inflate(layoutInflater)
-        setContentView(introBinding.root)
+        googleSignInBinding = ActivityIntroBinding.inflate(layoutInflater)
+        setContentView(googleSignInBinding.root)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        btnEmailClick()
-        tvSignInClick()
+        initObserve()
+        initEvent()
+    }
 
-        introBinding.btnContinueGoogle.setOnClickListener {
-            signIn()
-        }
+    private fun initObserve() {
+        googleSignInViewModel.googleSignIn.observe(this, { result ->
+            googleSignInBinding.introSwipe.isRefreshing = false
+            when (result) {
+                is GoogleSignInViewModel.GoogleSignInResult.SignInOk -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                is GoogleSignInViewModel.GoogleSignInResult.SignInError -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                }
+                is GoogleSignInViewModel.GoogleSignInResult.Loading -> {
+                    googleSignInBinding.introSwipe.isRefreshing = true
+                }
+            }
+        })
+    }
+
+    private fun initEvent() {
+        goSignUp()
+        goSignIn()
+        googleSignIn()
     }
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = AuthConnection.auth.currentUser
         updateUI(currentUser)
     }
@@ -56,58 +75,18 @@ class IntroActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        //Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
-                    // Google Sign In was successful, authenticate with Firebase
                     val account = task.getResult(ApiException::class.java)!!
                     Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
                     Toast.makeText(this, "Sign-in Success", Toast.LENGTH_SHORT).show()
-                    firebaseAuthWithGoogle(account.idToken!!)
+                    googleSignInViewModel.handleGoogleLoading(account.idToken!!)
                 } catch (e: ApiException) {
-                    // Google Sign In failed, update UI appropriately
                     Log.w(TAG, "Google sign in failed", e)
                     Toast.makeText(this, "Sign-in Fail", Toast.LENGTH_SHORT).show()
                 }
         }
-
-//        googleSignInViewModel.googleSignIn.observe(this, Observer { signInResult ->
-//            when (signInResult) {
-//                is IntroViewModel.GoogleSignInResult.SignInOk -> {
-//
-//                    Toast.makeText(this, signInResult.message, Toast.LENGTH_SHORT).show()
-//                    firebaseAuthWithGoogle(account.idToken!!)
-//                }
-//
-//                is IntroViewModel.GoogleSignInResult.SignInError -> {
-//                    Toast.makeText(this, signInResult.message, Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        })
-//
-//        googleSignInViewModel.handleGoogleSuccess(requestCode, resultCode, data)
-
-    }
-
-    // [START auth_with_google]
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        googleSignInViewModel.googleSignIn.observe(this, Observer { result ->
-            when (result) {
-                is IntroViewModel.GoogleSignInResult.SignInOk -> {
-                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-
-                is IntroViewModel.GoogleSignInResult.SignInError -> {
-                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
-        googleSignInViewModel.handleGoogleLoading(idToken)
     }
 
     // [START signin]
@@ -117,7 +96,6 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-
     }
 
     companion object {
@@ -125,15 +103,21 @@ class IntroActivity : AppCompatActivity() {
         const val RC_SIGN_IN = 100
     }
 
-    private fun tvSignInClick() {
-        introBinding.tvSignIn.setOnClickListener {
+    private fun googleSignIn() {
+        googleSignInBinding.btnContinueGoogle.setOnClickListener {
+            signIn()
+        }
+    }
+
+    private fun goSignIn() {
+        googleSignInBinding.tvSignIn.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun btnEmailClick() {
-        introBinding.btnAnotherContinue.setOnClickListener {
+    private fun goSignUp() {
+        googleSignInBinding.btnAnotherContinue.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }

@@ -19,53 +19,54 @@ import com.example.matchball.model.validateUpperCasePassword
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var signUpBinding: ActivitySignUpBinding
+    private val signUpViewModel : SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signUpBinding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(signUpBinding.root)
 
+        initObserve()
+        signUpCheck()
         emailFocusListener()
         passwordFocusListener()
         passwordConfirmFocusListener()
 
-        signUpBinding.btnSignUp.setOnClickListener {
-            signUpCheck()
-        }
     }
 
-    private fun signUpCheck() {
-        val validEmail = signUpBinding.tvEmailSignUp.helperText == null
-        val validPass = signUpBinding.tvPasswordSignUp.helperText == null
-        val validConfirmPass = signUpBinding.tvConfirmPasswordSignUp.helperText == null
-
-        if (validEmail && validPass && validConfirmPass)
-            signUpSuccess()
-        else
-            Toast.makeText(this, R.string.sign_up_fail, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun signUpSuccess() {
-        val email: String = signUpBinding.emailEt.text.toString()
-        val password: String = signUpBinding.passET.text.toString()
-        val confirmPass: String = signUpBinding.passConfirmET.text.toString()
-
-        val signUpViewModel : SignUpViewModel by viewModels()
-
-        signUpViewModel.signUpResult.observe(this, Observer { result ->
+    private fun initObserve() {
+        signUpViewModel.signUpResult.observe(this, { result ->
+            signUpBinding.signUpSwipe.isRefreshing = false
             when (result) {
                 is SignUpViewModel.SignUpResult.LoginOk -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, SignInActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 is SignUpViewModel.SignUpResult.LoginError -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
+                is SignUpViewModel.SignUpResult.Loading -> {
+                    signUpBinding.signUpSwipe.isRefreshing = true
+                }
             }
         })
+    }
 
-        signUpViewModel.handleSignUp(email, password, confirmPass)
+    private fun signUpCheck() {
+        signUpBinding.btnSignUp.setOnClickListener{
+            val email: String = signUpBinding.emailEt.text.toString()
+            val password: String = signUpBinding.passET.text.toString()
+            val validEmail = signUpBinding.tvEmailSignUp.helperText == null
+            val validPass = signUpBinding.tvPasswordSignUp.helperText == null
+            val validConfirmPass = signUpBinding.tvConfirmPasswordSignUp.helperText == null
+
+            if (validEmail && validPass && validConfirmPass)
+                signUpViewModel.handleSignUp(email, password)
+            else
+                Toast.makeText(this, R.string.sign_up_fail, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun emailFocusListener() {

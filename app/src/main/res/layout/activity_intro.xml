@@ -5,8 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".signin.IntroActivity"
+    tools:context=".signin.GoogleSignInActivity"
     >
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/introSwipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
     <ImageView
         android:layout_width="match_parent"

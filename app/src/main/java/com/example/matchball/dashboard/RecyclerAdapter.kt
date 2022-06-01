@@ -7,8 +7,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
 import com.example.matchball.model.MatchRequest
 
-class RecyclerAdapter(val requestList:ArrayList<MatchRequest>):
+class RecyclerAdapter(private val requestList:ArrayList<MatchRequest>):
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+
     private lateinit var listerner: OnItemClickListerner
 
     interface OnItemClickListerner {
@@ -48,7 +49,6 @@ class RecyclerAdapter(val requestList:ArrayList<MatchRequest>):
                 requestItemsBinding.rlRequestItems.setOnClickListener {
                     listerner.onItemClick(requestData)
                 }
-
             }
         }
     }

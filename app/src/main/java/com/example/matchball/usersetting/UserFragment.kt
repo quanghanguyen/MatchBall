@@ -1,7 +1,6 @@
 package com.example.matchball.usersetting
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,36 +12,33 @@ import androidx.lifecycle.Observer
 import com.example.matchball.*
 import com.example.matchball.databinding.FragmentUserBinding
 import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.firebaseconnection.DatabaseConnection
-import com.example.matchball.firebaseconnection.StorageConnection
-import com.example.matchball.signin.IntroActivity
+import com.example.matchball.signin.GoogleSignInActivity
 import com.example.matchball.yourmatchrequest.YourRequestActivity
-import java.io.File
 
 class UserFragment : Fragment() {
 
     private lateinit var userFragmentBinding : FragmentUserBinding
     private val userFragmentViewModel : UserFragmentViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        readUserInfo()
-        readUserImage()
-        goUserInfoActivity()
-        yourRequestClick()
-        signOut()
+        initUserImageObserve()
+        initUserInfoObserve()
+        initEvent()
+        userFragmentViewModel.handleReadUserInfo()
+        userFragmentViewModel.handleReadUserImage()
 
     }
 
-    private fun readUserInfo() {
+    private fun initEvent() {
+        signOut()
+        goUserInfoActivity()
+        goYourRequestActivity()
+    }
 
-        userFragmentViewModel.readUserInfo.observe(this, Observer { result ->
+    private fun initUserInfoObserve() {
+        userFragmentViewModel.readUserInfo.observe(this, { result ->
             when (result) {
                 is UserFragmentViewModel.UserInfo.ReadSuccess -> {
                     userFragmentBinding.tvIntroName.text = result.teamName
@@ -50,33 +46,26 @@ class UserFragment : Fragment() {
                     userFragmentBinding.tvBio.text = result.teamBio
                     userFragmentBinding.tvPhone.text = result.phone
                 }
-
                 is UserFragmentViewModel.UserInfo.ReadError -> {
                     Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         })
-        userFragmentViewModel.handleReadUserInfo()
     }
 
-    private fun readUserImage() {
-        userFragmentViewModel.readUserImage.observe(this, Observer { result ->
-
+    private fun initUserImageObserve() {
+        userFragmentViewModel.readUserImage.observe(this, { result ->
             when (result) {
                 is UserFragmentViewModel.UserImage.ReadSuccess -> {
                     userFragmentBinding.civIntroAvatar.setImageBitmap(result.image)
                 }
                 is UserFragmentViewModel.UserImage.ReadError -> {
-                    // Do nothing
                 }
             }
         })
-
-        userFragmentViewModel.handleReadUserImage()
-
     }
 
-    private fun yourRequestClick() {
+    private fun goYourRequestActivity() {
         userFragmentBinding.cvYourRequest.setOnClickListener {
             val intent = Intent(requireContext(), YourRequestActivity::class.java)
             startActivity(intent)
@@ -86,7 +75,7 @@ class UserFragment : Fragment() {
     private fun signOut() {
         userFragmentBinding.btnSignOut.setOnClickListener {
             AuthConnection.auth.signOut()
-            val intent = Intent(context, IntroActivity::class.java)
+            val intent = Intent(context, GoogleSignInActivity::class.java)
             startActivity(intent)
             activity?.finish()
         }
@@ -108,14 +97,11 @@ class UserFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         userFragmentBinding = FragmentUserBinding.inflate(inflater, container, false)
         return userFragmentBinding.root
     }
-
 }

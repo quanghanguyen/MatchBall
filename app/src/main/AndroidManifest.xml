@@ -91,7 +91,7 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".signin.IntroActivity"
+            android:name=".signin.GoogleSignInActivity"
             android:exported="false" />
         <activity
             android:name=".signin.SignInActivity"

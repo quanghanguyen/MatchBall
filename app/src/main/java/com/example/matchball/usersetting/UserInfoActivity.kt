@@ -1,21 +1,13 @@
 package com.example.matchball.usersetting
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
-import com.example.matchball.model.User
 import com.example.matchball.databinding.ActivityUserInfoBinding
-import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.firebaseconnection.DatabaseConnection
-import com.example.matchball.firebaseconnection.StorageConnection
 import com.example.matchball.home.MainActivity
-import com.google.firebase.storage.FirebaseStorage
-import java.io.File
 
 class UserInfoActivity : AppCompatActivity() {
 
@@ -28,15 +20,36 @@ class UserInfoActivity : AppCompatActivity() {
         userInfoBinding = ActivityUserInfoBinding.inflate(layoutInflater)
         setContentView(userInfoBinding.root)
 
-        getData()
-        loadAvatar()
-        avatarClick()
-        btnSaveClick()
-
+        initAvatarObserve()
+        initSaveProfileObserve()
+        initEvent()
+        userInfoViewModel.handleLoadUserData()
     }
 
-    private fun loadAvatar() {
-        userInfoViewModel.loadUserAvatar.observe(this, Observer { result ->
+    private fun initEvent() {
+        getIntentData()
+        changeAvatar()
+        saveProfile()
+    }
+
+    private fun initSaveProfileObserve() {
+        userInfoViewModel.saveUserData.observe(this, { result ->
+            when (result) {
+                is UserInfoViewModel.SaveUserData.SaveOk -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                is UserInfoViewModel.SaveUserData.SaveFail -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun initAvatarObserve() {
+        userInfoViewModel.loadUserAvatar.observe(this, { result ->
             when (result) {
                 is UserInfoViewModel.LoadUserAvatar.LoadOk -> {
                     userInfoBinding.civAvatar.setImageBitmap(result.avatar)
@@ -46,10 +59,9 @@ class UserInfoActivity : AppCompatActivity() {
                 }
             }
         })
-        userInfoViewModel.handleLoadUserData()
     }
 
-    private fun getData() {
+    private fun getIntentData() {
         val nameIntent = intent.getStringExtra("name")
         val bioIntent = intent.getStringExtra("bio")
         val emailIntent = intent.getStringExtra("email")
@@ -65,31 +77,19 @@ class UserInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun btnSaveClick() {
+    private fun saveProfile() {
         userInfoBinding.btnSave.setOnClickListener {
             val teamName = userInfoBinding.edtTeamName.text.toString()
             val teamBio = userInfoBinding.edtBio.text.toString()
             val teamEmail = userInfoBinding.edtEmail.text.toString()
             val teamPhone = userInfoBinding.edtPhone.text.toString()
 
-            userInfoViewModel.saveUserData.observe(this, Observer { result ->
-                when (result) {
-                    is UserInfoViewModel.SaveUserData.SaveOk -> {
-                        Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                    is UserInfoViewModel.SaveUserData.SaveFail -> {
-                        Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-            })
             userInfoViewModel.handleSaveUserData(teamName, teamBio, teamEmail, teamPhone)
+
         }
     }
 
-    private fun avatarClick() {
+    private fun changeAvatar() {
         userInfoBinding.civAvatar.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"

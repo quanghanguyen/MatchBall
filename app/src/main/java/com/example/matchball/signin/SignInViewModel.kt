@@ -19,7 +19,7 @@ class SignInViewModel : ViewModel() {
     }
 
     fun handleSignIn(email : String, password : String) {
-        signInResult.value = SignInResult.Loading
+        signInResult.postValue(SignInResult.Loading)
         AuthConnection.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 signInResult.postValue(SignInResult.SignInOk("Sign In Success"))

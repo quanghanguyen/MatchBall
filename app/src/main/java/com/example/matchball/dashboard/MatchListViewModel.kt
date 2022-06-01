@@ -24,7 +24,7 @@ class MatchListViewModel : ViewModel() {
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val listMatch=ArrayList<MatchRequest>()
+                    val listMatch = ArrayList<MatchRequest>()
                     for (requestSnapshot in snapshot.children) {
                         requestSnapshot.getValue(MatchRequest::class.java)?.let {
                             listMatch.add(it)
@@ -33,7 +33,6 @@ class MatchListViewModel : ViewModel() {
                     matchListResult.postValue(MatchListResult.ResultOk(listMatch))
                 }
             }
-
             override fun onCancelled(error: DatabaseError) {
                 matchListResult.postValue(MatchListResult.ResultError("Failed to load Data"))
             }

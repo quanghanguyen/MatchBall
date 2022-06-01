@@ -15,27 +15,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
-class IntroViewModel : ViewModel() {
+class GoogleSignInViewModel : ViewModel() {
 
     val googleSignIn = MutableLiveData<GoogleSignInResult>()
 
     sealed class GoogleSignInResult {
         object Loading : GoogleSignInResult()
-        object Success : GoogleSignInResult()
         class SignInOk(val message : String) : GoogleSignInResult()
         class SignInError(val message: String) : GoogleSignInResult()
     }
 
     fun handleGoogleLoading(idToken: String) {
-        googleSignIn.value = GoogleSignInResult.Loading
+        googleSignIn.postValue(GoogleSignInResult.Loading)
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         AuthConnection.auth.signInWithCredential(credential)
             .addOnCompleteListener() { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     googleSignIn.postValue(GoogleSignInResult.SignInOk("Sign In Success"))
                 } else {
-                    // If sign in fails, display a message to the user.
                     googleSignIn.postValue(GoogleSignInResult.SignInError("Sign In Fail"))
                 }
             }

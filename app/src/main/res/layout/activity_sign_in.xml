@@ -13,6 +13,11 @@
         android:src="@drawable/sign_in_new"
         android:scaleType="centerCrop"/>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/signInSwipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <RelativeLayout
         android:id="@+id/rlSignIn"
         android:layout_width="wrap_content"

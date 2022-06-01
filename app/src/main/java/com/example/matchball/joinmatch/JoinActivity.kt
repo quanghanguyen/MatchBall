@@ -31,6 +31,11 @@ class JoinActivity : AppCompatActivity() {
         joinBinding = ActivityJoinBinding.inflate(layoutInflater)
         setContentView(joinBinding.root)
 
+        initIntentData()
+        initEvent()
+    }
+
+    private fun initIntentData() {
         intent?.let { bundle ->
             val requests = bundle.getParcelableExtra<MatchRequest>(KEY_DATA)
 
@@ -39,16 +44,17 @@ class JoinActivity : AppCompatActivity() {
                 tvJMTime.text = requests.time
                 tvJMPitch.text = requests.pitch
                 tvJMNote.text = requests.note
+                tvJMPhone.text = requests.phone
             }
-
         }
-
-        openPitchMap()
-        sendJoin()
-
     }
 
-    private fun sendJoin() {
+    private fun initEvent() {
+        sendJoinRequest()
+        openPitchMap()
+    }
+
+    private fun sendJoinRequest() {
         joinBinding.btnJoin.setOnClickListener {
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
@@ -76,7 +82,6 @@ class JoinActivity : AppCompatActivity() {
                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                 mapIntent.setPackage("com.google.android.apps.maps")
                 startActivity(mapIntent)
-
             }
         }
     }

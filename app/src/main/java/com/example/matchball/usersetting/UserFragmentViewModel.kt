@@ -12,7 +12,7 @@ import java.io.File
 
 class UserFragmentViewModel : ViewModel() {
 
-    val uid = AuthConnection.auth.currentUser!!.uid
+    private val uid = AuthConnection.auth.currentUser!!.uid
     val readUserImage = MutableLiveData<UserImage>()
     val readUserInfo = MutableLiveData<UserInfo>()
 
@@ -29,7 +29,6 @@ class UserFragmentViewModel : ViewModel() {
     fun handleReadUserInfo() {
         DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
             if (it.exists()) {
-
                 val teamName = it.child("teamName").value.toString()
                 val teamBio = it.child("teamBio").value.toString()
                 val email = it.child("email").value.toString()
@@ -50,10 +49,8 @@ class UserFragmentViewModel : ViewModel() {
         StorageConnection.storageReference.getReference("Users").child(uid).getFile(localFile).addOnSuccessListener {
             val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
             readUserImage.postValue(UserImage.ReadSuccess(bitmap))
-
         }.addOnFailureListener {
             readUserImage.postValue(UserImage.ReadError())
         }
     }
-
 }

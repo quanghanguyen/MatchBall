@@ -11,7 +11,7 @@ import com.example.matchball.model.MatchRequest
 
 class RequestViewModel : ViewModel() {
 
-    val uid = AuthConnection.auth.currentUser!!.uid
+    private val uid = AuthConnection.auth.currentUser!!.uid
 
     val getNameAndPhone = MutableLiveData<GetNameAndPhoneResult>()
     val sendRequest = MutableLiveData<SendRequestResult>()
@@ -37,19 +37,17 @@ class RequestViewModel : ViewModel() {
     }
 
     fun handleSendRequest(teamNameReceived : String, matchTime : String, locationReceived: String?,
-                          latitudeReceived: String?, longitudeReceived : String?, matchPeople: String,
+                          latitudeReceived: String?, longitudeReceived : String?, matchPeople: String?,
                           matchNote : String, teamPhoneReceived : String) {
 
         val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
             matchPeople, matchNote, teamPhoneReceived)
 
-        if (uid != null) {
-            DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    sendRequest.postValue(SendRequestResult.SendResultOk("Send Request Success"))
-                } else {
-                    sendRequest.postValue(SendRequestResult.SendResultError("Send Request Fail"))
-                }
+        DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
+            if (it.isSuccessful) {
+                sendRequest.postValue(SendRequestResult.SendResultOk("Send Request Success"))
+            } else {
+                sendRequest.postValue(SendRequestResult.SendResultError("Send Request Fail"))
             }
         }
     }

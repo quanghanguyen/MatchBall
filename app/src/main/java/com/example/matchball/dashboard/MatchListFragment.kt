@@ -21,10 +21,12 @@ class MatchListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initList()
         initObserve()
         initEvent()
         matchListViewModel.handleMatchList()
+
     }
 
     private fun initObserve() {

@@ -37,26 +37,30 @@ class MainActivity : AppCompatActivity() {
         mainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mainBinding.root)
 
+        initEvents()
+        initUI()
+    }
+
+    private fun initUI() {
         mainBinding.bottomNavigationView.background = null
         mainBinding.bottomNavigationView.menu.getItem(2).isEnabled = true
-
-        mainBinding.fab.setOnClickListener {
-            goRequest()
-        }
-
-        //List fragment is first
         loadFragment(MatchListFragment.newInstance())
+    }
 
+    private fun initEvents() {
+        createRequest()
+        selectBottomNavigation()
+    }
+
+    private fun selectBottomNavigation() {
         mainBinding.bottomNavigationView.setOnItemSelectedListener { item ->
             val fragment : Fragment
             when (item.itemId) {
-
                 R.id.home -> {
                     fragment = MatchListFragment()
                     loadFragment(fragment)
                     true
                 }
-
                 R.id.person -> {
                     fragment = UserFragment()
                     loadFragment(fragment)
@@ -67,9 +71,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun goRequest() {
-        val intent = Intent(this, RequestActivity::class.java)
-        startActivity(intent)
+    private fun createRequest() {
+        mainBinding.fab.setOnClickListener {
+            val intent = Intent(this, RequestActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -79,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 // Print KeyHash Syntax
-
+//
 //    private fun printKeyHash() {
 //        try {
 //            val info : PackageInfo = this.packageManager.getPackageInfo(this.packageName, PackageManager.GET_SIGNATURES)

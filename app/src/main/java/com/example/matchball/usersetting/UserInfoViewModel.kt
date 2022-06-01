@@ -17,9 +17,8 @@ import java.io.File
 
 class UserInfoViewModel : ViewModel() {
 
-    val uid = AuthConnection.auth.currentUser!!.uid
+    private val uid = AuthConnection.auth.currentUser!!.uid
     private lateinit var imgUri : Uri
-
 
     val loadUserAvatar = MutableLiveData<LoadUserAvatar>()
     val saveUserData = MutableLiveData<SaveUserData>()
@@ -47,16 +46,12 @@ class UserInfoViewModel : ViewModel() {
 
     fun handleSaveUserData(teamName : String, teamBio : String, teamEmail : String, teamPhone : String) {
         val user = User(teamName, teamBio, teamEmail, teamPhone)
-        if (uid != null) {
-            DatabaseConnection.databaseReference.getReference("Users").child(uid).setValue(user).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid).putFile(imgUri).addOnSuccessListener {
-                        saveUserData.postValue(SaveUserData.SaveOk("Save Profile Success"))
-                    }.addOnFailureListener{
-                        saveUserData.postValue(SaveUserData.SaveFail("Failed to Save Profile"))
-                    }
-                } else {
-                    // Do Nothing
+        DatabaseConnection.databaseReference.getReference("Users").child(uid).setValue(user).addOnCompleteListener {
+            if (it.isSuccessful) {
+                StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid).putFile(imgUri).addOnSuccessListener {
+                    saveUserData.postValue(SaveUserData.SaveOk("Save Profile Success"))
+                }.addOnFailureListener{
+                    saveUserData.postValue(SaveUserData.SaveFail("Failed to Save Profile"))
                 }
             }
         }

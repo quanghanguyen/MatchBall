@@ -9,51 +9,29 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.matchball.R
 import com.example.matchball.databinding.ActivitySignInBinding
-import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.home.MainActivity
 import com.example.matchball.model.*
 
 class SignInActivity : AppCompatActivity() {
 
     private lateinit var signInBinding: ActivitySignInBinding
+    private val signInViewModel : SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         signInBinding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(signInBinding.root)
 
-        signInBinding.tvSignup.setOnClickListener {
-            goSignUp()
-        }
-
-        signInBinding.btnSignIn.setOnClickListener {
-            signInCheck()
-        }
-
+        initObserve()
+        initEvent()
         passwordFocusListener()
         emailFocusListener()
 
     }
 
-    private fun signInCheck() {
-        val validEmail = signInBinding.emailLayout.helperText == null
-        val validPass = signInBinding.passwordLayout.helperText == null
-
-        if (validEmail && validPass) {
-            signInSuccess()
-        } else {
-            Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
-        }
-
-
-    }
-
-    private fun signInSuccess() {
-        val email : String = signInBinding.emailEt.text.toString()
-        val password : String = signInBinding.passET.text.toString()
-
-        val signInViewModel : SignInViewModel by viewModels()
+    private fun initObserve() {
         signInViewModel.signInResult.observe(this, Observer {result ->
+            signInBinding.signInSwipe.isRefreshing = false
             when (result) {
                 is SignInViewModel.SignInResult.SignInOk -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
@@ -61,15 +39,41 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
                 is SignInViewModel.SignInResult.SignInError -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
+                is SignInViewModel.SignInResult.Loading -> {
+                    signInBinding.signInSwipe.isRefreshing = true
+                }
             }
         })
+    }
 
-        signInViewModel.handleSignIn(email, password)
+    private fun initEvent() {
+        goSignUpActivity()
+        signInCheck()
+    }
 
+    private fun goSignUpActivity() {
+        signInBinding.tvSignup.setOnClickListener {
+            val intent = Intent(this, GoogleSignInActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun signInCheck() {
+        signInBinding.btnSignIn.setOnClickListener {
+            val email : String = signInBinding.emailEt.text.toString()
+            val password : String = signInBinding.passET.text.toString()
+            val validEmail = signInBinding.emailLayout.helperText == null
+            val validPass = signInBinding.passwordLayout.helperText == null
+
+            if (validEmail && validPass) {
+                signInViewModel.handleSignIn(email, password)
+            } else {
+                Toast.makeText(this, R.string.sign_in_fail, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun emailFocusListener() {
@@ -134,11 +138,5 @@ class SignInActivity : AppCompatActivity() {
             return "Must contain 1 Special Character"
         }
         return null
-    }
-
-
-    private fun goSignUp() {
-        val intent = Intent(this, IntroActivity::class.java)
-        startActivity(intent)
     }
 }

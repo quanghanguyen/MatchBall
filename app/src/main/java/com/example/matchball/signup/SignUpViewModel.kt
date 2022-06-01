@@ -12,7 +12,6 @@ import com.example.matchball.firebaseconnection.AuthConnection
 class SignUpViewModel : ViewModel() {
 
     val signUpResult = MutableLiveData<SignUpResult>()
-
 //    private val _loginOk by lazy {MutableLiveData<LoginResult>()}
 //    val signUpResult : LiveData<LoginResult> = _loginOk
 
@@ -22,12 +21,11 @@ class SignUpViewModel : ViewModel() {
         class LoginError(val message: String) : SignUpResult()
     }
 
-    fun handleSignUp(email: String, password: String, confirmPassword: String) {
-        signUpResult.value = SignUpResult.Loading
+    fun handleSignUp(email: String, password: String) {
+        signUpResult.postValue(SignUpResult.Loading)
         AuthConnection.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (it.isSuccessful) {
                 signUpResult.postValue(SignUpResult.LoginOk("Sign Up Success"))
-
             } else {
                 signUpResult.postValue(SignUpResult.LoginError("Sign Up Fail"))
             }

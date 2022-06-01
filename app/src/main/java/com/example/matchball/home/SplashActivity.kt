@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.matchball.R
-import com.example.matchball.signin.IntroActivity
+import com.example.matchball.signin.GoogleSignInActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(signUpIntent)
                 finish()
             } else {
-                val mainUpIntent = Intent(this, IntroActivity::class.java)
+                val mainUpIntent = Intent(this, GoogleSignInActivity::class.java)
                 startActivity(mainUpIntent)
                 finish()
             }
