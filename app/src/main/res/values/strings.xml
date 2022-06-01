@@ -45,10 +45,10 @@
     <string name="your_match_request">Your Match Request</string>
     <string name="time">Time:</string>
     <string name="pitch">Pitch:</string>
-    <string name="amount_of_people">Amount of people</string>
+    <string name="amount_of_people">Amount of people:</string>
     <string name="send">Send</string>
     <string name="select">Select</string>
-    <string name="note">Note</string>
+    <string name="note">Note:</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="search_location">Search Location</string>
     <string name="search">Search</string>

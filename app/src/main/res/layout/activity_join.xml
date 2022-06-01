@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
-        android:weightSum="5">
+        android:weightSum="6">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -104,6 +104,33 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/amount_of_people"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvJMPeople"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="4dp"
+                android:text="@string/amount_of_people"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 

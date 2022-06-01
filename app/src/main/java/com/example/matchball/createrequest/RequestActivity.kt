@@ -38,11 +38,38 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         setContentView(requestBinding.root)
 
         initEvents()
-        initObserve()
+        initNameAndPhoneObserve()
+        initSendRequestObserve()
+        requestViewModel.handleNameAndPhone()
     }
 
-    private fun initObserve() {
-        TODO("Not yet implemented")
+    private fun initSendRequestObserve() {
+        requestViewModel.sendRequest.observe(this, {sendRequestResult ->
+            when (sendRequestResult) {
+                is RequestViewModel.SendRequestResult.SendResultOk -> {
+                    Toast.makeText(this, sendRequestResult.successMessage, Toast.LENGTH_SHORT).show()
+                    intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+                is RequestViewModel.SendRequestResult.SendResultError -> {
+                    Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun initNameAndPhoneObserve() {
+        requestViewModel.getNameAndPhone.observe(this, {result ->
+            when (result) {
+                is RequestViewModel.GetNameAndPhoneResult.ResultOk -> {
+                    val teamNameReceived = result.teamName
+                    val teamPhoneReceived = result.teamPhone
+                }
+                is RequestViewModel.GetNameAndPhoneResult.ResultError -> {
+                    Toast.makeText(this, result.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun initEvents() {
@@ -56,88 +83,15 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         val locationReceived = intent.getStringExtra("location")
         val latitudeReceived = intent.getStringExtra("latitude")
         val longitudeReceived = intent.getStringExtra("longitude")
-        val matchTime = requestBinding.tvPickTime.text.toString()
-        val matchPeople = requestBinding.spnPeople.selectedItem.toString()
-        val matchNote = requestBinding.edtNote.text.toString()
 
-        requestViewModel.getNameAndPhone.observe(this, { result ->
-            when (result) {
-                is RequestViewModel.GetNameAndPhoneResult.ResultOk -> {
+        requestBinding.btnSend.setOnClickListener {
+            val matchTime = requestBinding.tvPickTime.text.toString()
+            val matchPeople = requestBinding.spnPeople.selectedItem.toString()
+            val matchNote = requestBinding.edtNote.text.toString()
 
-                    val teamNameReceived = result.teamName
-                    val teamPhoneReceived = result.teamPhone
-
-                    requestBinding.btnSend.setOnClickListener {
-                        if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
-                            || requestBinding.spnPeople.isEmpty()) {
-                        Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
-                } else {
-                            requestViewModel.sendRequest.observe(this, androidx.lifecycle.Observer { sendResult ->
-                                when (sendResult) {
-                                    is RequestViewModel.SendRequestResult.SendResultOk -> {
-                                        Toast.makeText(this, sendResult.successMessage, Toast.LENGTH_SHORT).show()
-                                        intent = Intent(this, MainActivity::class.java)
-                                        startActivity(intent)
-                                    }
-                                    is RequestViewModel.SendRequestResult.SendResultError -> {
-                                        Toast.makeText(this, sendResult.errorMessage, Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                            })
-                            requestViewModel.handleSendRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived, matchPeople, matchNote, teamPhoneReceived)
-                        }
-                    }
-                }
-                is RequestViewModel.GetNameAndPhoneResult.ResultError -> {
-                    Toast.makeText(this, result.errorMessage, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
-        requestViewModel.handleNameAndPhone()
-
-//        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
-//            val teamNameReceived =  it.child("teamName").value.toString()
-//            val teamPhoneReceived = it.child("phone").value.toString()
-//
-//            requestBinding.btnSend.setOnClickListener {
-//
-//                if (requestBinding.tvPickTime.text.isEmpty() || requestBinding.tvPickPitch.text.isEmpty()
-//                    || requestBinding.spnPeople.isEmpty()) {
-//                    Toast.makeText(this, "Missing Information Request", Toast.LENGTH_SHORT).show()
-//                } else {
-//
-//                    val locationReceived = intent.getStringExtra("location")
-//                    val latitudeReceived = intent.getStringExtra("latitude")
-//                    val longitudeReceived = intent.getStringExtra("longitude")
-//
-//                    val matchTime = requestBinding.tvPickTime.text.toString()
-//                    val matchPeople = requestBinding.spnPeople.selectedItem.toString()
-//                    val matchNote = requestBinding.edtNote.text.toString()
-//
-//                    val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
-//                        matchPeople, matchNote, teamPhoneReceived)
-//
-//                    if (uid != null) {
-//                        DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
-//                            if (it.isSuccessful) {
-//                                Toast.makeText(this, "Send Request Success", Toast.LENGTH_SHORT).show()
-//                                intent = Intent(this, MainActivity::class.java)
-//                                startActivity(intent)
-//                            } else {
-//                                Toast.makeText(this, "Failed to Send Request", Toast.LENGTH_SHORT).show()
-//                            }
-//                        }
-//                    }
-//                }
-//
-//            }
-//
-//        }.addOnFailureListener {
-//            Toast.makeText(this, "Failed to Load TeamName", Toast.LENGTH_SHORT).show()
-//        }
-
+            requestViewModel.handleSendRequest("Ha", matchTime, locationReceived, latitudeReceived, longitudeReceived, matchPeople, matchNote, "083222")
         }
+    }
 
     private fun locationReceived() {
         val locationReceived = intent.getStringExtra("location")
@@ -156,12 +110,12 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     private fun peopleSelect() {
         requestBinding.spnPeople.adapter = ArrayAdapter<Int>(this, android.R.layout.simple_list_item_1, peopleOptions)
-        requestBinding.spnPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-        }
+//        requestBinding.spnPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//            }
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//            }
+//        }
     }
 
     private fun timeSelect() {

@@ -48,6 +48,8 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+
+
         searchButtonClick()
         doneButtonClick()
 
@@ -63,13 +65,6 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-
-
-//        // Add a marker in Sydney and move the camera
-//        val sydney = LatLng(-34.0, 151.0)
-//        val hue = LatLng(16.461109, 107.570183)
-//        mMap.addMarker(MarkerOptions().position(hue).title("Marker in Hue"))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(hue))
         mMap = googleMap
         mMap.setOnMapLongClickListener {
             mMap.addMarker(MarkerOptions().position(it))
@@ -145,26 +140,24 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
     private fun searchButtonClick() {
         binding.btnSearch.setOnClickListener {
             val location = binding.edtSearch.text.toString()
-            var addressList: List<Address>? = null
+            lateinit var addressList: List<Address>
 
-            if (location == "") {
+            if (location.isEmpty()) {
                 Toast.makeText(applicationContext,"Please Provide Location",Toast.LENGTH_SHORT).show()
             }
-            else{
+            else {
                 val geoCoder = Geocoder(this)
                 try {
-                    addressList = geoCoder.getFromLocationName(location, 5)
+                    addressList = geoCoder.getFromLocationName(location, 1)
 
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-                val address = addressList!![0]
+                val address = addressList[0]
                 val latLng = LatLng(address.latitude, address.longitude)
 
                 mMap.addMarker(MarkerOptions().position(latLng).title(location))
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
-
-//                Toast.makeText(applicationContext, address.latitude.toString() + " " + address.longitude, Toast.LENGTH_LONG).show()
 
             }
         }
@@ -178,7 +171,7 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
                 Toast.makeText(this, "Please Select Location", Toast.LENGTH_SHORT).show()
             } else {
                 val location = binding.edtSearch.text.toString()
-                var addressList: List<Address>? = null
+                lateinit var addressList: List<Address>
                 val geoCoder = Geocoder(this)
                 try {
                     addressList = geoCoder.getFromLocationName(location, 1)
@@ -186,7 +179,7 @@ open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, Locati
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
-                val address = addressList!![0]
+                val address = addressList[0]
 
                 if (location.isEmpty() || address.latitude.toString().isBlank() || address.longitude.toString().isBlank()) {
                     Toast.makeText(applicationContext, "Location is Invalid", Toast.LENGTH_SHORT).show()
