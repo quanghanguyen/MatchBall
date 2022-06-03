@@ -23,11 +23,9 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initUserImageObserve()
-        initUserInfoObserve()
+        initObserve()
         initEvent()
-        userFragmentViewModel.handleReadUserInfo()
-        userFragmentViewModel.handleReadUserImage()
+        userFragmentViewModel.handleReadUser()
 
     }
 
@@ -37,29 +35,29 @@ class UserFragment : Fragment() {
         goYourRequestActivity()
     }
 
-    private fun initUserInfoObserve() {
-        userFragmentViewModel.readUserInfo.observe(this, { result ->
+    private fun initObserve() {
+        userFragmentViewModel.readUser.observe(this, {result ->
             when (result) {
-                is UserFragmentViewModel.UserInfo.ReadSuccess -> {
+                is UserFragmentViewModel.UserData.Loading -> {
+                    userFragmentBinding.progressBar.visibility = View.GONE
+                    userFragmentBinding.cvUserInfo.visibility = View.VISIBLE
+                    userFragmentBinding.cvYourRequest.visibility = View.VISIBLE
+                    userFragmentBinding.cvSetting.visibility = View.VISIBLE
+                    userFragmentBinding.btnSignOut.visibility = View.VISIBLE
+                }
+                is UserFragmentViewModel.UserData.ReadAvatarSuccess -> {
+                    userFragmentBinding.civIntroAvatar.setImageBitmap(result.image)
+                }
+                is UserFragmentViewModel.UserData.ReadAvatarError -> {
+                }
+                is UserFragmentViewModel.UserData.ReadInfoSuccess -> {
                     userFragmentBinding.tvIntroName.text = result.teamName
                     userFragmentBinding.tvIntroEmail.text = result.email
                     userFragmentBinding.tvBio.text = result.teamBio
                     userFragmentBinding.tvPhone.text = result.phone
                 }
-                is UserFragmentViewModel.UserInfo.ReadError -> {
+                is UserFragmentViewModel.UserData.ReadInfoError -> {
                     Toast.makeText(context, result.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-
-    private fun initUserImageObserve() {
-        userFragmentViewModel.readUserImage.observe(this, { result ->
-            when (result) {
-                is UserFragmentViewModel.UserImage.ReadSuccess -> {
-                    userFragmentBinding.civIntroAvatar.setImageBitmap(result.image)
-                }
-                is UserFragmentViewModel.UserImage.ReadError -> {
                 }
             }
         })
@@ -100,7 +98,7 @@ class UserFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         userFragmentBinding = FragmentUserBinding.inflate(inflater, container, false)
         return userFragmentBinding.root
     }

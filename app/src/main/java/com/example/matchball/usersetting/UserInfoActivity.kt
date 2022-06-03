@@ -20,10 +20,23 @@ class UserInfoActivity : AppCompatActivity() {
         userInfoBinding = ActivityUserInfoBinding.inflate(layoutInflater)
         setContentView(userInfoBinding.root)
 
-        initAvatarObserve()
-        initSaveProfileObserve()
         initEvent()
-        userInfoViewModel.handleLoadUserData()
+        initLoadAvatarObserve()
+        initSaveProfileObserve()
+        userInfoViewModel.handleLoadAvatar()
+    }
+
+    private fun initLoadAvatarObserve() {
+        userInfoViewModel.loadAvatar.observe(this, { loadResult ->
+            when (loadResult) {
+                is UserInfoViewModel.LoadAvatar.LoadAvatarOk -> {
+                    userInfoBinding.civAvatar.setImageBitmap(loadResult.avatar)
+                }
+                is UserInfoViewModel.LoadAvatar.LoadAvatarFail -> {
+                    Toast.makeText(this, loadResult.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun initEvent() {
@@ -42,19 +55,6 @@ class UserInfoActivity : AppCompatActivity() {
                     finish()
                 }
                 is UserInfoViewModel.SaveUserData.SaveFail -> {
-                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-
-    private fun initAvatarObserve() {
-        userInfoViewModel.loadUserAvatar.observe(this, { result ->
-            when (result) {
-                is UserInfoViewModel.LoadUserAvatar.LoadOk -> {
-                    userInfoBinding.civAvatar.setImageBitmap(result.avatar)
-                }
-                is UserInfoViewModel.LoadUserAvatar.LoadFail -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
             }

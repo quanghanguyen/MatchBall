@@ -21,12 +21,12 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
 
     private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
-    var day = 0
+    var day: Int = 0
     var month: Int = 0
     var year: Int = 0
     var hour: Int = 0
     var minute: Int = 0
-    var myDay = 0
+    var myDay: Int = 0
     var myMonth: Int = 0
     var myYear: Int = 0
     var myHour: Int = 0
@@ -38,35 +38,27 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         setContentView(requestBinding.root)
 
         initEvents()
-        initNameAndPhoneObserve()
         initSendRequestObserve()
-        requestViewModel.handleNameAndPhone()
     }
 
     private fun initSendRequestObserve() {
         requestViewModel.sendRequest.observe(this, {sendRequestResult ->
             when (sendRequestResult) {
+                is RequestViewModel.SendRequestResult.GetResultOk -> {
+                    val teamName = sendRequestResult.teamName
+                    val teamPhone = sendRequestResult.teamPhone
+                }
+                is RequestViewModel.SendRequestResult.GetResultError -> {
+                    Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
+                }
                 is RequestViewModel.SendRequestResult.SendResultOk -> {
                     Toast.makeText(this, sendRequestResult.successMessage, Toast.LENGTH_SHORT).show()
                     intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 is RequestViewModel.SendRequestResult.SendResultError -> {
                     Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-    }
-
-    private fun initNameAndPhoneObserve() {
-        requestViewModel.getNameAndPhone.observe(this, {result ->
-            when (result) {
-                is RequestViewModel.GetNameAndPhoneResult.ResultOk -> {
-                    val teamNameReceived = result.teamName
-                    val teamPhoneReceived = result.teamPhone
-                }
-                is RequestViewModel.GetNameAndPhoneResult.ResultError -> {
-                    Toast.makeText(this, result.errorMessage, Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -89,7 +81,8 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             val matchPeople = requestBinding.spnPeople.selectedItem.toString()
             val matchNote = requestBinding.edtNote.text.toString()
 
-            requestViewModel.handleSendRequest("Ha", matchTime, locationReceived, latitudeReceived, longitudeReceived, matchPeople, matchNote, "083222")
+            requestViewModel.handleSendRequest("teamName", matchTime, locationReceived,
+                latitudeReceived, longitudeReceived, matchPeople, matchNote, "teamPhone")
         }
     }
 
@@ -121,7 +114,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     private fun timeSelect() {
         requestBinding.btnSelect.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
-            day = calendar.get(Calendar.DAY_OF_MONTH)
+            day = calendar.get(Calendar.DATE)
             month = calendar.get(Calendar.MONTH)
             year = calendar.get(Calendar.YEAR)
             val datePickerDialog = DatePickerDialog(this, this, year, month,day)

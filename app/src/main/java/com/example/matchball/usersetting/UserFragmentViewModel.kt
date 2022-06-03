@@ -13,20 +13,19 @@ import java.io.File
 class UserFragmentViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
-    val readUserImage = MutableLiveData<UserImage>()
-    val readUserInfo = MutableLiveData<UserInfo>()
+    val readUser = MutableLiveData<UserData>()
 
-    sealed class UserImage() {
-        class ReadSuccess(val image : Bitmap) : UserImage()
-        class ReadError() : UserImage()
+    sealed class UserData {
+        object Loading : UserData()
+        class ReadAvatarSuccess(val image : Bitmap) : UserData()
+        class ReadAvatarError : UserData()
+        class ReadInfoSuccess(val teamName: String, val teamBio : String, val email : String, val phone : String) : UserData()
+        class ReadInfoError(val message : String) : UserData()
+
     }
 
-    sealed class UserInfo() {
-        class ReadSuccess(val teamName: String, val teamBio : String, val email : String, val phone : String) : UserInfo()
-        class ReadError(val message : String) : UserInfo()
-    }
-
-    fun handleReadUserInfo() {
+    fun handleReadUser() {
+        readUser.postValue(UserData.Loading)
         DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
             if (it.exists()) {
                 val teamName = it.child("teamName").value.toString()
@@ -34,23 +33,22 @@ class UserFragmentViewModel : ViewModel() {
                 val email = it.child("email").value.toString()
                 val phone = it.child("phone").value.toString()
 
-                readUserInfo.postValue(UserInfo.ReadSuccess(teamName, teamBio, email, phone))
+                readUser.postValue(UserData.ReadInfoSuccess(teamName, teamBio, email, phone))
 
             } else {
-                readUserInfo.postValue(UserInfo.ReadError("Please Create Your Team Information"))
+                readUser.postValue(UserData.ReadInfoError("Please Create Your Team Information"))
             }
         }.addOnFailureListener {
             it.printStackTrace()
         }
-    }
 
-    fun handleReadUserImage() {
         val localFile = File.createTempFile("tempImage", "jpg")
         StorageConnection.storageReference.getReference("Users").child(uid).getFile(localFile).addOnSuccessListener {
             val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-            readUserImage.postValue(UserImage.ReadSuccess(bitmap))
+            readUser.postValue(UserData.ReadAvatarSuccess(bitmap))
         }.addOnFailureListener {
-            readUserImage.postValue(UserImage.ReadError())
+            readUser.postValue(UserData.ReadAvatarError())
         }
     }
+
 }

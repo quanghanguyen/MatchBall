@@ -12,28 +12,13 @@ import com.example.matchball.model.MatchRequest
 class RequestViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
-
-    val getNameAndPhone = MutableLiveData<GetNameAndPhoneResult>()
     val sendRequest = MutableLiveData<SendRequestResult>()
 
-    sealed class GetNameAndPhoneResult {
-        class ResultOk(val teamName : String, val teamPhone : String) : GetNameAndPhoneResult()
-        class ResultError(val errorMessage : String) : GetNameAndPhoneResult()
-    }
-
     sealed class SendRequestResult {
+        class GetResultOk(val teamName : String, val teamPhone : String) : SendRequestResult()
+        class GetResultError(val errorMessage : String) : SendRequestResult()
         class SendResultOk(val successMessage : String) : SendRequestResult()
         class SendResultError(val errorMessage: String) : SendRequestResult()
-    }
-
-    fun handleNameAndPhone() {
-        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
-            val teamNameReceived =  it.child("teamName").value.toString()
-            val teamPhoneReceived = it.child("phone").value.toString()
-            getNameAndPhone.postValue(GetNameAndPhoneResult.ResultOk(teamNameReceived, teamPhoneReceived))
-        }.addOnFailureListener {
-            getNameAndPhone.postValue(GetNameAndPhoneResult.ResultError("Failed to get Name and Phone"))
-        }
     }
 
     fun handleSendRequest(teamNameReceived : String, matchTime : String, locationReceived: String?,
@@ -42,6 +27,14 @@ class RequestViewModel : ViewModel() {
 
         val matchRequest = MatchRequest(teamNameReceived, matchTime, locationReceived, latitudeReceived, longitudeReceived,
             matchPeople, matchNote, teamPhoneReceived)
+
+        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
+            val teamName =  it.child("teamName").value.toString()
+            val teamPhone = it.child("phone").value.toString()
+            sendRequest.postValue(SendRequestResult.GetResultOk(teamName, teamPhone))
+        }.addOnFailureListener {
+            sendRequest.postValue(SendRequestResult.GetResultError("Failed to get Name and Phone"))
+        }
 
         DatabaseConnection.databaseReference.getReference("MatchRequest").push().setValue(matchRequest).addOnCompleteListener {
             if (it.isSuccessful) {

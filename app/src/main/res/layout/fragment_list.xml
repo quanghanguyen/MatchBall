@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard.MatchListFragment">
+    tools:context=".dashboard.MatchListFragment"
+    android:padding="16dp">
 
     <RelativeLayout
         android:id="@+id/rlTitle"
@@ -36,16 +37,15 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
-        android:layout_below="@+id/rlTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rlTitle"
         android:layout_marginTop="16dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvMatchRequest"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
 
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
