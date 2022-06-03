@@ -12,5 +12,7 @@
     <color name="lower_yellow">#F57AA0</color>
     <color name="light_grey">#e6e8eb</color>
     <color name="blue">#223fe3</color>
+    <color name="light_black">#2d3138</color>
+    <color name="low_white">#b5b5b5</color>
 
 </resources>

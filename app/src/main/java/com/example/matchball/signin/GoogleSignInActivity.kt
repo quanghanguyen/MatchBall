@@ -11,12 +11,15 @@ import com.example.matchball.home.MainActivity
 import com.example.matchball.R
 import com.example.matchball.databinding.ActivityIntroBinding
 import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.firebaseconnection.StorageConnection
 import com.example.matchball.signup.SignUpActivity
+import com.example.matchball.usersetting.UserAccountViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseUser
+import java.io.File
 
 class GoogleSignInActivity : AppCompatActivity() {
 
@@ -42,9 +45,9 @@ class GoogleSignInActivity : AppCompatActivity() {
 
     private fun initObserve() {
         googleSignInViewModel.googleSignIn.observe(this, { result ->
-            googleSignInBinding.introSwipe.isRefreshing = false
             when (result) {
                 is GoogleSignInViewModel.GoogleSignInResult.SignInOk -> {
+                    googleSignInBinding.introSwipe.isRefreshing = false
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -52,6 +55,7 @@ class GoogleSignInActivity : AppCompatActivity() {
                 }
                 is GoogleSignInViewModel.GoogleSignInResult.SignInError -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                    googleSignInBinding.introSwipe.isRefreshing = false
                 }
                 is GoogleSignInViewModel.GoogleSignInResult.Loading -> {
                     googleSignInBinding.introSwipe.isRefreshing = true
@@ -107,6 +111,8 @@ class GoogleSignInActivity : AppCompatActivity() {
         googleSignInBinding.btnContinueGoogle.setOnClickListener {
             signIn()
         }
+        val localFile = File.createTempFile("tempImage", "jpg")
+
     }
 
     private fun goSignIn() {

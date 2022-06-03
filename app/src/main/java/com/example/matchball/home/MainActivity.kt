@@ -11,7 +11,9 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.dashboard.MatchListFragment
 import com.example.matchball.usersetting.UserFragment
 
+// get được email và ảnh của current User
 // Check Intent trên Google Maps
+// Xác thực email
 // Chủ sân
 // Check lại cái lưu ảnh
 // Click on Map

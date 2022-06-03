@@ -4,73 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".usersetting.UserFragment"
-    android:padding="16dp">
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/bg_pb"/>
+    android:background="@color/light_black">
 
     <RelativeLayout
-        android:id="@+id/rlTitle"
+        android:id="@+id/user_intro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_baseline_search_24" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_baseline_notifications_active_24" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Your Account"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvUserInfo"
-        android:layout_below="@+id/rlTitle"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:cardCornerRadius="15dp"
-        android:backgroundTint="@color/light_grey">
+        android:padding="16dp">
 
         <RelativeLayout
+            android:id="@+id/rlTitle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_baseline_search_24_white" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_notifications_active_24_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/your_account"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/user_account"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/rlTitle"
+            android:layout_marginTop="16dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/civIntroAvatar"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:padding="20dp"
                 android:layout_marginStart="20dp"
-                android:src="@drawable/blank_image"/>
+                android:src="@drawable/blank_image" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/civIntroAvatar"
                 android:orientation="vertical"
-                android:weightSum="4">
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/tvIntroName"
@@ -78,8 +74,10 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/blank"
-                    android:textSize="11sp" />
+                    android:text="@string/unnamed"
+                    android:textColor="@color/low_white"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvIntroEmail"
@@ -89,84 +87,335 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="@string/blank"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/tvBio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/blank"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/tvPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/blank"
+                    android:textColor="@color/low_white"
                     android:textSize="11sp" />
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvYourRequest"
-        android:layout_below="@+id/cvUserInfo"
-        android:layout_marginTop="15dp"
-        style="@style/CardViewStyle">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateDrawable="@drawable/bg_pb"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/user_intro"
+        android:background="@drawable/bg_user">
 
         <RelativeLayout
+            android:id="@+id/user_information_title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/your_request"
-                android:textSize="15sp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="12dp"
+                android:text="@string/personal_information"
+                android:textColor="@color/yellow"
+
+                />
+
+            <TextView
+                android:id="@+id/edit_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="12dp"
+                android:text="@string/edit"
+                android:textColor="@color/yellow" />
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvSetting"
-        android:layout_below="@+id/cvYourRequest"
-        android:layout_marginTop="15dp"
-        style="@style/CardViewStyle">
+        <LinearLayout
+            android:id="@+id/user_information"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_below="@+id/user_information_title"
+            android:weightSum="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_phone_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_phone_number_yet"
+                    android:textColor="@color/low_white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_calendar_month_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_date_of_birth"
+                    android:textColor="@color/low_white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_note_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_bio"
+                    android:textColor="@color/low_white"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/your_request_match_title"
+            android:layout_below="@+id/user_information"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:text="@string/setting"
-                android:textSize="15sp" />
-
+                android:layout_marginStart="12dp"
+                android:text="@string/requests_manager"
+                android:textColor="@color/yellow" />
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:id="@+id/requests_manager"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/your_request_match_title"
+            android:weightSum="1"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnSignOut"
-        style="@style/ButtonStyle"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/sign_out" />
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_edit_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/edit_your_requests"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_title"
+            android:layout_below="@+id/requests_manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/settings"
+                android:textColor="@color/yellow" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/your_setting"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@+id/setting_title"
+            android:weightSum="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_settings_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Settings"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/signOut"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_call_missed_outgoing_24"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_out"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cvYourRequest"-->
+<!--        android:layout_below="@+id/rlUserInfo"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        style="@style/CardViewStyle">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:text="@string/your_request"-->
+<!--                android:textSize="15sp" />-->
+
+<!--        </RelativeLayout>-->
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:id="@+id/cvSetting"-->
+<!--        android:layout_below="@+id/cvYourRequest"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        style="@style/CardViewStyle">-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            >-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:text="@string/setting"-->
+<!--                android:textSize="15sp" />-->
+
+<!--        </RelativeLayout>-->
+
+<!--    </androidx.cardview.widget.CardView>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnSignOut"-->
+<!--        style="@style/ButtonStyle"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:text="@string/sign_out" />-->
 
 </RelativeLayout>

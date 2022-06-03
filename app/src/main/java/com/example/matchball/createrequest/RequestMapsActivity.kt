@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.Marker
 import java.io.IOException
 
-open class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
+ class RequestMapsActivity : AppCompatActivity(), OnMapReadyCallback, LocationListener,
     GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private lateinit var mMap: GoogleMap

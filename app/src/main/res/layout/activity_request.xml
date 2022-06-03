@@ -13,10 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="@string/your_match_request"
+        android:gravity="center"
+        android:text="@string/match_request"
         android:textColor="@color/black"
-        android:textSize="40sp"
-        android:gravity="center"/>
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -140,7 +140,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="@string/send"
-        />
+        android:text="@string/send_request" />
 
 </RelativeLayout>

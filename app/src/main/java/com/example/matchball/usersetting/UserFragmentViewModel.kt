@@ -6,8 +6,10 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.firebaseconnection.DatabaseConnection
 import com.example.matchball.firebaseconnection.StorageConnection
+import com.google.firebase.auth.FirebaseAuth
 import java.io.File
 
 class UserFragmentViewModel : ViewModel() {
@@ -16,16 +18,28 @@ class UserFragmentViewModel : ViewModel() {
     val readUser = MutableLiveData<UserData>()
 
     sealed class UserData {
+        class LoadUserEmail(val email : String) : UserData()
         object Loading : UserData()
         class ReadAvatarSuccess(val image : Bitmap) : UserData()
-        class ReadAvatarError : UserData()
+        object ReadAvatarError : UserData()
         class ReadInfoSuccess(val teamName: String, val teamBio : String, val email : String, val phone : String) : UserData()
-        class ReadInfoError(val message : String) : UserData()
+        object ReadInfoError : UserData()
 
     }
 
     fun handleReadUser() {
         readUser.postValue(UserData.Loading)
+
+//        val authUser = FirebaseAuth.getInstance().currentUser
+//
+//        authUser?.let {
+//            val email = authUser.email
+//        }
+
+
+        val email = authUser?.email
+        readUser.postValue(UserData.LoadUserEmail(email!!))
+
         DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
             if (it.exists()) {
                 val teamName = it.child("teamName").value.toString()
@@ -36,7 +50,7 @@ class UserFragmentViewModel : ViewModel() {
                 readUser.postValue(UserData.ReadInfoSuccess(teamName, teamBio, email, phone))
 
             } else {
-                readUser.postValue(UserData.ReadInfoError("Please Create Your Team Information"))
+                readUser.postValue(UserData.ReadInfoError)
             }
         }.addOnFailureListener {
             it.printStackTrace()
@@ -47,7 +61,7 @@ class UserFragmentViewModel : ViewModel() {
             val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
             readUser.postValue(UserData.ReadAvatarSuccess(bitmap))
         }.addOnFailureListener {
-            readUser.postValue(UserData.ReadAvatarError())
+            readUser.postValue(UserData.ReadAvatarError)
         }
     }
 

@@ -27,6 +27,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatchBall">
         <activity
+            android:name=".usersetting.changepassword.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".usersetting.UserAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".yourmatchrequest.YourRequestDetailsActivity"
             android:exported="false" />
         <activity
@@ -53,10 +59,10 @@
             android:name=".joinmatch.JoinMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_join_maps" />
-
-        <activity android:name=".createrequest.ShowRequestMapActivity"
+        <activity
+            android:name=".createrequest.ShowRequestMapActivity"
             android:exported="false"
-            android:label="@string/title_activity_edit_maps"/>
+            android:label="@string/title_activity_edit_maps" />
 
         <service
             android:name=".MyFirebaseMessagingService"

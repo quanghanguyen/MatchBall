@@ -67,6 +67,28 @@
     <string name="title_activity_edit_maps">EditMapsActivity</string>
     <string name="edit_your_request">Edit Your Request</string>
     <string name="phone">Phone:</string>
+    <string name="unnamed">Unnamed</string>
+    <string name="personal_information">PERSONAL INFORMATION</string>
+    <string name="no_phone_number_yet">No phone number yet</string>
+    <string name="no_date_of_birth">No date of birth</string>
+    <string name="no_bio">No Bio</string>
+    <string name="requests_manager">REQUESTS MANAGER</string>
+    <string name="edit_your_requests">Edit your Requests</string>
+    <string name="settings">SETTINGS</string>
+    <string name="account_information">Account Information</string>
+    <string name="change_your_password">Change Your Password</string>
+    <string name="your_account">Your Account</string>
+    <string name="hint_team_name">Team Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_phone">Phone</string>
+    <string name="hint_birthday">Birthday</string>
+    <string name="hint_bio">Bio</string>
+    <string name="match_request">MATCH REQUEST</string>
+    <string name="send_request">Send Request</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
 
 
 </resources>

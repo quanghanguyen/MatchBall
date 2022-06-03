@@ -8,7 +8,7 @@ data class User (
     @SerializedName("teamBio")
     var teamBio : String,
     @SerializedName("email")
-    var email : String,
+    var birthday : String,
     @SerializedName("phone")
     var phone : String
         )

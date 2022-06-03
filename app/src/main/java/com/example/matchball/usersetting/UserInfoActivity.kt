@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.matchball.databinding.ActivityUserInfoBinding
 import com.example.matchball.home.MainActivity
+import com.google.firebase.auth.UserInfo
 
 class UserInfoActivity : AppCompatActivity() {
 
@@ -21,26 +22,34 @@ class UserInfoActivity : AppCompatActivity() {
         setContentView(userInfoBinding.root)
 
         initEvent()
-        initLoadAvatarObserve()
+        initLoadUserDataObserve()
         initSaveProfileObserve()
-        userInfoViewModel.handleLoadAvatar()
+        userInfoViewModel.handleLoadUserData()
     }
 
-    private fun initLoadAvatarObserve() {
-        userInfoViewModel.loadAvatar.observe(this, { loadResult ->
+    private fun initLoadUserDataObserve() {
+        userInfoViewModel.loadUserData.observe(this, { loadResult ->
             when (loadResult) {
-                is UserInfoViewModel.LoadAvatar.LoadAvatarOk -> {
-                    userInfoBinding.civAvatar.setImageBitmap(loadResult.avatar)
+                is UserInfoViewModel.LoadUserData.LoadUserAvatarOk -> {
+                    userInfoBinding.avatar.setImageBitmap(loadResult.avatar)
                 }
-                is UserInfoViewModel.LoadAvatar.LoadAvatarFail -> {
-                    Toast.makeText(this, loadResult.message, Toast.LENGTH_SHORT).show()
+                is UserInfoViewModel.LoadUserData.LoadUserAvatarFail -> {
+                    //
+                }
+                is UserInfoViewModel.LoadUserData.LoadUserInfoSuccess -> {
+                    userInfoBinding.teamNameEt.setText(loadResult.name)
+                    userInfoBinding.teamBioEt.setText(loadResult.bio)
+                    userInfoBinding.teamBirthdayEt.setText(loadResult.email)
+                    userInfoBinding.teamPhoneEt.setText(loadResult.phone)
+                }
+                is UserInfoViewModel.LoadUserData.LoadUserInfoFail -> {
+                    //
                 }
             }
         })
     }
 
     private fun initEvent() {
-        getIntentData()
         changeAvatar()
         saveProfile()
     }
@@ -61,36 +70,20 @@ class UserInfoActivity : AppCompatActivity() {
         })
     }
 
-    private fun getIntentData() {
-        val nameIntent = intent.getStringExtra("name")
-        val bioIntent = intent.getStringExtra("bio")
-        val emailIntent = intent.getStringExtra("email")
-        val phoneIntent = intent.getStringExtra("phone")
-
-        intent?.let {
-            with(userInfoBinding) {
-                edtTeamName.setText(nameIntent)
-                edtBio.setText(bioIntent)
-                edtEmail.setText(emailIntent)
-                edtPhone.setText(phoneIntent)
-            }
-        }
-    }
-
     private fun saveProfile() {
         userInfoBinding.btnSave.setOnClickListener {
-            val teamName = userInfoBinding.edtTeamName.text.toString()
-            val teamBio = userInfoBinding.edtBio.text.toString()
-            val teamEmail = userInfoBinding.edtEmail.text.toString()
-            val teamPhone = userInfoBinding.edtPhone.text.toString()
+            val teamName = userInfoBinding.teamNameEt.text.toString()
+            val teamBio = userInfoBinding.teamBioEt.text.toString()
+            val teamBirthday = userInfoBinding.teamBirthdayEt.text.toString()
+            val teamPhone = userInfoBinding.teamPhoneEt.text.toString()
 
-            userInfoViewModel.handleSaveUserData(teamName, teamBio, teamEmail, teamPhone)
+            userInfoViewModel.handleSaveUserData(teamName, teamBio, teamBirthday, teamPhone)
 
         }
     }
 
     private fun changeAvatar() {
-        userInfoBinding.civAvatar.setOnClickListener {
+        userInfoBinding.avatar.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -104,7 +97,7 @@ class UserInfoActivity : AppCompatActivity() {
 
         if (requestCode == 100 && resultCode == RESULT_OK) {
             imgUri = data?.data!!
-            userInfoBinding.civAvatar.setImageURI(imgUri)
+            userInfoBinding.avatar.setImageURI(imgUri)
         }
     }
 }

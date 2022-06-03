@@ -5,5 +5,6 @@ import com.google.firebase.auth.FirebaseAuth
 object AuthConnection {
 
     val auth = FirebaseAuth.getInstance()
+    val authUser = FirebaseAuth.getInstance().currentUser
 
 }
