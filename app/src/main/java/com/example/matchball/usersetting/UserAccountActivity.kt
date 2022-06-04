@@ -3,9 +3,7 @@ package com.example.matchball.usersetting
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
-import com.example.matchball.R
 import com.example.matchball.databinding.ActivityUserAccountBinding
 import com.example.matchball.home.MainActivity
 import com.example.matchball.usersetting.changepassword.ChangePasswordActivity
@@ -26,12 +24,15 @@ class UserAccountActivity : AppCompatActivity() {
     }
 
     private fun initObserve() {
-        userAccountViewModel.loadAvatar.observe(this, { result ->
+        userAccountViewModel.loadData.observe(this, { result ->
             when (result) {
-                is UserAccountViewModel.UserAvatar.LoadAvatarSuccess -> {
+                is UserAccountViewModel.UserData.LoadEmailSuccess -> {
+                    userAccountBinding.email.text = result.email
+                }
+                is UserAccountViewModel.UserData.LoadAvatarSuccess -> {
                     userAccountBinding.avatar.setImageBitmap(result.image)
                 }
-                is UserAccountViewModel.UserAvatar.LoadAvatarFail -> {
+                is UserAccountViewModel.UserData.LoadDataFail -> {
                 }
             }
 

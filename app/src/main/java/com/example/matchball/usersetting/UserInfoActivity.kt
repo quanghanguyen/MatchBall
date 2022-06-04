@@ -55,7 +55,7 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun initSaveProfileObserve() {
-        userInfoViewModel.saveUserData.observe(this, { result ->
+        userInfoViewModel.saveUserData.observe(this, {result ->
             when (result) {
                 is UserInfoViewModel.SaveUserData.SaveOk -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()

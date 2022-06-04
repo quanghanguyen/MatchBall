@@ -203,7 +203,6 @@
                     android:textColor="@color/low_white"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"/>
-
             </LinearLayout>
 
             <LinearLayout

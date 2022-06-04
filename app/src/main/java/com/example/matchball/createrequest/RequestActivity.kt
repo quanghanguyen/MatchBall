@@ -19,7 +19,9 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     private lateinit var requestBinding: ActivityRequestBinding
     private val requestViewModel : RequestViewModel by viewModels()
 
-    private var teamName=""
+    private var teamName = ""
+    private var teamPhone = ""
+
     private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
     var day: Int = 0
     var month: Int = 0
@@ -45,8 +47,8 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestViewModel.sendRequest.observe(this, {sendRequestResult ->
             when (sendRequestResult) {
                 is RequestViewModel.SendRequestResult.GetResultOk -> {
-                     teamName = sendRequestResult.teamName
-                    val teamPhone = sendRequestResult.teamPhone
+                    teamName = sendRequestResult.teamName
+                    teamPhone = sendRequestResult.teamPhone
                 }
                 is RequestViewModel.SendRequestResult.GetResultError -> {
                     Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
@@ -82,7 +84,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             val matchNote = requestBinding.edtNote.text.toString()
 
             requestViewModel.handleSendRequest(teamName, matchTime, locationReceived,
-                latitudeReceived, longitudeReceived, matchPeople, matchNote, "teamPhone")
+                latitudeReceived, longitudeReceived, matchPeople, matchNote, teamPhone)
         }
     }
 

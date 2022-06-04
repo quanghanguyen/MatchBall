@@ -11,7 +11,7 @@ object StorageConnection {
 
     val storageReference = FirebaseStorage.getInstance()
 
-    fun handleAvatar(blala:String?=null,uid:String, localFile:File,onSuccess:(Bitmap)->Unit, onFail:(Exception)->Unit)
+    fun handleAvatar(blala : String? = null , uid:String, localFile:File, onSuccess:(Bitmap) -> Unit, onFail:(Exception) -> Unit)
     {
 
         storageReference.getReference("Users").child(uid).getFile(localFile)
@@ -21,14 +21,5 @@ object StorageConnection {
             }.addOnFailureListener {
                 onFail(it)
             }
-
-//        StorageConnection.storageReference.getReference("Users").child(uid).getFile(uri).addOnSuccessListener {
-//            val bitmap = BitmapFactory.decodeFile(absolutePath)
-//            onSuccess(bitmap)
-//            //loadAvatar.postValue(UserAccountViewModel.UserAvatar.LoadAvatarSuccess(bitmap))
-//        }.addOnFailureListener{
-//            onFail(it)
-//            //loadAvatar.postValue(UserAccountViewModel.UserAvatar.LoadAvatarFail)
-//        }
     }
 }

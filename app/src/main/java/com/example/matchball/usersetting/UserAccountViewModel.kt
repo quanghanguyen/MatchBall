@@ -1,7 +1,6 @@
 package com.example.matchball.usersetting
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.AuthConnection
@@ -11,19 +10,24 @@ import java.io.File
 class UserAccountViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
-    val loadAvatar = MutableLiveData<UserAvatar>()
+    val loadData = MutableLiveData<UserData>()
 
-    sealed class UserAvatar {
-        class LoadAvatarSuccess(val image: Bitmap) : UserAvatar()
-        object LoadAvatarFail : UserAvatar()
+    sealed class UserData {
+        class LoadAvatarSuccess(val image: Bitmap) : UserData()
+        class LoadEmailSuccess(val email : String) : UserData()
+        object LoadDataFail : UserData()
     }
 
     fun handleLoadAvatar() {
+        val email = AuthConnection.authUser?.email
+        loadData.postValue(email?.let
+        {UserData.LoadEmailSuccess(it)})
+
         val localFile = File.createTempFile("tempImage", "jpg")
         StorageConnection.handleAvatar(uid = uid, localFile =  localFile, onSuccess = {
-            loadAvatar.postValue(UserAvatar.LoadAvatarSuccess(it))
+            loadData.postValue(UserData.LoadAvatarSuccess(it))
         }, onFail = {
-            loadAvatar.postValue(UserAvatar.LoadAvatarFail)
+            loadData.postValue(UserData.LoadDataFail)
         })
     }
 

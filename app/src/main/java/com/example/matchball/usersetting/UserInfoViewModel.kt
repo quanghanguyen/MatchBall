@@ -16,6 +16,7 @@ class UserInfoViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
     private var imgUri: Uri? = null
+
     fun setUri(uri: Uri) {
         imgUri = uri
     }
@@ -42,14 +43,12 @@ class UserInfoViewModel : ViewModel() {
     }
 
     fun handleLoadUserData() {
-        val firebaseStorage = FirebaseStorage.getInstance().getReference("Users").child(uid)
         val localFile = File.createTempFile("tempImage", "jpg")
-        firebaseStorage.getFile(localFile).addOnSuccessListener {
-            val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-            loadUserData.postValue(LoadUserData.LoadUserAvatarOk(bitmap))
-        }.addOnFailureListener {
-            loadUserData.postValue((LoadUserData.LoadUserAvatarFail))
-        }
+        StorageConnection.handleAvatar(uid = uid, localFile = localFile, onSuccess = {
+            loadUserData.postValue(LoadUserData.LoadUserAvatarOk(it))
+        }, onFail = {
+            loadUserData.postValue(LoadUserData.LoadUserAvatarFail)
+        })
 
         DatabaseConnection.databaseReference.getReference("Users").child(uid).get()
             .addOnSuccessListener {
@@ -80,11 +79,13 @@ class UserInfoViewModel : ViewModel() {
         DatabaseConnection.databaseReference.getReference("Users").child(uid).setValue(user)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid)
-                        .putFile(imgUri).addOnSuccessListener {
-                        saveUserData.postValue(SaveUserData.SaveOk("Save Profile Success"))
-                    }.addOnFailureListener {
-                        saveUserData.postValue(SaveUserData.SaveFail("Failed to Save Profile"))
+                    imgUri?.let { it1 ->
+                        StorageConnection.storageReference.getReference("Users/" + AuthConnection.auth.currentUser?.uid)
+                            .putFile(it1).addOnSuccessListener {
+                                saveUserData.postValue(SaveUserData.SaveOk("Save Profile Success"))
+                            }.addOnFailureListener {
+                                saveUserData.postValue(SaveUserData.SaveFail("Failed to Save Profile"))
+                            }
                     }
                 }
             }
