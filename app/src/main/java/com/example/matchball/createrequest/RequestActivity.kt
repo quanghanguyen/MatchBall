@@ -19,8 +19,8 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     private lateinit var requestBinding: ActivityRequestBinding
     private val requestViewModel : RequestViewModel by viewModels()
 
-    private var teamName = ""
-    private var teamPhone = ""
+    private var teamName : String? = null
+    private var teamPhone : String? = null
 
     private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
     var day: Int = 0
@@ -41,6 +41,13 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         initEvents()
         initSendRequestObserve()
+    }
+
+    private fun initEvents() {
+        timeSelect()
+        pitchSelect()
+        peopleSelect()
+        sendRequest()
     }
 
     private fun initSendRequestObserve() {
@@ -66,37 +73,38 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         })
     }
 
-    private fun initEvents() {
-        timeSelect()
-        pitchSelect()
-        peopleSelect()
-        sendRequest()
-    }
-
     private fun sendRequest() {
         val locationReceived = intent.getStringExtra("location")
         val latitudeReceived = intent.getStringExtra("latitude")
         val longitudeReceived = intent.getStringExtra("longitude")
 
         requestBinding.btnSend.setOnClickListener {
-            val matchTime = requestBinding.tvPickTime.text.toString()
+            val matchTime = requestBinding.timeEt.text.toString()
             val matchPeople = requestBinding.spnPeople.selectedItem.toString()
-            val matchNote = requestBinding.edtNote.text.toString()
+            val matchNote = requestBinding.noteEt.text.toString()
 
-            requestViewModel.handleSendRequest(teamName, matchTime, locationReceived,
-                latitudeReceived, longitudeReceived, matchPeople, matchNote, teamPhone)
+            teamName?.let { it1 ->
+                teamPhone?.let { it2 ->
+                    requestViewModel.handleSendRequest(
+                        it1, matchTime, locationReceived,
+                        latitudeReceived, longitudeReceived, matchPeople, matchNote, it2
+                    )
+                }
+            }
         }
     }
 
     private fun locationReceived() {
         val locationReceived = intent.getStringExtra("location")
-        with(requestBinding) {
-            tvPickPitch.text = ("$locationReceived")
+        locationReceived?.let {
+            with(requestBinding) {
+                pitchEt.setText("$locationReceived")
+            }
         }
     }
 
     private fun pitchSelect() {
-        requestBinding.btnLocationSelect.setOnClickListener {
+        requestBinding.pitchSelect.setOnClickListener {
             intent = Intent(this, RequestMapsActivity::class.java)
             startActivity(intent)
         }
@@ -114,17 +122,17 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     }
 
     private fun timeSelect() {
-        requestBinding.btnSelect.setOnClickListener {
+        requestBinding.timeSelect.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
             day = calendar.get(Calendar.DATE)
             month = calendar.get(Calendar.MONTH)
             year = calendar.get(Calendar.YEAR)
-            val datePickerDialog = DatePickerDialog(this, this, year, month,day)
+            val datePickerDialog = DatePickerDialog(this, this, year, month, day)
             datePickerDialog.show()
         }
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+    override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         myDay = day
         myYear = year
         myMonth = month
@@ -139,7 +147,6 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         myHour = hourOfDay
         myMinute = minute
-//        requestBinding.tvPickTime.text = "Year: " + myYear + "\n" + "Month: " + myMonth + "\n" + "Day: " + myDay + "\n" + "Hour: " + myHour + "\n" + "Minute: " + myMinute
-        requestBinding.tvPickTime.text = "$myHour:$myMinute ($myDay/$myMonth/$myYear)"
+        requestBinding.timeEt.setText("$myHour:$myMinute ($myDay/$myMonth/$myYear)")
     }
 }

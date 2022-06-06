@@ -11,13 +11,15 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.dashboard.MatchListFragment
 import com.example.matchball.usersetting.UserFragment
 
-// get được email và ảnh của current User
+// chưa lấy đưuọc teamname + phonename
+// sửa lại màu trong request activity
+// get email và ảnh của current User
 // Check Intent trên Google Maps
 // Xác thực email
 // Chủ sân
 // Check lại cái lưu ảnh
 // Click on Map
-// Check lại Time + Null trong Request List
+// Check lại Time Request List
 // MVVM
 // Object
 

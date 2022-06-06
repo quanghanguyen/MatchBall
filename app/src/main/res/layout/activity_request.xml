@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".createrequest.RequestActivity"
     android:padding="15dp">
 
@@ -18,121 +18,157 @@
         android:textColor="@color/black"
         android:textSize="40sp" />
 
-    <TextView
-        android:id="@+id/tvTime"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvMatchRequest"
-        android:layout_marginTop="40dp"
-        android:text="@string/time"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp">
 
-    <LinearLayout
-        android:id="@+id/llTimePick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/tvTime"
-        android:layout_marginTop="5dp">
+        <LinearLayout
+            android:id="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tvPickTime"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edittext"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/time_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-        <Button
-            android:id="@+id/btnSelect"
-            style="@style/ButtonStyle"
-            android:layout_marginStart="15dp"
-            android:text="@string/select"
-            />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/time_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/select_time"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/time_select"
+                style="@style/ButtonStyle"
+                android:layout_marginStart="8dp"
+                android:text="@string/select"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pitch"
+            android:layout_below="@+id/time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pitch_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-    <LinearLayout
-        android:id="@+id/llPitchPick"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/tvPitch"
-        android:layout_marginTop="5dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pitch_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/select_pitch"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvPickPitch"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_edittext"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            <Button
+                android:id="@+id/pitch_select"
+                style="@style/ButtonStyle"
+                android:layout_marginStart="8dp"
+                android:text="@string/select"
+                android:layout_gravity="center_vertical"
+                />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLocationSelect"
-            style="@style/ButtonStyle"
-            android:layout_marginStart="15dp"
-            android:text="@string/select"
-            />
+        <LinearLayout
+            android:id="@+id/people"
+            android:layout_below="@+id/pitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/people_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-    </LinearLayout>
+                    <Spinner
+                        android:id="@+id/spnPeople"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_below="@+id/tvPeople"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/bg_edittext"
+                        android:textSize="15sp" />
 
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvPitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llTimePick"
-        android:layout_marginTop="10dp"
-        android:text="@string/pitch"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        <LinearLayout
+            android:id="@+id/note"
+            android:layout_below="@+id/people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvPeople"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/llPitchPick"
-        android:layout_marginTop="10dp"
-        android:text="@string/amount_of_people"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/note_layout"
+                style="@style/NoteInputInnerFieldStyle"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-    <Spinner
-        android:id="@+id/spnPeople"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvPeople"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_edittext"
-        android:textSize="15sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:baselineAligned="false"
+                    android:hint="@string/take_note"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/tvNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spnPeople"
-        android:layout_marginTop="10dp"
-        android:text="@string/note"
-        android:textColor="@color/black"
-        android:textSize="20sp"/>
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/edtNote"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@+id/tvNote"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bg_edittext"
-        android:textSize="15sp" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btnSend"
