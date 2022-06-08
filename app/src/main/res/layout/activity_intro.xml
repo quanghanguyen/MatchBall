@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".signin.GoogleSignInActivity"
-    >
+    tools:context=".signin.GoogleSignInActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/introSwipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/intro"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/intro" />
 
     <TextView
         android:id="@+id/tvIntro"
@@ -56,9 +53,9 @@
         android:text="@string/i_ll_use_email_or_phone"
         android:textAllCaps="false"
         android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
         app:strokeColor="@android:color/darker_gray"
-        app:strokeWidth="2dp"
-        android:textSize="12sp"/>
+        app:strokeWidth="2dp" />
 
     <TextView
         android:id="@+id/tvOthersSignUp"
@@ -68,16 +65,16 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/or_sign_up_with"
-        android:textSize="12sp"
-        android:textColor="@android:color/darker_gray"/>
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp" />
 
     <LinearLayout
         android:layout_width="200dp"
         android:layout_height="40dp"
-        android:orientation="horizontal"
         android:layout_below="@+id/tvOthersSignUp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         android:weightSum="1">
 
         <LinearLayout
@@ -88,7 +85,7 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/icon_facebook"/>
+                android:src="@drawable/icon_facebook" />
 
         </LinearLayout>
 

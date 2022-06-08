@@ -31,7 +31,6 @@ class SignInActivity : AppCompatActivity() {
 
     private fun initObserve() {
         signInViewModel.signInResult.observe(this, Observer {result ->
-            signInBinding.signInSwipe.isRefreshing = false
             when (result) {
                 is SignInViewModel.SignInResult.SignInOk -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
@@ -43,7 +42,6 @@ class SignInActivity : AppCompatActivity() {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
                 is SignInViewModel.SignInResult.Loading -> {
-                    signInBinding.signInSwipe.isRefreshing = true
                 }
             }
         })

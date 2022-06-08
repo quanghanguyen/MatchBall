@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateFormat
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
@@ -45,6 +46,13 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
                 is RequestViewModel.SendRequestResult.GetResultOk -> {
                     teamName = sendRequestResult.name
                     teamPhone = sendRequestResult.phone
+                    if(teamName!=null)
+                    {
+                        Log.e("teamName",teamName.orEmpty())
+                    }
+                    else{
+                        Log.e("teamName","teamName")
+                    }
                 }
                 is RequestViewModel.SendRequestResult.GetResultError -> {
                     Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()

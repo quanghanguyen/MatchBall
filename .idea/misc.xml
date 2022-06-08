@@ -12,6 +12,7 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/dropdown_items.xml" value="0.19814814814814816" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/email_valid_border.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_baseline_near_me_24.xml" value="0.2203125" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.20185185185185187" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/ic_launcher_background.xml" value="0.17592592592592593" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/underline.xml" value="0.2203125" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_change_password.xml" value="0.20416666666666666" />
@@ -22,7 +23,7 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_maps.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_request.xml" value="0.2" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_in.xml" value="0.2" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_in.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_sign_up.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_account.xml" value="0.18" />

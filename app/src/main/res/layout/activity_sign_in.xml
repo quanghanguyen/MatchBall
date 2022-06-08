@@ -13,11 +13,6 @@
         android:src="@drawable/sign_in_new"
         android:scaleType="centerCrop"/>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/signInSwipe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <RelativeLayout
         android:id="@+id/rlSignIn"
         android:layout_width="wrap_content"
@@ -94,7 +89,8 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignIn"
-        android:layout_width="180dp"
+        android:paddingHorizontal="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rlHaveNotAccount"
         android:layout_centerHorizontal="true"

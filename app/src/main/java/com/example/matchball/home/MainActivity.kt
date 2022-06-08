@@ -16,6 +16,7 @@ import com.example.matchball.usersetting.UserFragment
 // Xác thực email
 // get email và ảnh của current User
 // Fragment UI
+// Check trước khi User tạo request
 
 //------------------------------
 

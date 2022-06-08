@@ -100,6 +100,7 @@
     <string name="your_settings">Your Settings</string>
     <string name="match_information">Match Information</string>
     <string name="join_this_match">Join this Match</string>
+    <string name="request">Request</string>
 
     <string-array name="amount_people">
         <item>4</item>

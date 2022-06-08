@@ -24,7 +24,6 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     }
 
     fun addNewData(list: ArrayList<MatchRequest>) {
-//        requestList.addAll(list)
         requestList = list
         notifyDataSetChanged()
     }
