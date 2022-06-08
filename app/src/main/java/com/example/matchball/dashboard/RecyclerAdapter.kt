@@ -5,9 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
+import com.example.matchball.model.FilterModel
 import com.example.matchball.model.MatchRequest
 
-class RecyclerAdapter(private val requestList:ArrayList<MatchRequest>):
+class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
     private lateinit var listerner: OnItemClickListerner
@@ -16,8 +17,15 @@ class RecyclerAdapter(private val requestList:ArrayList<MatchRequest>):
         fun onItemClick(requestData: MatchRequest)
     }
 
+    //search list
+    fun filterList(requests: ArrayList<MatchRequest>) {
+        this.requestList = requests
+        notifyDataSetChanged()
+    }
+
     fun addNewData(list: ArrayList<MatchRequest>) {
-        requestList.addAll(list)
+//        requestList.addAll(list)
+        requestList = list
         notifyDataSetChanged()
     }
 
@@ -27,7 +35,6 @@ class RecyclerAdapter(private val requestList:ArrayList<MatchRequest>):
     }
 
     fun remove(matchRequest: MatchRequest) {
-
     }
 
     fun setOnItemClickListerner(listerner: OnItemClickListerner) {

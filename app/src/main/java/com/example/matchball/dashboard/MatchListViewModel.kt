@@ -3,6 +3,7 @@ package com.example.matchball.dashboard
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.DatabaseConnection
+import com.example.matchball.model.FilterModel
 import com.example.matchball.model.MatchRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,10 +17,19 @@ class MatchListViewModel : ViewModel() {
         object Loading : MatchListResult()
         class ResultOk(val matchList : ArrayList<MatchRequest>) : MatchListResult()
         class ResultError(val errorMessage : String) : MatchListResult()
+        class ResultFilterOk(val filterList : ArrayList<FilterModel>) : MatchListResult()
     }
 
     fun handleMatchList() {
         matchListResult.postValue(MatchListResult.Loading)
+        val data = ArrayList<FilterModel>()
+        data.add(FilterModel("All"))
+        data.add(FilterModel("Match Bid"))
+        data.add(FilterModel("Match Ask"))
+        data.add(FilterModel("Upcoming"))
+        data.add(FilterModel("Done"))
+        matchListResult.postValue(MatchListResult.ResultFilterOk(data))
+
         DatabaseConnection.databaseReference.getReference("MatchRequest").addValueEventListener(object :
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

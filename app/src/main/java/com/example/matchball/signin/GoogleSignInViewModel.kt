@@ -29,7 +29,7 @@ class GoogleSignInViewModel : ViewModel() {
         googleSignIn.postValue(GoogleSignInResult.Loading)
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         AuthConnection.auth.signInWithCredential(credential)
-            .addOnCompleteListener() { task ->
+            .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     googleSignIn.postValue(GoogleSignInResult.SignInOk("Sign In Success"))
                 } else {
@@ -37,24 +37,5 @@ class GoogleSignInViewModel : ViewModel() {
                 }
             }
     }
-
-//    fun handleGoogleSuccess(requestCode: Int, resultCode: Int, data: Intent?) {
-//
-//        googleSignIn.value = GoogleSignInResult.Success
-//
-//        if (requestCode == IntroActivity.RC_SIGN_IN) {
-//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-//            try {
-//                // Google Sign In was successful, authenticate with Firebase
-//                val account = task.getResult(ApiException::class.java)!!
-//                googleSignIn.postValue(GoogleSignInResult.SignInOk("Sign In Success"))
-//                IntroActivity.firebaseAuthWithGoogle(account.idToken!!)
-//            } catch (e: ApiException) {
-//                // Google Sign In failed, update UI appropriately
-//                googleSignIn.postValue(GoogleSignInResult.SignInError("Sign In Error"))
-//            }
-//        }
-//
-//    }
 
 }

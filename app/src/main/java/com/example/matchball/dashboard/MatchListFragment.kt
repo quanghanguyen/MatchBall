@@ -9,20 +9,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.matchball.dashboard.filterbar.FilterAdapter
 import com.example.matchball.joinmatch.JoinActivity
 import com.example.matchball.databinding.FragmentListBinding
+import com.example.matchball.model.FilterModel
 import com.example.matchball.model.MatchRequest
 
 class MatchListFragment : Fragment() {
 
     private lateinit var listFragmentBinding: FragmentListBinding
     private lateinit var matchRequestAdapter: RecyclerAdapter
+    private lateinit var filterAdapter : FilterAdapter
     private val matchListViewModel: MatchListViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initList()
+        initFilterList()
         initObserve()
         initEvent()
         matchListViewModel.handleMatchList()
@@ -36,6 +41,9 @@ class MatchListFragment : Fragment() {
                 is MatchListViewModel.MatchListResult.Loading -> {
                     listFragmentBinding.swipe.isRefreshing = true
                 }
+                is MatchListViewModel.MatchListResult.ResultFilterOk -> {
+                    filterAdapter.addFilterNewData(result.filterList)
+                }
                 is MatchListViewModel.MatchListResult.ResultOk -> {
                     matchRequestAdapter.addNewData(result.matchList)
                 }
@@ -44,6 +52,14 @@ class MatchListFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun initFilterList() {
+        listFragmentBinding.filter.apply {
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            filterAdapter = FilterAdapter(arrayListOf())
+            adapter = filterAdapter
+        }
     }
 
     private fun initList() {

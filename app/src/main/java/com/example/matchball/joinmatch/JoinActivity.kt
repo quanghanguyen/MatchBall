@@ -2,6 +2,8 @@ package com.example.matchball.joinmatch
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -73,17 +75,28 @@ class JoinActivity : AppCompatActivity() {
                 val pitchLongitude = requests?.pitchLongitude?.toDouble()
                 val pitchName = requests?.pitch.toString()
 
-//                val intent = Intent(this, JoinMapsActivity::class.java)
-//                intent.putExtra("pitchLatitude", pitchLatitude)
-//                intent.putExtra("pitchLongitude", pitchLongitude)
-//                intent.putExtra("pitchName", pitchName)
-//                startActivity(intent)
-
-                val gmmIntentUri = Uri.parse("geo:$pitchLatitude, $pitchLongitude")
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
+                if (isGoogleMapsInstalled()) {
+                    val gmmIntentUri = Uri.parse("geo:$pitchLatitude, $pitchLongitude")
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    startActivity(mapIntent)
+                } else {
+                    val intent = Intent(this, JoinMapsActivity::class.java)
+                    intent.putExtra("pitchLatitude", pitchLatitude)
+                    intent.putExtra("pitchLongitude", pitchLongitude)
+                    intent.putExtra("pitchName", pitchName)
+                    startActivity(intent)
+                }
             }
+        }
+    }
+
+    private fun isGoogleMapsInstalled(): Boolean {
+        return try {
+            packageManager.getPackageInfo("com.google.android.apps.maps", 0)
+            true
+        } catch (e : PackageManager.NameNotFoundException) {
+            false
         }
     }
 }

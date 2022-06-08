@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.core.view.isEmpty
+import com.example.matchball.R
 import com.example.matchball.home.MainActivity
 import com.example.matchball.databinding.ActivityRequestBinding
 import java.util.*
@@ -21,18 +22,6 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
     private var teamName : String? = null
     private var teamPhone : String? = null
-
-    private val peopleOptions = arrayOf(4, 5, 6, 7, 8, 9, 10, 11)
-    var day: Int = 0
-    var month: Int = 0
-    var year: Int = 0
-    var hour: Int = 0
-    var minute: Int = 0
-    var myDay: Int = 0
-    var myMonth: Int = 0
-    var myYear: Int = 0
-    var myHour: Int = 0
-    var myMinute: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +43,8 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestViewModel.sendRequest.observe(this, {sendRequestResult ->
             when (sendRequestResult) {
                 is RequestViewModel.SendRequestResult.GetResultOk -> {
-                    teamName = sendRequestResult.teamName
-                    teamPhone = sendRequestResult.teamPhone
+                    teamName = sendRequestResult.name
+                    teamPhone = sendRequestResult.phone
                 }
                 is RequestViewModel.SendRequestResult.GetResultError -> {
                     Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
@@ -80,7 +69,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         requestBinding.btnSend.setOnClickListener {
             val matchTime = requestBinding.timeEt.text.toString()
-            val matchPeople = requestBinding.spnPeople.selectedItem.toString()
+            val matchPeople = requestBinding.peopleSelect.toString()
             val matchNote = requestBinding.noteEt.text.toString()
 
             teamName?.let { it1 ->
@@ -112,41 +101,39 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     }
 
     private fun peopleSelect() {
-        requestBinding.spnPeople.adapter = ArrayAdapter<Int>(this, android.R.layout.simple_list_item_1, peopleOptions)
-//        requestBinding.spnPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//            }
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//            }
-//        }
+        val peopleOptions = resources.getStringArray(R.array.amount_people)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_items, peopleOptions)
+        requestBinding.peopleSelect.setAdapter(arrayAdapter)
     }
 
     private fun timeSelect() {
         requestBinding.timeSelect.setOnClickListener {
             val calendar: Calendar = Calendar.getInstance()
-            day = calendar.get(Calendar.DATE)
-            month = calendar.get(Calendar.MONTH)
-            year = calendar.get(Calendar.YEAR)
-            val datePickerDialog = DatePickerDialog(this, this, year, month, day)
+            requestViewModel.day = calendar.get(Calendar.DATE)
+            requestViewModel.month = calendar.get(Calendar.MONTH)
+            requestViewModel.year = calendar.get(Calendar.YEAR)
+            val datePickerDialog = DatePickerDialog(this, this, requestViewModel.year,
+                requestViewModel.month, requestViewModel.day)
             datePickerDialog.show()
         }
     }
 
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
-        myDay = day
-        myYear = year
-        myMonth = month
+        requestViewModel.myDay = day
+        requestViewModel.myYear = year
+        requestViewModel.myMonth = month
         val calendar: Calendar = Calendar.getInstance()
-        hour = calendar.get(Calendar.HOUR)
-        minute = calendar.get(Calendar.MINUTE)
-        val timePickerDialog = TimePickerDialog(this, this, hour, minute,
+        requestViewModel.hour = calendar.get(Calendar.HOUR)
+        requestViewModel.minute = calendar.get(Calendar.MINUTE)
+        val timePickerDialog = TimePickerDialog(this, this, requestViewModel.hour,
+            requestViewModel.minute,
             DateFormat.is24HourFormat(this))
         timePickerDialog.show()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
-        myHour = hourOfDay
-        myMinute = minute
-        requestBinding.timeEt.setText("$myHour:$myMinute ($myDay/$myMonth/$myYear)")
+        requestViewModel.myHour = hourOfDay
+        requestViewModel.myMinute = minute
+        requestBinding.timeEt.setText("${requestViewModel.myHour}:${requestViewModel.myMinute} (${requestViewModel.myDay}/${requestViewModel.myMonth}/${requestViewModel.myYear})")
     }
 }

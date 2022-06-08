@@ -43,33 +43,26 @@ import java.io.IOException
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-
 
         searchButtonClick()
         doneButtonClick()
 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
         mMap.setOnMapLongClickListener {
             mMap.addMarker(MarkerOptions().position(it))
         }
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+        val hue = LatLng(16.461109, 107.570183)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hue, 15f))
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient()
@@ -123,14 +116,13 @@ import java.io.IOException
         mCurrLocationMarker = mMap.addMarker(markerOptions)
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15f))
 
         //stop location updates
         if (mGoogleApiClient != null) {
             LocationServices.getFusedLocationProviderClient(this)
         }
-
     }
 
     override fun onConnectionFailed(connectionResult: ConnectionResult) {
@@ -153,6 +145,7 @@ import java.io.IOException
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
+
                 val address = addressList[0]
                 val latLng = LatLng(address.latitude, address.longitude)
 
@@ -189,6 +182,7 @@ import java.io.IOException
                     intent.putExtra("latitude", address.latitude.toString())
                     intent.putExtra("longitude", address.longitude.toString())
                     startActivity(intent)
+                    finish()
                 }
             }
         }

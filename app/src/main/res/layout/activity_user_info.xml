@@ -117,6 +117,12 @@
             app:helperTextTextColor="@android:color/holo_red_light"
             app:hintTextColor="@color/yellow">
 
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_baseline_edit_24"-->
+<!--                android:layout_toEndOf="@+id/team_birthday_layout"-->
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/team_birthday_et"
                 style="@style/LoginTextInputInnerFieldStyle"
@@ -125,6 +131,7 @@
                 android:hint="@string/hint_birthday"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/team_bio_layout"

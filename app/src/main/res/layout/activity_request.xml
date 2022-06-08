@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/select_time"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -91,10 +91,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pitch_et"
                     style="@style/LoginTextInputInnerFieldStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:hint="@string/select_pitch"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -115,7 +113,10 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/people_layout"
-                style="@style/LoginTextInputOuterFieldStyle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_marginHorizontal="16dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
@@ -126,14 +127,19 @@
                 app:helperTextTextColor="@android:color/holo_red_light"
                 app:hintTextColor="@color/yellow">
 
-                    <Spinner
-                        android:id="@+id/spnPeople"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_below="@+id/tvPeople"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/bg_edittext"
-                        android:textSize="15sp" />
+                <AutoCompleteTextView
+                    android:id="@+id/people_select"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:hint="@string/hint_amount_of_people"
+                    android:inputType="none"/>
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/spnPeople"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="60dp"-->
+<!--                        android:layout_below="@+id/tvPeople"-->
+<!--                        android:layout_marginTop="5dp"-->
+<!--                        android:textSize="15sp" />-->
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -147,7 +153,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/note_layout"
-                style="@style/NoteInputInnerFieldStyle"
+                style="@style/NoteInputOuterFieldStyle"
                 android:layout_marginHorizontal="16dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"

@@ -11,26 +11,16 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.dashboard.MatchListFragment
 import com.example.matchball.usersetting.UserFragment
 
-// chưa lấy đưuọc teamname + phonename
-// sửa lại màu trong request activity
-// get email và ảnh của current User
-// Check Intent trên Google Maps
+// chưa lấy được teamname + phonename
+// Lưu info thì ảnh bị null
 // Xác thực email
-// Chủ sân
-// Check lại cái lưu ảnh
-// Click on Map
-// Check lại Time Request List
-// MVVM
-// Object
+// get email và ảnh của current User
+// Fragment UI
 
-//------------
+//------------------------------
 
-// Setting Activity
-// Lên ý tưởng về phân quyền User
-// Xây dựng Database
 // Notification
 // Search
-
 
 class MainActivity : AppCompatActivity() {
 

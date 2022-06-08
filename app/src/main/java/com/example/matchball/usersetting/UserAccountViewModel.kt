@@ -4,13 +4,16 @@ import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.firebaseconnection.StorageConnection
+import com.google.android.gms.auth.api.Auth
 import java.io.File
 
 class UserAccountViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
     val loadData = MutableLiveData<UserData>()
+    val verifyEmail = MutableLiveData<VerifyEmail>()
 
     sealed class UserData {
         class LoadAvatarSuccess(val image: Bitmap) : UserData()
@@ -18,8 +21,13 @@ class UserAccountViewModel : ViewModel() {
         object LoadDataFail : UserData()
     }
 
+    sealed class VerifyEmail {
+        class EmailVerifySuccess(val successMessage : String) : VerifyEmail()
+        class EmailVerifyFail(val errorMessage : String) : VerifyEmail()
+    }
+
     fun handleLoadAvatar() {
-        val email = AuthConnection.authUser?.email
+        val email = authUser?.email
         loadData.postValue(email?.let
         {UserData.LoadEmailSuccess(it)})
 
@@ -29,6 +37,16 @@ class UserAccountViewModel : ViewModel() {
         }, onFail = {
             loadData.postValue(UserData.LoadDataFail)
         })
+    }
+
+    fun handleVerifyEmail() {
+        authUser!!.sendEmailVerification().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                verifyEmail.postValue(VerifyEmail.EmailVerifySuccess("Send Verify Email Success"))
+            } else {
+                verifyEmail.postValue(VerifyEmail.EmailVerifyFail("Send Verify Email Fail"))
+            }
+        }
     }
 
 }

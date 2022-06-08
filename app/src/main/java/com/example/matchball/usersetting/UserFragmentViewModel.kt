@@ -12,7 +12,7 @@ import java.io.File
 
 class UserFragmentViewModel : ViewModel() {
 
-    private val uid = AuthConnection.authUser!!.uid
+    private val uid = authUser?.uid
     val readUser = MutableLiveData<UserData>()
 
     sealed class UserData {
@@ -28,29 +28,34 @@ class UserFragmentViewModel : ViewModel() {
         readUser.postValue(UserData.Loading)
 
         val userEmail = authUser?.email
+//        val imageUrl = authUser?.photoUrl
         readUser.postValue(UserData.LoadUserInfo(userEmail!!))
 
-        DatabaseConnection.databaseReference.getReference("Users").child(uid).get().addOnSuccessListener {
-            if (it.exists()) {
-                val teamName = it.child("teamName").value.toString()
-                val teamBio = it.child("teamBio").value.toString()
-                val birthday = it.child("birthday").value.toString()
-                val phone = it.child("phone").value.toString()
+        uid?.let {
+            DatabaseConnection.databaseReference.getReference("Users").child(it).get().addOnSuccessListener {
+                if (it.exists()) {
+                    val teamName = it.child("teamName").value.toString()
+                    val teamBio = it.child("teamBio").value.toString()
+                    val birthday = it.child("birthday").value.toString()
+                    val phone = it.child("phone").value.toString()
 
-                readUser.postValue(UserData.ReadInfoSuccess(teamName, teamBio, birthday, phone))
+                    readUser.postValue(UserData.ReadInfoSuccess(teamName, teamBio, birthday, phone))
 
-            } else {
-                readUser.postValue(UserData.ReadInfoError)
+                } else {
+                    readUser.postValue(UserData.ReadInfoError)
+                }
+            }.addOnFailureListener {
+                it.printStackTrace()
             }
-        }.addOnFailureListener {
-            it.printStackTrace()
         }
 
         val localFile = File.createTempFile("tempImage", "jpg")
-        StorageConnection.handleAvatar(uid = uid, localFile = localFile, onSuccess = {
-            readUser.postValue(UserData.ReadAvatarSuccess(it))
-        }, onFail = {
-            readUser.postValue(UserData.ReadAvatarError)
-        })
+        uid?.let {
+            StorageConnection.handleAvatar(uid = it, localFile = localFile, onSuccess = {
+                readUser.postValue(UserData.ReadAvatarSuccess(it))
+            }, onFail = {
+                readUser.postValue(UserData.ReadAvatarError)
+            })
+        }
     }
 }

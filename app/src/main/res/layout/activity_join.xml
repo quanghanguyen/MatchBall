@@ -12,18 +12,18 @@
         android:id="@+id/tvJoinMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/join_match"
-        android:textColor="@color/black"
         android:layout_centerHorizontal="true"
-        android:textSize="50sp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:text="@string/match_information"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:gravity="center"/>
 
     <LinearLayout
         android:id="@+id/llMatchInfo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@+id/tvJoinMatch"
-        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:weightSum="6">
@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:text="@string/team_name"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -59,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +68,7 @@
                 android:layout_gravity="center"
                 android:text="@string/pitch"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,7 +79,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name_join"
                 android:textColor="@color/blue"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -86,7 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -94,7 +96,7 @@
                 android:layout_gravity="center"
                 android:text="@string/time"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -105,7 +107,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -113,7 +115,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +124,7 @@
                 android:layout_gravity="center"
                 android:text="@string/amount_of_people"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -132,7 +135,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/amount_of_people"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -140,7 +143,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,7 +152,7 @@
                 android:layout_gravity="center"
                 android:text="@string/note"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -159,7 +163,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -167,7 +171,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,7 +180,7 @@
                 android:layout_gravity="center"
                 android:text="@string/phone"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -186,7 +191,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/phone"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -198,7 +203,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="@string/join" />
-
+        android:text="@string/join_this_match"/>
 
 </RelativeLayout>

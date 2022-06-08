@@ -13,9 +13,19 @@ class RequestViewModel : ViewModel() {
 
     private val uid = AuthConnection.auth.currentUser!!.uid
     val sendRequest = MutableLiveData<SendRequestResult>()
+    var day: Int = 0
+    var month: Int = 0
+    var year: Int = 0
+    var hour: Int = 0
+    var minute: Int = 0
+    var myDay: Int = 0
+    var myMonth: Int = 0
+    var myYear: Int = 0
+    var myHour: Int = 0
+    var myMinute: Int = 0
 
     sealed class SendRequestResult {
-        class GetResultOk(val teamName : String, val teamPhone : String) : SendRequestResult()
+        class GetResultOk(val name : String, val phone : String) : SendRequestResult()
         class GetResultError(val errorMessage : String) : SendRequestResult()
         class SendResultOk(val successMessage : String) : SendRequestResult()
         class SendResultError(val errorMessage: String) : SendRequestResult()
@@ -44,5 +54,4 @@ class RequestViewModel : ViewModel() {
             }
         }
     }
-
 }

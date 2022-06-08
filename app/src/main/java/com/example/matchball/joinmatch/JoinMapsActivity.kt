@@ -42,10 +42,9 @@ class JoinMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val pitchLatitude = intent.getDoubleExtra("pitchLatitude", 0.1)
         val pitchLongitude = intent.getDoubleExtra("pitchLongitude", 0.1)
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(pitchLatitude, pitchLongitude)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in $pitchName"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val location = LatLng(pitchLatitude, pitchLongitude)
+        mMap.addMarker(MarkerOptions().position(location).title("Marker in $pitchName"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
 
     }
 }

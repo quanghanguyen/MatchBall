@@ -3,8 +3,11 @@ package com.example.matchball.usersetting
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.example.matchball.databinding.ActivityUserAccountBinding
+import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.home.MainActivity
 import com.example.matchball.usersetting.changepassword.ChangePasswordActivity
 
@@ -20,7 +23,21 @@ class UserAccountActivity : AppCompatActivity() {
 
         initEvents()
         initObserve()
+        initEmailVerifyObserve()
         userAccountViewModel.handleLoadAvatar()
+    }
+
+    private fun initEmailVerifyObserve() {
+        userAccountViewModel.verifyEmail.observe(this, {sendResult ->
+            when (sendResult) {
+                is UserAccountViewModel.VerifyEmail.EmailVerifySuccess -> {
+                    Toast.makeText(this, sendResult.successMessage, Toast.LENGTH_SHORT).show()
+                }
+                is UserAccountViewModel.VerifyEmail.EmailVerifyFail -> {
+                    Toast.makeText(this, sendResult.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
     private fun initObserve() {
@@ -35,13 +52,31 @@ class UserAccountActivity : AppCompatActivity() {
                 is UserAccountViewModel.UserData.LoadDataFail -> {
                 }
             }
-
         })
     }
 
     private fun initEvents() {
+        emailVerifyCheck()
         back()
         changePassword()
+        verifyEmail()
+    }
+
+    private fun emailVerifyCheck() {
+        if (authUser!!.isEmailVerified) {
+            Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show()
+        }
+            // if (authUser.isEmailVerified) {
+//                userAccountBinding.emailStatus.visibility = View.GONE
+//                userAccountBinding.verifyEmail.visibility = View.GONE
+    }
+
+    private fun verifyEmail() {
+        userAccountBinding.verifyEmail.setOnClickListener {
+            userAccountViewModel.handleVerifyEmail()
+        }
     }
 
     private fun changePassword() {

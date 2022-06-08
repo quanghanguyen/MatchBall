@@ -92,6 +92,24 @@
     <string name="select_time">Select Time</string>
     <string name="select_pitch">Select Pitch</string>
     <string name="take_note">Take Note</string>
+    <string name="hint_amount_of_people">Amount of People</string>
+    <string name="all">All</string>
+    <string name="email_not_verified">Email not verified</string>
+    <string name="verify">Verify</string>
+    <string name="not_verified">Not Verified</string>
+    <string name="your_settings">Your Settings</string>
+    <string name="match_information">Match Information</string>
+    <string name="join_this_match">Join this Match</string>
 
-
+    <string-array name="amount_people">
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+    
 </resources>
