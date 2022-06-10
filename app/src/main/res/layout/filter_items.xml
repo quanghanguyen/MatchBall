@@ -5,10 +5,14 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <Button
+    <TextView
         android:id="@+id/label_filter"
         android:background="@drawable/button_stroke"
         android:text="@string/all"
-        style="@style/ButtonStyle"/>
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:paddingHorizontal="20dp"
+        android:textColor="@color/black"
+        android:paddingVertical="4dp"/>
 
 </RelativeLayout>
