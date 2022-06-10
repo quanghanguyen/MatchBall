@@ -30,8 +30,11 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         setContentView(requestBinding.root)
 
         initEvents()
+        initGetNameAndPhone()
         initSendRequestObserve()
+        requestViewModel.handleNameAndPhone()
     }
+
 
     private fun initEvents() {
         timeSelect()
@@ -40,23 +43,37 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         sendRequest()
     }
 
+    private fun initGetNameAndPhone() {
+        requestViewModel.getNameAndPhone.observe(this, {getResult ->
+            when (getResult) {
+                is RequestViewModel.GetNameAndPhone.GetResultOk -> {
+                    teamName = getResult.name
+                    teamPhone = getResult.phone
+                }
+                is RequestViewModel.GetNameAndPhone.GetResultError -> {
+                    Toast.makeText(this, getResult.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
     private fun initSendRequestObserve() {
         requestViewModel.sendRequest.observe(this, {sendRequestResult ->
             when (sendRequestResult) {
-                is RequestViewModel.SendRequestResult.GetResultOk -> {
-                    teamName = sendRequestResult.name
-                    teamPhone = sendRequestResult.phone
-                    if(teamName!=null)
-                    {
-                        Log.e("teamName",teamName.orEmpty())
-                    }
-                    else{
-                        Log.e("teamName","teamName")
-                    }
-                }
-                is RequestViewModel.SendRequestResult.GetResultError -> {
-                    Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
-                }
+//                is RequestViewModel.SendRequestResult.GetResultOk -> {
+//                    teamName = sendRequestResult.name
+//                    teamPhone = sendRequestResult.phone
+//                    if(teamName!=null)
+//                    {
+//                        Log.e("teamName",teamName.orEmpty())
+//                    }
+//                    else{
+//                        Log.e("teamName","teamName")
+//                    }
+//                }
+//                is RequestViewModel.SendRequestResult.GetResultError -> {
+//                    Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
+//                }
                 is RequestViewModel.SendRequestResult.SendResultOk -> {
                     Toast.makeText(this, sendRequestResult.successMessage, Toast.LENGTH_SHORT).show()
                     intent = Intent(this, MainActivity::class.java)

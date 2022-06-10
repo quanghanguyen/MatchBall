@@ -28,7 +28,6 @@ class UserFragmentViewModel : ViewModel() {
         readUser.postValue(UserData.Loading)
 
         val userEmail = authUser?.email
-//        val imageUrl = authUser?.photoUrl
         readUser.postValue(UserData.LoadUserInfo(userEmail!!))
 
         uid?.let {

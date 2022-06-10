@@ -15,27 +15,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/intro" />
+        android:src="@drawable/intro_image" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_title"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tvIntro"
+        android:layout_marginBottom="8dp"
+        android:textStyle="bold"
+        android:textSize="28sp"/>
+
 
     <TextView
         android:id="@+id/tvIntro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="400dp"
+        android:layout_centerInParent="true"
         android:text="@string/it_s_easier_to_sign_up_now"
         android:textColor="@android:color/darker_gray"
         android:textSize="12sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinueGoogle"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp"
         android:layout_below="@+id/tvIntro"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/border"
-        android:drawableStart="@drawable/icon_google_white_32"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
         android:text="@string/continue_with_google"
@@ -44,8 +55,9 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnAnotherContinue"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="80dp"
         android:layout_below="@+id/btnContinueGoogle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
@@ -69,6 +81,7 @@
         android:textSize="12sp" />
 
     <LinearLayout
+        android:id="@+id/facebook_icon"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_below="@+id/tvOthersSignUp"
@@ -94,9 +107,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/facebook_icon"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/tvAlreadyHaveAccount"

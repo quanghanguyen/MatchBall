@@ -27,6 +27,13 @@ class UserAccountActivity : AppCompatActivity() {
         userAccountViewModel.handleLoadAvatar()
     }
 
+    private fun initEvents() {
+        emailVerifyCheck()
+        back()
+        changePassword()
+        verifyEmail()
+    }
+
     private fun initEmailVerifyObserve() {
         userAccountViewModel.verifyEmail.observe(this, {sendResult ->
             when (sendResult) {
@@ -55,22 +62,14 @@ class UserAccountActivity : AppCompatActivity() {
         })
     }
 
-    private fun initEvents() {
-        emailVerifyCheck()
-        back()
-        changePassword()
-        verifyEmail()
-    }
-
     private fun emailVerifyCheck() {
         if (authUser!!.isEmailVerified) {
+            userAccountBinding.emailStatus.visibility = View.GONE
+            userAccountBinding.verifyEmail.visibility = View.GONE
             Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show()
         }
-            // if (authUser.isEmailVerified) {
-//                userAccountBinding.emailStatus.visibility = View.GONE
-//                userAccountBinding.verifyEmail.visibility = View.GONE
     }
 
     private fun verifyEmail() {

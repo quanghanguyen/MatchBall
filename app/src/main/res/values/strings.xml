@@ -101,6 +101,9 @@
     <string name="match_information">Match Information</string>
     <string name="join_this_match">Join this Match</string>
     <string name="request">Request</string>
+    <string name="create_request">Create Request</string>
+    <string name="create_match">Create Match</string>
+    <string name="sign_up_title">SIGN UP</string>
 
     <string-array name="amount_people">
         <item>4</item>

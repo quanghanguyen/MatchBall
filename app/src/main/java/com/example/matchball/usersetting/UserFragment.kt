@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.example.matchball.*
 import com.example.matchball.databinding.FragmentUserBinding
 import com.example.matchball.firebaseconnection.AuthConnection
+import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.signin.GoogleSignInActivity
 import com.example.matchball.yourmatchrequest.YourRequestActivity
 
@@ -30,6 +31,7 @@ class UserFragment : Fragment() {
     }
 
     private fun initEvent() {
+        checkEmailVerified()
         signOut()
         goUserInfoActivity()
         goYourRequestActivity()
@@ -39,13 +41,6 @@ class UserFragment : Fragment() {
     private fun initObserve() {
         userFragmentViewModel.readUser.observe(this, {result ->
             when (result) {
-//                is UserFragmentViewModel.UserData.Loading -> {
-//                    userFragmentBinding.progressBar.visibility = View.GONE
-//                    userFragmentBinding.cvUserInfo.visibility = View.VISIBLE
-//                    userFragmentBinding.cvYourRequest.visibility = View.VISIBLE
-//                    userFragmentBinding.cvSetting.visibility = View.VISIBLE
-//                    userFragmentBinding.btnSignOut.visibility = View.VISIBLE
-//                }
                 is UserFragmentViewModel.UserData.ReadAvatarSuccess -> {
                     userFragmentBinding.civIntroAvatar.setImageBitmap(result.image)
                 }
@@ -68,6 +63,12 @@ class UserFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun checkEmailVerified() {
+        if (authUser!!.isEmailVerified) {
+            userFragmentBinding.emailVerified.visibility = View.GONE
+        }
     }
 
     private fun goYourRequestActivity() {

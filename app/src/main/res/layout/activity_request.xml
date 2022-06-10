@@ -19,6 +19,7 @@
         android:textSize="40sp" />
 
     <RelativeLayout
+        android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvMatchRequest"
@@ -36,8 +37,8 @@
                 style="@style/LoginTextInputOuterFieldStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
@@ -59,10 +60,9 @@
             <Button
                 android:id="@+id/time_select"
                 style="@style/ButtonStyle"
-                android:layout_marginStart="8dp"
-                android:text="@string/select"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_marginStart="8dp"
+                android:text="@string/select" />
         </LinearLayout>
 
         <LinearLayout
@@ -132,23 +132,14 @@
                     style="@style/LoginTextInputInnerFieldStyle"
                     android:hint="@string/hint_amount_of_people"
                     android:inputType="none"/>
-
-<!--                    <Spinner-->
-<!--                        android:id="@+id/spnPeople"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="60dp"-->
-<!--                        android:layout_below="@+id/tvPeople"-->
-<!--                        android:layout_marginTop="5dp"-->
-<!--                        android:textSize="15sp" />-->
-
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/note"
-            android:layout_below="@+id/people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/people"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -179,9 +170,9 @@
     <Button
         android:id="@+id/btnSend"
         style="@style/ButtonStyle"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="@string/send_request" />
+        android:layout_below="@+id/menu"
+        android:text="@string/send_request"
+        android:layout_marginTop="8dp"/>
 
 </RelativeLayout>

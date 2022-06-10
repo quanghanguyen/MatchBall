@@ -11,11 +11,14 @@ import com.example.matchball.databinding.ActivityMainBinding
 import com.example.matchball.dashboard.MatchListFragment
 import com.example.matchball.usersetting.UserFragment
 
-// chưa lấy được teamname + phonename
-// Lưu info thì ảnh bị null
+// Sửa UI :
+// 5/ activity_user_account : avatar
+// 6/ activity_user_info : avatar
+// 7/ fragment_user
+
+
 // Xác thực email
 // get email và ảnh của current User
-// Fragment UI
 // Check trước khi User tạo request
 
 //------------------------------
@@ -43,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initEvents() {
-        createRequest()
+        //createRequest()
         selectBottomNavigation()
     }
 
@@ -61,17 +64,22 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(fragment)
                     true
                 }
+                R.id.request -> {
+                    startActivity(Intent(applicationContext, RequestActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
                 else -> false
             }
         }
     }
 
-    private fun createRequest() {
-        mainBinding.fab.setOnClickListener {
-            val intent = Intent(this, RequestActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    private fun createRequest() {
+//        mainBinding.fab.setOnClickListener {
+//            val intent = Intent(this, RequestActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

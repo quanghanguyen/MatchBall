@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,13 +22,13 @@
         android:id="@+id/rlSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="270dp">
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/btnSignUp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvEmailSignUp"
             style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="16dp"
@@ -54,12 +53,11 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvPasswordSignUp"
             style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvEmailSignUp"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="30dp"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -85,7 +83,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvConfirmPasswordSignUp"
             style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvPasswordSignUp"
             android:layout_centerHorizontal="true"
@@ -117,7 +115,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignUp"
-        android:layout_width="180dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/rlTerms"
         android:layout_centerHorizontal="true"
@@ -125,56 +123,10 @@
         android:layout_marginBottom="20dp"
         android:background="@drawable/border"
         android:fontFamily="sans-serif-medium"
+        android:paddingHorizontal="40dp"
         android:text="@string/btn_sign_up"
         android:textColor="@color/white"
-        android:textStyle="bold"
-
-        />
-
-<!--    <TextView-->
-<!--        android:id="@+id/tvOthersSignUp"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/btnSignUp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:text="@string/or_sign_up_with"-->
-<!--        android:textSize="12sp" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:layout_below="@+id/tvOthersSignUp"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:weightSum="2">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:src="@drawable/icon_google"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1">-->
-
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:src="@drawable/icon_facebook"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--    </LinearLayout>-->
+        android:textStyle="bold" />
 
     <RelativeLayout
         android:id="@+id/rlTerms"
@@ -182,6 +134,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="10dp">
 
         <TextView
@@ -196,11 +149,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvByClick"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="3dp"
             android:text="@string/terms_and_conditions"
             android:textColor="@color/yellow"
-            android:textSize="12sp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="12sp" />
 
     </RelativeLayout>
 
