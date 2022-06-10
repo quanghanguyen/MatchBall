@@ -54,7 +54,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_searchview"
-        app:queryBackground="@android:color/transparent"/>
+        app:queryBackground="@android:color/transparent" />
 
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

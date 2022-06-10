@@ -69,7 +69,7 @@
     <string name="phone">Phone:</string>
     <string name="unnamed">Unnamed</string>
     <string name="personal_information">PERSONAL INFORMATION</string>
-    <string name="no_phone_number_yet">No phone number yet</string>
+    <string name="no_phone_number_yet">No phone number</string>
     <string name="no_date_of_birth">No date of birth</string>
     <string name="no_bio">No Bio</string>
     <string name="requests_manager">REQUESTS MANAGER</string>

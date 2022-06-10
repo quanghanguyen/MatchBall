@@ -1,11 +1,9 @@
 package com.example.matchball.dashboard
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
-import com.example.matchball.model.FilterModel
 import com.example.matchball.model.MatchRequest
 
 class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
@@ -13,14 +11,16 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
 
     private lateinit var listerner: OnItemClickListerner
 
-    interface OnItemClickListerner {
-        fun onItemClick(requestData: MatchRequest)
+    var requestFilterList = ArrayList<MatchRequest>()
+
+    init {
+        requestFilterList = requestList
     }
 
-    //search list
-    fun filterList(requests: ArrayList<MatchRequest>) {
-        this.requestList = requests
-        notifyDataSetChanged()
+//    class RequestHolder(var)
+
+    interface OnItemClickListerner {
+        fun onItemClick(requestData: MatchRequest)
     }
 
     fun addNewData(list: ArrayList<MatchRequest>) {
@@ -62,12 +62,14 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val matchRequestItems =
             MatchRequestItemsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        val viewHolder: MyViewHolder = MyViewHolder(matchRequestItems, listerner)
+        val viewHolder = MyViewHolder(matchRequestItems, listerner)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(requestList[position])
+
+//        val requestHolder = holder as RequestHolder
     }
 
     override fun getItemCount(): Int {

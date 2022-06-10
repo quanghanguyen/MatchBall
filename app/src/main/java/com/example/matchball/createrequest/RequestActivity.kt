@@ -60,20 +60,6 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     private fun initSendRequestObserve() {
         requestViewModel.sendRequest.observe(this, {sendRequestResult ->
             when (sendRequestResult) {
-//                is RequestViewModel.SendRequestResult.GetResultOk -> {
-//                    teamName = sendRequestResult.name
-//                    teamPhone = sendRequestResult.phone
-//                    if(teamName!=null)
-//                    {
-//                        Log.e("teamName",teamName.orEmpty())
-//                    }
-//                    else{
-//                        Log.e("teamName","teamName")
-//                    }
-//                }
-//                is RequestViewModel.SendRequestResult.GetResultError -> {
-//                    Toast.makeText(this, sendRequestResult.errorMessage, Toast.LENGTH_SHORT).show()
-//                }
                 is RequestViewModel.SendRequestResult.SendResultOk -> {
                     Toast.makeText(this, sendRequestResult.successMessage, Toast.LENGTH_SHORT).show()
                     intent = Intent(this, MainActivity::class.java)
@@ -94,7 +80,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         requestBinding.btnSend.setOnClickListener {
             val matchTime = requestBinding.timeEt.text.toString()
-            val matchPeople = requestBinding.peopleSelect.toString()
+            val matchPeople = requestBinding.peopleSelect.text.toString()
             val matchNote = requestBinding.noteEt.text.toString()
 
             teamName?.let { it1 ->

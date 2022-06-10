@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".signin.GoogleSignInActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/introSwipe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,11 +52,11 @@
         android:id="@+id/btnAnotherContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="80dp"
         android:layout_below="@+id/btnContinueGoogle"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:background="@drawable/button_stroke"
+        android:background="@drawable/sign_in_button_stroke"
+        android:paddingHorizontal="80dp"
         android:text="@string/i_ll_use_email_or_phone"
         android:textAllCaps="false"
         android:textColor="@android:color/darker_gray"

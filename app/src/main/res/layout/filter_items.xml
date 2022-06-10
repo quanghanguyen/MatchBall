@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:paddingHorizontal="20dp"
-        android:textColor="@color/black"
         android:paddingVertical="4dp"/>
 
 </RelativeLayout>

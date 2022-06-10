@@ -47,7 +47,6 @@ class GoogleSignInActivity : AppCompatActivity() {
         googleSignInViewModel.googleSignIn.observe(this, { result ->
             when (result) {
                 is GoogleSignInViewModel.GoogleSignInResult.SignInOk -> {
-                    googleSignInBinding.introSwipe.isRefreshing = false
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
@@ -55,10 +54,8 @@ class GoogleSignInActivity : AppCompatActivity() {
                 }
                 is GoogleSignInViewModel.GoogleSignInResult.SignInError -> {
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
-                    googleSignInBinding.introSwipe.isRefreshing = false
                 }
                 is GoogleSignInViewModel.GoogleSignInResult.Loading -> {
-                    googleSignInBinding.introSwipe.isRefreshing = true
                 }
             }
         })

@@ -74,20 +74,19 @@ class UserInfoActivity : AppCompatActivity() {
     private fun saveProfile() {
         userInfoBinding.btnSave.setOnClickListener {
 
-            if (userInfoBinding.teamNameEt.text.isNullOrEmpty()
-                && userInfoBinding.teamBioEt.text.isNullOrEmpty()
-                && userInfoBinding.teamBirthdayEt.text.isNullOrEmpty()
-                && userInfoBinding.teamPhoneEt.text.isNullOrEmpty())
-            {
-                Toast.makeText(this, "Please Enter all Fields", Toast.LENGTH_SHORT).show()
-            } else {
+//            if (userInfoBinding.teamNameEt.text.isNullOrEmpty()
+//                || userInfoBinding.teamBioEt.text.isNullOrEmpty()
+//                || userInfoBinding.teamBirthdayEt.text.isNullOrEmpty()
+//                || userInfoBinding.teamPhoneEt.text.isNullOrEmpty())
+//            {
+//                Toast.makeText(this, "Please Enter all Fields", Toast.LENGTH_SHORT).show()
+//            } else {
                 val teamName = userInfoBinding.teamNameEt.text.toString()
                 val teamBio = userInfoBinding.teamBioEt.text.toString()
                 val teamBirthday = userInfoBinding.teamBirthdayEt.text.toString()
                 val teamPhone = userInfoBinding.teamPhoneEt.text.toString()
 
                 userInfoViewModel.handleSaveUserData(teamName, teamBio, teamBirthday, teamPhone)
-            }
         }
     }
 

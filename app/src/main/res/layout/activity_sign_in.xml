@@ -10,14 +10,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/sign_in_new"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/sign_in_new" />
 
     <RelativeLayout
         android:id="@+id/rlSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_centerInParent="true">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -83,9 +82,7 @@
             android:layout_alignEnd="@+id/passwordLayout"
             android:text="@string/forgot_password"
             android:textSize="12sp" />
-
     </RelativeLayout>
-
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSignIn"
@@ -107,7 +104,8 @@
         android:id="@+id/rlHaveNotAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/btnSignIn"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp">
 

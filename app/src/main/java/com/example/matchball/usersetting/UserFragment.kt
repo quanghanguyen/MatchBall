@@ -50,14 +50,30 @@ class UserFragment : Fragment() {
                 is UserFragmentViewModel.UserData.ReadAvatarError -> {
                 }
                 is UserFragmentViewModel.UserData.ReadInfoSuccess -> {
-                    userFragmentBinding.tvIntroName.text = result.teamName
-                    userFragmentBinding.tvIntroName.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-                    userFragmentBinding.bio.text = result.teamBio
-                    userFragmentBinding.bio.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                    userFragmentBinding.phone.text = result.phone
-                    userFragmentBinding.phone.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                    userFragmentBinding.birthday.text = result.birthday
-                    userFragmentBinding.birthday.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    if (result.teamName == "") {
+                        userFragmentBinding.tvIntroName.text = "Unnamed"
+                    } else {
+                        userFragmentBinding.tvIntroName.text = result.teamName
+                        userFragmentBinding.tvIntroName.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    }
+                    if (result.teamBio == "") {
+                        userFragmentBinding.bio.text = "No Bio"
+                    } else {
+                        userFragmentBinding.bio.text = result.teamBio
+                        userFragmentBinding.bio.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    }
+                    if (result.phone == "") {
+                        userFragmentBinding.phone.text = "No phone number"
+                    } else {
+                        userFragmentBinding.phone.text = result.phone
+                        userFragmentBinding.phone.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    }
+                    if (result.birthday == "") {
+                        userFragmentBinding.birthday.text = "No date of birth"
+                    } else {
+                        userFragmentBinding.birthday.text = result.birthday
+                        userFragmentBinding.birthday.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                    }
                 }
                 is UserFragmentViewModel.UserData.ReadInfoError -> {
                 }
