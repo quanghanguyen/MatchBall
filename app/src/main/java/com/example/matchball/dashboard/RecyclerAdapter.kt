@@ -2,12 +2,16 @@ package com.example.matchball.dashboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.matchball.databinding.MatchRequestItemsBinding
 import com.example.matchball.model.MatchRequest
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
-    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>(), Filterable{
 
     private lateinit var listerner: OnItemClickListerner
 
@@ -16,8 +20,6 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     init {
         requestFilterList = requestList
     }
-
-//    class RequestHolder(var)
 
     interface OnItemClickListerner {
         fun onItemClick(requestData: MatchRequest)
@@ -69,10 +71,40 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(requestList[position])
 
-//        val requestHolder = holder as RequestHolder
+        val requestHolder = holder as MyViewHolder
+        requestHolder.bind(requestList[position])
     }
 
     override fun getItemCount(): Int {
         return requestList.size
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                requestFilterList = if (charSearch.isEmpty()) {
+                    requestList
+                } else {
+                    val resultList = ArrayList<MatchRequest>()
+                    for (row in requestList) {
+                        if (row.teamName!!.contains(charSearch.lowercase(Locale.ROOT))
+                        ) {
+                            resultList.add(row)
+                        }
+                    }
+                    resultList
+                }
+                val filterResults = FilterResults()
+                filterResults.values = requestFilterList
+                return filterResults
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                requestFilterList = results?.values as ArrayList<MatchRequest>
+                notifyDataSetChanged()
+            }
+        }
     }
 }

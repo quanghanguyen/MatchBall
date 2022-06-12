@@ -20,16 +20,6 @@
             app:itemIconTint="@drawable/items_selector"
             />
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:backgroundTint="@color/yellow"-->
-<!--        android:contentDescription="@string/app_name"-->
-<!--        android:src="@drawable/ic_baseline_add_24"-->
-<!--        android:layout_above="@+id/bottomNavigationView"/>-->
-
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

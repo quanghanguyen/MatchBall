@@ -40,7 +40,7 @@
                 android:layout_gravity="center"
                 android:text="@string/team_name"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
                 android:layout_gravity="center"
                 android:text="@string/pitch"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -79,7 +79,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name_join"
                 android:textColor="@color/blue"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -96,7 +96,7 @@
                 android:layout_gravity="center"
                 android:text="@string/time"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -107,7 +107,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -124,7 +124,7 @@
                 android:layout_gravity="center"
                 android:text="@string/amount_of_people"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -135,7 +135,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/amount_of_people"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -152,7 +152,7 @@
                 android:layout_gravity="center"
                 android:text="@string/note"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -163,7 +163,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/team_name"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -180,7 +180,7 @@
                 android:layout_gravity="center"
                 android:text="@string/phone"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -191,7 +191,7 @@
                 android:layout_marginStart="4dp"
                 android:text="@string/phone"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 

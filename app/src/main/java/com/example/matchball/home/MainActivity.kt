@@ -24,11 +24,12 @@ import com.example.matchball.usersetting.UserFragment
 // check ảnh khi tạo user
 // Xác thực email
 // get email và ảnh của current User
-// Check trước khi User tạo request
 
 //------------------------------
 
+// Sửa các function deprecated : Map, UserInfoActivity
 // Search
+// Sort
 // Notification
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         initObserve()
         initUI()
         mainActivityViewModel.handleReadUserData()
-
     }
 
     private fun initObserve() {
@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initEvents() {
-        //createRequest()
         selectBottomNavigation()
     }
 
@@ -100,13 +99,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-//    private fun createRequest() {
-//        mainBinding.fab.setOnClickListener {
-//            val intent = Intent(this, RequestActivity::class.java)
-//            startActivity(intent)
-//        }
-//    }
 
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

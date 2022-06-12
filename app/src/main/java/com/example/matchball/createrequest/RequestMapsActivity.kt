@@ -32,9 +32,9 @@ import java.io.IOException
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
-    internal lateinit var mLastLocation: Location
-    internal var mCurrLocationMarker: Marker? = null
-    internal var mGoogleApiClient: GoogleApiClient? = null
+    private lateinit var mLastLocation: Location
+    private var mCurrLocationMarker: Marker? = null
+    private var mGoogleApiClient: GoogleApiClient? = null
     lateinit var mLocationRequest: LocationRequest
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,6 @@ import java.io.IOException
 
         searchButtonClick()
         doneButtonClick()
-
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -78,12 +77,12 @@ import java.io.IOException
         mGoogleApiClient = GoogleApiClient.Builder(this)
             .addConnectionCallbacks(this)
             .addOnConnectionFailedListener(this)
-            .addApi(LocationServices.API).build()
+            .addApi(LocationServices.API)
+            .build()
         mGoogleApiClient!!.connect()
     }
 
     override fun onConnected(p0: Bundle?) {
-
         mLocationRequest = LocationRequest()
         mLocationRequest.interval = 1000
         mLocationRequest.fastestInterval = 1000

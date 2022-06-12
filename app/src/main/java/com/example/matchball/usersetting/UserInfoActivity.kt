@@ -5,6 +5,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.matchball.databinding.ActivityUserInfoBinding
 import com.example.matchball.home.MainActivity
@@ -92,11 +94,20 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun changeAvatar() {
         userInfoBinding.avatar.setOnClickListener {
+//            val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {result ->
+//                when (result.resultCode) {
+//                    RESULT_OK -> {
+//                        val intent = Intent()
+//                        intent.type = "image/*"
+//                        intent.action = Intent.ACTION_GET_CONTENT
+//                    }
+//                }
+//            }
+
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, 100)
-
         }
     }
 
