@@ -1,5 +1,6 @@
 package com.example.matchball.usersetting
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -96,10 +97,20 @@ class UserFragment : Fragment() {
 
     private fun signOut() {
         userFragmentBinding.signOut.setOnClickListener {
-            AuthConnection.auth.signOut()
-            val intent = Intent(context, GoogleSignInActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            val signOutDialog = AlertDialog.Builder(context)
+            signOutDialog.apply {
+                setTitle("Sign-Out")
+                setMessage("You want to Sign-out?")
+                setPositiveButton("Yes") {_, _ ->
+                    AuthConnection.auth.signOut()
+                    val intent = Intent(context, GoogleSignInActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+                setNegativeButton("No") {_, _ ->
+
+                }
+            }.create().show()
         }
     }
 

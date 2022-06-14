@@ -1,16 +1,19 @@
 package com.example.matchball.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.matchball.createrequest.RequestActivity
 import com.example.matchball.dashboard.filterbar.FilterAdapter
 import com.example.matchball.joinmatch.JoinActivity
 import com.example.matchball.databinding.FragmentListBinding
@@ -23,6 +26,7 @@ class MatchListFragment : Fragment() {
     private lateinit var matchRequestAdapter: RecyclerAdapter
     private lateinit var filterAdapter : FilterAdapter
     private val matchListViewModel: MatchListViewModel by viewModels()
+    private var matchList = ArrayList<MatchRequest>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,14 +56,24 @@ class MatchListFragment : Fragment() {
                 is MatchListViewModel.MatchListResult.Loading -> {
                     listFragmentBinding.swipe.isRefreshing = true
                 }
-                is MatchListViewModel.MatchListResult.ResultFilterOk -> {
-                    filterAdapter.addFilterNewData(result.filterList)
-                }
                 is MatchListViewModel.MatchListResult.ResultOk -> {
                     matchRequestAdapter.addNewData(result.matchList)
+                    matchList = result.matchList
                 }
                 is MatchListViewModel.MatchListResult.ResultError -> {
                     Toast.makeText(context, result.errorMessage, Toast.LENGTH_SHORT).show()
+                }
+                is MatchListViewModel.MatchListResult.ResultFilterOk -> {
+                    filterAdapter.addFilterNewData(result.filterList)
+
+                    filterAdapter.setOnItemClickListerner(object :
+                        FilterAdapter.OnItemClickListerner{
+                        override fun onItemClick(position: Int) {
+                            if (position == 0) {
+                                matchRequestAdapter.addNewData(matchList)
+                            }
+                        }
+                    })
                 }
             }
         })
@@ -70,6 +84,14 @@ class MatchListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             filterAdapter = FilterAdapter(arrayListOf())
             adapter = filterAdapter
+//            filterAdapter.setOnItemClickListerner(object :
+//            FilterAdapter.OnItemClickListerner{
+//                override fun onItemClick(position : Int) {
+//                    if (position == 1) {
+////                        startActivity(Intent(context, RequestActivity::class.java))
+//                    }
+//                }
+//            })
         }
     }
 

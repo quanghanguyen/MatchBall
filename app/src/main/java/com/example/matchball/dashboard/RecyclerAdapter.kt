@@ -38,6 +38,14 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     fun remove(matchRequest: MatchRequest) {
     }
 
+//    fun sortDescending(list: ArrayList<MatchRequest>) {
+//        requestList = list
+//        requestList.sortByDescending {
+//            it.people
+//        }
+//        notifyDataSetChanged()
+//    }
+
     fun setOnItemClickListerner(listerner: OnItemClickListerner) {
         this.listerner = listerner
     }
@@ -89,6 +97,7 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
                     val resultList = ArrayList<MatchRequest>()
                     for (row in requestList) {
                         if (row.teamName!!.contains(charSearch.lowercase(Locale.ROOT))
+                            //if (row.lowercase().contains(charSearch.lowercase(Locale.ROOT))
                         ) {
                             resultList.add(row)
                         }

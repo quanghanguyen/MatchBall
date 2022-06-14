@@ -1,9 +1,15 @@
 package com.example.matchball.usersetting
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateFormat
+import android.view.View
+import android.widget.DatePicker
+import android.widget.TimePicker
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -11,12 +17,15 @@ import androidx.activity.viewModels
 import com.example.matchball.databinding.ActivityUserInfoBinding
 import com.example.matchball.home.MainActivity
 import com.google.firebase.auth.UserInfo
+import java.text.SimpleDateFormat
+import java.util.*
 
 class UserInfoActivity : AppCompatActivity() {
 
     private lateinit var userInfoBinding: ActivityUserInfoBinding
     private lateinit var imgUri : Uri
     private val userInfoViewModel : UserInfoViewModel by viewModels()
+    val cal: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +61,7 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
+        selectBirthday()
         changeAvatar()
         saveProfile()
         back()
@@ -71,6 +81,32 @@ class UserInfoActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun selectBirthday() {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+
+        userInfoBinding.birthdaySelect.setOnClickListener {
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+    }
+
+    private fun updateDateInView() {
+        val myFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        userInfoBinding.teamBirthdayEt.setText(sdf.format(cal.time))
     }
 
     private fun saveProfile() {

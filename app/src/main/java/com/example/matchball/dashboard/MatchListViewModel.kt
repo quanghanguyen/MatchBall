@@ -24,8 +24,8 @@ class MatchListViewModel : ViewModel() {
         matchListResult.postValue(MatchListResult.Loading)
         val data = ArrayList<FilterModel>()
         data.add(FilterModel("All"))
-        data.add(FilterModel("Match Bid"))
-        data.add(FilterModel("Match Ask"))
+        data.add(FilterModel("Newest"))
+        data.add(FilterModel("Oldest"))
         data.add(FilterModel("Upcoming"))
         data.add(FilterModel("Done"))
         matchListResult.postValue(MatchListResult.ResultFilterOk(data))
@@ -37,15 +37,19 @@ class MatchListViewModel : ViewModel() {
                     val listMatch = ArrayList<MatchRequest>()
                     for (requestSnapshot in snapshot.children) {
                         requestSnapshot.getValue(MatchRequest::class.java)?.let {
-                            listMatch.add(it)
+                            listMatch.add(0, it)
                         }
                     }
                     matchListResult.postValue(MatchListResult.ResultOk(listMatch))
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
                 matchListResult.postValue(MatchListResult.ResultError("Failed to load Data"))
             }
         })
+
+
+
     }
 }

@@ -103,10 +103,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/team_birthday_layout"
             style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/team_phone_layout"
-            android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="16dp"
             app:boxCornerRadiusBottomEnd="10dp"
             app:boxCornerRadiusBottomStart="10dp"
@@ -117,12 +116,6 @@
             app:helperTextTextColor="@android:color/holo_red_light"
             app:hintTextColor="@color/yellow">
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_baseline_edit_24"-->
-<!--                android:layout_toEndOf="@+id/team_birthday_layout"-->
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/team_birthday_et"
                 style="@style/LoginTextInputInnerFieldStyle"
@@ -132,12 +125,21 @@
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/birthday_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/team_phone_layout"
+            android:layout_marginTop="36dp"
+            android:layout_toEndOf="@+id/team_birthday_layout"
+            android:src="@drawable/ic_baseline_date_range_24" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/team_bio_layout"
             style="@style/LoginTextInputOuterFieldStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_below="@+id/team_birthday_layout"
             android:layout_centerHorizontal="true"
             android:layout_marginHorizontal="16dp"
@@ -154,7 +156,7 @@
                 android:id="@+id/team_bio_et"
                 style="@style/LoginTextInputInnerFieldStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/hint_bio"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -168,6 +170,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:text="@string/save" />
-
 
 </RelativeLayout>

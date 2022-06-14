@@ -66,9 +66,6 @@ class UserAccountActivity : AppCompatActivity() {
         if (authUser!!.isEmailVerified) {
             userAccountBinding.emailStatus.visibility = View.GONE
             userAccountBinding.verifyEmail.visibility = View.GONE
-            Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "NO", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -163,13 +163,13 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_below="@+id/user_information_title"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:weightSum="3">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -194,7 +194,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -218,7 +218,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -262,15 +262,16 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@+id/your_request_match_title"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:weightSum="1">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -311,13 +312,13 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_below="@+id/setting_title"
+            android:layout_marginTop="12dp"
             android:orientation="vertical"
             android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -342,7 +343,7 @@
                 android:id="@+id/signOut"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 

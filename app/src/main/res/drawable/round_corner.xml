@@ -3,7 +3,12 @@
 <shape android:shape="rectangle"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <gradient android:startColor="@color/lower_yellow" android:endColor="@color/yellow" android:type="linear"/>
-    <corners android:radius="100dp"/>
+<!--    <gradient-->
+<!--        android:startColor="@color/lower_yellow"-->
+<!--        android:endColor="@color/yellow"-->
+<!--        android:type="linear"/>-->
 
+    <solid android:color="@color/yellow"/>
+
+<!--    <corners android:radius="100dp"/>-->
 </shape>

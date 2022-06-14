@@ -132,7 +132,7 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, day: Int) {
         requestViewModel.myDay = day
         requestViewModel.myYear = year
-        requestViewModel.myMonth = month
+        requestViewModel.myMonth = month + 1
         val calendar: Calendar = Calendar.getInstance()
         requestViewModel.hour = calendar.get(Calendar.HOUR)
         requestViewModel.minute = calendar.get(Calendar.MINUTE)

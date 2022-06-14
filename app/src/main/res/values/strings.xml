@@ -104,6 +104,8 @@
     <string name="create_request">Create Request</string>
     <string name="create_match">Create Match</string>
     <string name="sign_up_title">SIGN UP</string>
+    <string name="account">Account</string>
+    <string name="location">Location:</string>
 
     <string-array name="amount_people">
         <item>4</item>
