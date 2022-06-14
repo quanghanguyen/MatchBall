@@ -17,17 +17,6 @@ class UserInfoViewModel : ViewModel() {
     private val uid = AuthConnection.auth.currentUser!!.uid
     private var imgUri: Uri? = null
 
-    var day: Int = 0
-    var month: Int = 0
-    var year: Int = 0
-    var hour: Int = 0
-    var minute: Int = 0
-    var myDay: Int = 0
-    var myMonth: Int = 0
-    var myYear: Int = 0
-    var myHour: Int = 0
-    var myMinute: Int = 0
-
     fun setUri(uri: Uri) {
         imgUri = uri
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.matchball.*
+import com.example.matchball.appsetting.AppSettingActivity
 import com.example.matchball.databinding.FragmentUserBinding
 import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
@@ -37,6 +38,7 @@ class UserFragment : Fragment() {
         goUserInfoActivity()
         goYourRequestActivity()
         goUserAccount()
+        goSetting()
     }
 
     private fun initObserve() {
@@ -125,6 +127,12 @@ class UserFragment : Fragment() {
         userFragmentBinding.userAccount.setOnClickListener {
             val intent = Intent(context, UserAccountActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun goSetting() {
+        userFragmentBinding.yourSetting.setOnClickListener {
+            startActivity(Intent(context, AppSettingActivity::class.java))
         }
     }
 

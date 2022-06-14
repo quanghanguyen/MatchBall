@@ -106,6 +106,11 @@
     <string name="sign_up_title">SIGN UP</string>
     <string name="account">Account</string>
     <string name="location">Location:</string>
+    <string name="matches">Matches</string>
+    <string name="match_list">Match List</string>
+    <string name="select_location">Select Location</string>
+    <string name="your_matches_request">Your Matches Request</string>
+    <string name="done">Done</string>
 
     <string-array name="amount_people">
         <item>4</item>

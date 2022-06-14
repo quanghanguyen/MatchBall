@@ -144,7 +144,6 @@
                 android:layout_marginStart="12dp"
                 android:text="@string/personal_information"
                 android:textColor="@color/yellow"
-
                 />
 
             <TextView
@@ -334,7 +333,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="12dp"
-                    android:text="@string/your_settings"
+                    android:text="@string/setting"
                     android:textColor="@color/black" />
 
             </LinearLayout>

@@ -67,9 +67,9 @@
 
         <LinearLayout
             android:id="@+id/pitch"
-            android:layout_below="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/time"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -77,8 +77,8 @@
                 style="@style/LoginTextInputOuterFieldStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
@@ -91,17 +91,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pitch_et"
                     style="@style/LoginTextInputInnerFieldStyle"
-                    android:hint="@string/select_pitch"
+                    android:hint="@string/select_location"
                     android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/pitch_select"
                 style="@style/ButtonStyle"
-                android:layout_marginStart="8dp"
-                android:text="@string/select"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_marginStart="8dp"
+                android:text="@string/select" />
         </LinearLayout>
 
         <LinearLayout

@@ -38,14 +38,6 @@ class RecyclerAdapter(private var requestList : ArrayList<MatchRequest>):
     fun remove(matchRequest: MatchRequest) {
     }
 
-//    fun sortDescending(list: ArrayList<MatchRequest>) {
-//        requestList = list
-//        requestList.sortByDescending {
-//            it.people
-//        }
-//        notifyDataSetChanged()
-//    }
-
     fun setOnItemClickListerner(listerner: OnItemClickListerner) {
         this.listerner = listerner
     }

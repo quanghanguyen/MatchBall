@@ -35,7 +35,6 @@ class RequestActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         requestViewModel.handleNameAndPhone()
     }
 
-
     private fun initEvents() {
         timeSelect()
         pitchSelect()

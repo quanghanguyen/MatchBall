@@ -23,7 +23,7 @@ import com.example.matchball.usersetting.UserFragment
 // khi đăng nhập bằng account mới thì vẫn load lại info account cũ
 // check ảnh khi tạo user
 // Xác thực email
-// get email và ảnh của current User
+// get ảnh của current User
 
 //------------------------------
 
@@ -85,9 +85,8 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(fragment)
                     true
                 }
-                // check uid is exist
                 R.id.request -> {
-                    if (authUser!!.isEmailVerified && name!!.isNotEmpty() && phone!!.isNotEmpty()) {
+                    if (authUser!!.isEmailVerified && name != null && phone != null) {
                         startActivity(Intent(applicationContext, RequestActivity::class.java))
                         overridePendingTransition(0, 0)
                     } else {

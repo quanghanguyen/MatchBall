@@ -62,6 +62,7 @@ class JoinActivity : AppCompatActivity() {
             Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 

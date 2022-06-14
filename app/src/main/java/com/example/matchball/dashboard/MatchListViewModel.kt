@@ -48,8 +48,5 @@ class MatchListViewModel : ViewModel() {
                 matchListResult.postValue(MatchListResult.ResultError("Failed to load Data"))
             }
         })
-
-
-
     }
 }

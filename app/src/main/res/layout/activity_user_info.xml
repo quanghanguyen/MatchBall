@@ -100,39 +100,46 @@
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
+        <RelativeLayout
             android:id="@+id/team_birthday_layout"
-            style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/team_phone_layout"
-            android:layout_marginHorizontal="16dp"
-            app:boxCornerRadiusBottomEnd="10dp"
-            app:boxCornerRadiusBottomStart="10dp"
-            app:boxCornerRadiusTopEnd="10dp"
-            app:boxCornerRadiusTopStart="10dp"
-            app:boxStrokeColor="@color/yellow"
-            app:helperText=""
-            app:helperTextTextColor="@android:color/holo_red_light"
-            app:hintTextColor="@color/yellow">
+            android:layout_below="@+id/team_phone_layout">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/team_birthday_et"
-                style="@style/LoginTextInputInnerFieldStyle"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/birthday_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_birthday"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-        <ImageView
-            android:id="@+id/birthday_select"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/team_phone_layout"
-            android:layout_marginTop="36dp"
-            android:layout_toEndOf="@+id/team_birthday_layout"
-            android:src="@drawable/ic_baseline_date_range_24" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/team_birthday_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_birthday"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/birthday_select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@+id/birthday_layout"
+                android:src="@drawable/ic_baseline_date_range_24" />
+
+        </RelativeLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout

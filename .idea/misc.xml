@@ -20,6 +20,7 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/round_corner.xml" value="0.19907407407407407" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/sign_in_button_stroke.xml" value="0.1925925925925926" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/drawable/underline.xml" value="0.2203125" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_app_setting.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_change_password.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_edit_maps.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_intro.xml" value="0.22" />
@@ -33,13 +34,14 @@
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_account.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_user_info.xml" value="0.18" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_your_request.xml" value="0.20416666666666666" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_your_request.xml" value="0.18" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/activity_your_request_details.xml" value="0.22" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/dropdown_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/filter_items.xml" value="0.2" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_list.xml" value="0.18" />
-        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_user.xml" value="0.33" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/fragment_user.xml" value="0.22" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/match_request_items.xml" value="0.2" />
+        <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/layout/your_request_items.xml" value="0.22" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/menu/bottom_nav_menu.xml" value="0.16" />
         <entry key="..\:/Desktop D/learn/MatchBall/app/src/main/res/menu/search_view.xml" value="0.16296296296296298" />
       </map>

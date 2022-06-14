@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".yourmatchrequest.YourRequestDetailsActivity"
     android:padding="16dp">
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:text="@string/done"
+            android:text="@string/delete"
             android:textColor="@color/yellow" />
 
     </RelativeLayout>
@@ -32,206 +32,354 @@
         android:id="@+id/tvEditRequest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rlTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
         android:text="@string/edit_your_request"
         android:textSize="40sp"
-        android:gravity="center"
-        android:layout_below="@+id/rlTitle"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/black"/>
 
-    <LinearLayout
-        android:id="@+id/llMatchInfo"
+<!--    <LinearLayout-->
+<!--        android:id="@+id/llMatchInfo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/tvEditRequest"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:orientation="vertical"-->
+<!--        android:weightSum="5">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="@string/team_name"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvTeamName"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:text="@string/team_name"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="16dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="@string/pitch"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvPitch"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:text="@string/team_name_join"-->
+<!--                android:textColor="@color/blue"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <Button-->
+<!--                android:id="@+id/btnPitchSelect"-->
+<!--                style="@style/ButtonStyle"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:text="@string/select"-->
+<!--                android:visibility="visible" />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="16dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="@string/time"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvTime"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:text="@string/team_name"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <Button-->
+<!--                android:visibility="visible"-->
+<!--                android:id="@+id/btnTimeSelect"-->
+<!--                style="@style/ButtonStyle"-->
+<!--                android:layout_marginStart="20dp"-->
+<!--                android:text="@string/select"-->
+<!--                />-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="16dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="@string/amount_of_people"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/tvPeople"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:text="@string/team_name"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <Spinner-->
+<!--                android:visibility="visible"-->
+<!--                android:id="@+id/spnPeople"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@drawable/bg_edittext"-->
+<!--                android:textSize="15sp"-->
+<!--                android:layout_marginStart="8dp"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:layout_marginTop="16dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="@string/note"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:visibility="gone"-->
+<!--                android:id="@+id/tvNote"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"-->
+<!--                android:text="@string/team_name"-->
+<!--                android:textColor="@android:color/darker_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <EditText-->
+<!--                android:visibility="visible"-->
+<!--                android:id="@+id/edtNote"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginStart="4dp"/>-->
+
+<!--        </LinearLayout>-->
+
+<!--    </LinearLayout>-->
+
+    <RelativeLayout
+        android:id="@+id/menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvEditRequest"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:orientation="vertical"
-        android:weightSum="5">
+        android:layout_marginTop="16dp">
 
         <LinearLayout
+            android:id="@+id/time"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/time_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/team_name"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-            <TextView
-                android:id="@+id/tvTeamName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="@string/team_name"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/pitch"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvPitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="@string/team_name_join"
-                android:textColor="@color/blue"
-                android:textSize="14sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/time_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/select_time"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/btnPitchSelect"
+                android:id="@+id/time_select"
                 style="@style/ButtonStyle"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:text="@string/select"
-                android:visibility="visible" />
-
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="@string/select" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/pitch"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/time"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pitch_layout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/time"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="@string/team_name"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pitch_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:hint="@string/select_location"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:visibility="visible"
-                android:id="@+id/btnTimeSelect"
+                android:id="@+id/pitch_select"
                 style="@style/ButtonStyle"
-                android:layout_marginStart="20dp"
-                android:text="@string/select"
-                />
-
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="8dp"
+                android:text="@string/select" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/people"
+            android:layout_below="@+id/pitch"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/people_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/amount_of_people"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/tvPeople"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="@string/team_name"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:visibility="visible"
-                android:id="@+id/spnPeople"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/bg_edittext"
-                android:textSize="15sp"
-                android:layout_marginStart="8dp"/>
-
+                <AutoCompleteTextView
+                    android:id="@+id/people_select"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:hint="@string/hint_amount_of_people"
+                    android:inputType="none"/>
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/note"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/people"
+            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/note"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/note_layout"
+                style="@style/NoteInputOuterFieldStyle"
+                android:layout_marginHorizontal="16dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxStrokeColor="@color/yellow"
+                app:helperText=""
+                app:helperTextTextColor="@android:color/holo_red_light"
+                app:hintTextColor="@color/yellow">
 
-            <TextView
-                android:visibility="gone"
-                android:id="@+id/tvNote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"
-                android:text="@string/team_name"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
-
-            <EditText
-                android:visibility="visible"
-                android:id="@+id/edtNote"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="4dp"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note_et"
+                    style="@style/LoginTextInputInnerFieldStyle"
+                    android:baselineAligned="false"
+                    android:hint="@string/take_note"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:padding="32dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_below="@+id/menu"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -245,7 +393,7 @@
             <Button
                 android:id="@+id/btnDelete"
                 style="@style/ButtonStyle"
-                android:text="@string/delete"
+                android:text="@string/done"
                 />
 
         </LinearLayout>

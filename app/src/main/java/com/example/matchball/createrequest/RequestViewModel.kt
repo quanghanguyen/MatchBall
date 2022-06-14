@@ -60,5 +60,7 @@ class RequestViewModel : ViewModel() {
                 sendRequest.postValue(SendRequestResult.SendResultError("Send Request Fail"))
             }
         }
+
+        DatabaseConnection.databaseReference.getReference("User_MatchRequest").child(uid).push().setValue(matchRequest)
     }
 }

@@ -5,22 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.matchball.R
+import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.signin.GoogleSignInActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SplashActivity : AppCompatActivity() {
-
-    private lateinit var firebaseAuth : FirebaseAuth
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser
-
         Handler().postDelayed({
-            if (user != null) {
+            if (authUser != null) {
                 val signUpIntent = Intent(this, MainActivity::class.java)
                 startActivity(signUpIntent)
                 finish()
@@ -29,6 +24,6 @@ class SplashActivity : AppCompatActivity() {
                 startActivity(mainUpIntent)
                 finish()
             }
-        }, 3000)
+        }, 2000)
     }
 }

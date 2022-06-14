@@ -27,6 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatchBall">
         <activity
+            android:name=".appsetting.AppSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".usersetting.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
