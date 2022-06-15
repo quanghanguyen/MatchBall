@@ -1,22 +1,14 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.userinfo
 
 import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.DateFormat
-import android.view.View
-import android.widget.DatePicker
-import android.widget.TimePicker
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.matchball.databinding.ActivityUserInfoBinding
 import com.example.matchball.home.MainActivity
-import com.google.firebase.auth.UserInfo
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -141,7 +133,7 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun back() {
         userInfoBinding.back.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 

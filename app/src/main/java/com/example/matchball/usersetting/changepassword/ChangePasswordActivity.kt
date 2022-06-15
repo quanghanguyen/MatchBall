@@ -3,19 +3,12 @@ package com.example.matchball.usersetting.changepassword
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.core.content.ContextCompat.startActivity
-import com.example.matchball.R
 import com.example.matchball.databinding.ActivityChangePasswordBinding
-import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.firebaseconnection.AuthConnection.auth
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
-import com.example.matchball.signin.GoogleSignInActivity.Companion.TAG
-import com.example.matchball.signin.SignInActivity
-import com.example.matchball.usersetting.UserAccountActivity
-import com.google.firebase.auth.EmailAuthProvider
+import com.example.matchball.signin.password.SignInActivity
+import com.example.matchball.usersetting.account.UserAccountActivity
 
 class ChangePasswordActivity : AppCompatActivity() {
 
@@ -69,8 +62,7 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun back() {
         changePasswordBinding.back.setOnClickListener {
-            val intent = Intent(this, UserAccountActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

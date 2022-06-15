@@ -1,4 +1,4 @@
-package com.example.matchball.signin
+package com.example.matchball.signin.password
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +11,7 @@ import com.example.matchball.R
 import com.example.matchball.databinding.ActivitySignInBinding
 import com.example.matchball.home.MainActivity
 import com.example.matchball.model.*
+import com.example.matchball.signin.google.GoogleSignInActivity
 
 class SignInActivity : AppCompatActivity() {
 

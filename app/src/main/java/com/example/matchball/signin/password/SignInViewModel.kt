@@ -1,12 +1,8 @@
-package com.example.matchball.signin
+package com.example.matchball.signin.password
 
-import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.matchball.R
 import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.home.MainActivity
 
 class SignInViewModel : ViewModel() {
 

@@ -1,23 +1,17 @@
-package com.example.matchball.dashboard
+package com.example.matchball.dashboard.matchlist
 
-import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.matchball.createrequest.RequestActivity
 import com.example.matchball.dashboard.filterbar.FilterAdapter
 import com.example.matchball.joinmatch.JoinActivity
 import com.example.matchball.databinding.FragmentListBinding
-import com.example.matchball.model.FilterModel
 import com.example.matchball.model.MatchRequest
 
 class MatchListFragment : Fragment() {

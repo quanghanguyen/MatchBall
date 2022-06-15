@@ -1,8 +1,7 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.useroverview
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,8 +14,10 @@ import com.example.matchball.appsetting.AppSettingActivity
 import com.example.matchball.databinding.FragmentUserBinding
 import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
-import com.example.matchball.signin.GoogleSignInActivity
-import com.example.matchball.yourmatchrequest.YourRequestActivity
+import com.example.matchball.signin.google.GoogleSignInActivity
+import com.example.matchball.usersetting.account.UserAccountActivity
+import com.example.matchball.usersetting.userinfo.UserInfoActivity
+import com.example.matchball.yourmatchrequest.list.YourRequestActivity
 
 class UserFragment : Fragment() {
 

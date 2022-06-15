@@ -26,7 +26,7 @@ class AppSettingActivity : AppCompatActivity() {
 
     private fun back() {
         appSettingBinding.back.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }

@@ -2,8 +2,6 @@ package com.example.matchball.firebaseconnection
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
-import com.example.matchball.usersetting.UserAccountViewModel
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 

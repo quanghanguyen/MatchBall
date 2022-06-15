@@ -1,12 +1,7 @@
 package com.example.matchball.signup
 
-import android.content.Intent
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.matchball.R
-import com.example.matchball.signin.SignInActivity
 import com.example.matchball.firebaseconnection.AuthConnection
 
 class SignUpViewModel : ViewModel() {

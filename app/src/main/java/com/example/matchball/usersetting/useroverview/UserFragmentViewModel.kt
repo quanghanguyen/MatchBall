@@ -1,10 +1,8 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.useroverview
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.firebaseconnection.DatabaseConnection
 import com.example.matchball.firebaseconnection.StorageConnection

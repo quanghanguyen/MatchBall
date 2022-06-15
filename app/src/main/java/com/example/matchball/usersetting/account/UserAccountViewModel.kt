@@ -1,4 +1,4 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.account
 
 import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
 import com.example.matchball.firebaseconnection.StorageConnection
-import com.google.android.gms.auth.api.Auth
 import java.io.File
 
 class UserAccountViewModel : ViewModel() {
@@ -29,7 +28,7 @@ class UserAccountViewModel : ViewModel() {
     fun handleLoadAvatar() {
         val email = authUser?.email
         loadData.postValue(email?.let
-        {UserData.LoadEmailSuccess(it)})
+        { UserData.LoadEmailSuccess(it) })
 
         val localFile = File.createTempFile("tempImage", "jpg")
         StorageConnection.handleAvatar(uid = uid, localFile =  localFile, onSuccess = {

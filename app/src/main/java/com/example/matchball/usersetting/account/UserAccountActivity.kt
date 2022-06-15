@@ -1,4 +1,4 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.account
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -84,8 +84,7 @@ class UserAccountActivity : AppCompatActivity() {
 
     private fun back() {
         userAccountBinding.back.setOnClickListener {
-            intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.example.matchball.R
-import com.example.matchball.signin.SignInActivity
+import com.example.matchball.signin.password.SignInActivity
 import com.example.matchball.databinding.ActivitySignUpBinding
-import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.model.validateLengthPassword
 import com.example.matchball.model.validateLowerCasePassword
 import com.example.matchball.model.validateSpecialPassword

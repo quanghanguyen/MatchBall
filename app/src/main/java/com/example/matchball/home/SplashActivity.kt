@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.matchball.R
 import com.example.matchball.firebaseconnection.AuthConnection.authUser
-import com.example.matchball.signin.GoogleSignInActivity
-import com.google.firebase.auth.FirebaseAuth
+import com.example.matchball.signin.google.GoogleSignInActivity
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,4 +1,4 @@
-package com.example.matchball.yourmatchrequest
+package com.example.matchball.yourmatchrequest.list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

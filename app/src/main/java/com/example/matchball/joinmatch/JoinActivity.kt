@@ -55,6 +55,13 @@ class JoinActivity : AppCompatActivity() {
     private fun initEvent() {
         sendJoinRequest()
         openPitchMap()
+        back()
+    }
+
+    private fun back() {
+        joinBinding.back.setOnClickListener {
+            finish()
+        }
     }
 
     private fun sendJoinRequest() {

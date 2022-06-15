@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.signin.GoogleSignInActivity
+import com.example.matchball.signin.google.GoogleSignInActivity
 import com.google.firebase.auth.EmailAuthProvider
 
 class ChangePasswordViewModel : ViewModel() {

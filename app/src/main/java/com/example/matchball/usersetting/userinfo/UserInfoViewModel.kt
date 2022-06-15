@@ -1,7 +1,6 @@
-package com.example.matchball.usersetting
+package com.example.matchball.usersetting.userinfo
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.example.matchball.firebaseconnection.AuthConnection
 import com.example.matchball.firebaseconnection.DatabaseConnection
 import com.example.matchball.firebaseconnection.StorageConnection
 import com.example.matchball.model.User
-import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 
 class UserInfoViewModel : ViewModel() {

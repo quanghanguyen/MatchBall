@@ -33,13 +33,13 @@
             android:name=".usersetting.changepassword.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".usersetting.UserAccountActivity"
+            android:name=".usersetting.account.UserAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".yourmatchrequest.YourRequestDetailsActivity"
+            android:name=".yourmatchrequest.details.YourRequestDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".yourmatchrequest.YourRequestActivity"
+            android:name=".yourmatchrequest.list.YourRequestActivity"
             android:exported="false" />
 
         <service
@@ -89,7 +89,7 @@
             android:name=".createrequest.RequestActivity"
             android:exported="false" />
         <activity
-            android:name=".usersetting.UserInfoActivity"
+            android:name=".usersetting.userinfo.UserInfoActivity"
             android:exported="false" />
 
         <meta-data
@@ -100,10 +100,10 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".signin.GoogleSignInActivity"
+            android:name=".signin.google.GoogleSignInActivity"
             android:exported="false" />
         <activity
-            android:name=".signin.SignInActivity"
+            android:name=".signin.password.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".signup.SignUpActivity"

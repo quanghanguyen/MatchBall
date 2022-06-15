@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".usersetting.UserInfoActivity">
+    tools:context=".usersetting.userinfo.UserInfoActivity">
 
     <RelativeLayout
         android:id="@+id/user_account_title"

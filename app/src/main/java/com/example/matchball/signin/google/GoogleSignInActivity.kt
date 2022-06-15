@@ -1,4 +1,4 @@
-package com.example.matchball.signin
+package com.example.matchball.signin.google
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Observer
 import com.example.matchball.home.MainActivity
 import com.example.matchball.R
 import com.example.matchball.databinding.ActivityIntroBinding
 import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.firebaseconnection.StorageConnection
+import com.example.matchball.signin.password.SignInActivity
 import com.example.matchball.signup.SignUpActivity
-import com.example.matchball.usersetting.UserAccountViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

@@ -1,18 +1,8 @@
-package com.example.matchball.signin
+package com.example.matchball.signin.google
 
-import android.content.Intent
-import android.provider.Settings.Global.getString
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.matchball.R
 import com.example.matchball.firebaseconnection.AuthConnection
-import com.example.matchball.home.MainActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
 class GoogleSignInViewModel : ViewModel() {

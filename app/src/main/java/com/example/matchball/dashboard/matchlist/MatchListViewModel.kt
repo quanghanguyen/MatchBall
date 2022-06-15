@@ -1,4 +1,4 @@
-package com.example.matchball.dashboard
+package com.example.matchball.dashboard.matchlist
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -13,7 +13,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.matchball.R
-import com.example.matchball.yourmatchrequest.YourRequestDetailsActivity
+import com.example.matchball.yourmatchrequest.details.YourRequestDetailsActivity
 import com.example.matchball.databinding.ActivityEditMapsBinding
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
